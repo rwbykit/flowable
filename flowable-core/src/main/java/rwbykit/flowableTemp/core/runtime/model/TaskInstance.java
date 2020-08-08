@@ -1,0 +1,137 @@
+package rwbykit.flowableTemp.core.runtime.model;
+
+public interface TaskInstance {
+
+    String getTaskInstance();
+
+    String getTaskId();
+
+    String getTaskName();
+
+    String getTaskStatus();
+
+    String getNodeInstance();
+
+    String getErrorMessage();
+
+
+    /*private String nodeInstanceId;
+
+    private String taskId;
+
+    private String taskName;
+
+    private String scheduleType;
+
+    private String executionMode;
+
+    private int order;
+
+    private String taskValue;
+
+    private String status;
+
+    private String startTime;
+
+    private String endTime;
+
+    private String errorMsg;
+
+    private String processInstId;
+
+    public String getNodeInstanceId() {
+        return nodeInstanceId;
+    }
+
+    public void setNodeInstanceId(String nodeInstanceId) {
+        this.nodeInstanceId = nodeInstanceId;
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public String getScheduleType() {
+        return scheduleType;
+    }
+
+    public void setScheduleType(String scheduleType) {
+        this.scheduleType = scheduleType;
+    }
+
+    public String getExecutionMode() {
+        return executionMode;
+    }
+
+    public void setExecutionMode(String executionMode) {
+        this.executionMode = executionMode;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public String getTaskValue() {
+        return taskValue;
+    }
+
+    public void setTaskValue(String taskValue) {
+        this.taskValue = taskValue;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public String getProcessInstId() {
+        return processInstId;
+    }
+
+    public void setProcessInstId(String processInstId) {
+        this.processInstId = processInstId;
+    }*/
+}
