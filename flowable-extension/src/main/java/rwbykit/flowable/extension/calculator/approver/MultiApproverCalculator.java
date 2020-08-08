@@ -17,7 +17,7 @@ public class MultiApproverCalculator extends GenericApproverCalculator {
 
     private final static Logger logger = LoggerFactory.getLogger(MultiJointlySignApproverCalculator.class);
 
-    @Override
+    /*@Override
     protected List<Approver> afterCalculatorSet(Context context, List<List<Approver>> listApprovers) throws FlowableException {
         ArtifactNode node = context.getProcessConfigService().getNode(context.getCurrentInstance().getNodeId());
         ApproverPolymerizationCalculator polymerizationCalculator = CalculatorFactory.factory().getApproverPolymerizationCalculator(node.getAssignment().getPolymerizationType());
@@ -25,6 +25,6 @@ public class MultiApproverCalculator extends GenericApproverCalculator {
         approvers = super.executeCustomizedApproverAuthority(context, approvers.parallelStream().limit(node.getAssignment().getAssignQuantity()).collect(Collectors.toList()));
         logger.info("节点实例[{}], 节点[{}]计算当前处理人结束, 审批人信息为:{}", context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId());
         return approvers;
-    }
+    }*/
 
 }
