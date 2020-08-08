@@ -1,6 +1,6 @@
 package rwbykit.flowableTemp.core;
 
-import com.war3.nova.beans.Approver;
+import rwbykit.flowable.war3.beans.Approver;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

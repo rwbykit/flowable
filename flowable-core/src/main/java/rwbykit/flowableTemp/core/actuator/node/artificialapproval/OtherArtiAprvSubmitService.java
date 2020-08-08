@@ -1,6 +1,6 @@
 package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
 
-import com.war3.nova.beans.NvNode;
+import rwbykit.flowable.war3.beans.NvNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.engine.runtime.model.ApprovalInstance;

@@ -1,9 +1,9 @@
 package rwbykit.flowableTemp.core;
 
-import com.war3.nova.beans.NvListener;
-import com.war3.nova.beans.NvNode;
-import com.war3.nova.beans.NvProcess;
-import com.war3.nova.beans.NvTask;
+import rwbykit.flowable.war3.beans.NvListener;
+import rwbykit.flowable.war3.beans.NvNode;
+import rwbykit.flowable.war3.beans.NvProcess;
+import rwbykit.flowable.war3.beans.NvTask;
 
 import java.util.List;
 

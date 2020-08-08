@@ -1,6 +1,6 @@
 package rwbykit.flowableTemp.core;
 
-import com.war3.nova.beans.Approver;
+import rwbykit.flowable.war3.beans.Approver;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 
