@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Selector;
+import rwbykit.flowable.engine.beans.factory.support.GenericFactoryAware;
 import rwbykit.flowable.engine.util.Asserts;
-import rwbykit.flowableTemp.object.factory.GenericFactory;
 
 /**
  * 选择器工厂
@@ -14,7 +14,7 @@ import rwbykit.flowableTemp.object.factory.GenericFactory;
  * @version 1.0
  * @since 2018年12月14日 上午9:56:23
  */
-public class SelectorFactory extends GenericFactory {
+public class SelectorFactory extends GenericFactoryAware {
 
     private final static Logger logger = LoggerFactory.getLogger(SelectorFactory.class);
 
@@ -31,7 +31,7 @@ public class SelectorFactory extends GenericFactory {
 
     public <I, O, R extends Selector<I, O>> R getSelector(String selectorType) {
         Asserts.nonEmpty(selectorType, "Unsupported RouteSelector type[{}]!", selectorType);
-        return this.getObjectFactory().getObject(Constants.TYPE_SELECTOR, selectorType);
+        return this.getBeanFactory().getBean(Constants.TYPE_SELECTOR, selectorType);
     }
 
 }

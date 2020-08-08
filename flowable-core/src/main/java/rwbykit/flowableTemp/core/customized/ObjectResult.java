@@ -26,6 +26,7 @@ public class ObjectResult extends AbstractResult<Object> {
         return new ObjectResult(null, false, errorCode, errorMessage);
     }
 
+    @Override
     public Object getResult() {
         return result;
     }

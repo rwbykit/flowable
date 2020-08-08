@@ -1,5 +1,9 @@
 package rwbykit.flowable.model;
 
+import rwbykit.flowable.model.enumeration.AssignType;
+import rwbykit.flowable.model.enumeration.AssigneeType;
+import rwbykit.flowable.model.enumeration.PolymerizationType;
+
 import java.util.List;
 
 /**
@@ -20,14 +24,14 @@ public class Assignment {
 
     /**
      * 分配类型
-     * @see rwbykit.flowableTemp.model.enumeration.AssignType
+     * @see AssignType
      */
     private String assignType;
 
 
     /**
      * 审批人员聚合类型
-     * @see rwbykit.flowableTemp.model.enumeration.PolymerizationType
+     * @see PolymerizationType
      */
     private String polymerizationType;
 
@@ -38,7 +42,7 @@ public class Assignment {
 
     /**
      * 审批人类型
-     * @see rwbykit.flowableTemp.model.enumeration.AssigneeType
+     * @see AssigneeType
      */
     private String assigneeType;
 

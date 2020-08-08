@@ -2,12 +2,8 @@ package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowableTemp.Constants;
-import rwbykit.flowableTemp.FlowableException;
-import rwbykit.flowableTemp.FlowableRuntimeException;
-import rwbykit.flowable.engine.exception.UnsupportedArgumentException;
+import rwbykit.flowable.engine.FlowableRuntimeException;
 import rwbykit.flowableTemp.core.enumeration.ApproverType;
-import rwbykit.flowableTemp.core.factory.Factory;
 import rwbykit.flowableTemp.core.util.FlowableHelper;
 import rwbykit.flowableTemp.core.util.SpringContexts;
 import rwbykit.flowableTemp.core.util.Strings;
@@ -49,15 +45,15 @@ public class ArtificialApprovalSubmitServiceFactory {
      * 获取审批类型提交处理
      * @param approverType 审批类型
      * @return
-     * @throws FlowableException
+     * @throws
      */
     public ArtificialApprovalSubmitService getArtificialApprovalSubmitService(ApproverType approverType) {
         if (Objects.isNull(approverType)) {
             String errorMsg = FlowableHelper.formatMessage("Unsupported Approver Type[{}]!", approverType);
             logger.error(errorMsg);
-            throw new UnsupportedArgumentException(errorMsg);
+            //throw new UnsupportedArgumentException(errorMsg);
         }
-        String bean = Factory.factory().getMapper(Constants.ARTIFICIAL_APPROVAL_SUBMIT_SERVICE, approverType);
+        String bean = null;//Factory.factory().getMapper(Constants.ARTIFICIAL_APPROVAL_SUBMIT_SERVICE, approverType);
         if (Strings.isEmpty(bean)) {
             if (Strings.isEmpty(defaultServiceBeanName)) {
                 initDefaultServiceBeanName();

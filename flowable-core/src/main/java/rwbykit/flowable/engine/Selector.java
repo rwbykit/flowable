@@ -1,6 +1,5 @@
 package rwbykit.flowable.engine;
 
-import rwbykit.flowableTemp.FlowableException;
 
 /**
  * 选择器
@@ -16,7 +15,7 @@ public interface Selector<I, O> {
      * 选择
      * @param arg
      * @return
-     * @throws rwbykit.flowableTemp.FlowableException
+     * @throws FlowableException
      */
     O select(I arg) throws FlowableException;
     

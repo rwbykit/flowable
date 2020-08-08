@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/flowable.iml" filepath="$PROJECT_DIR$/.idea/flowable.iml" />
       <module fileurl="file://$PROJECT_DIR$/flowable-beans/flowable-beans.iml" filepath="$PROJECT_DIR$/flowable-beans/flowable-beans.iml" />
       <module fileurl="file://$PROJECT_DIR$/flowable-core/flowable-core.iml" filepath="$PROJECT_DIR$/flowable-core/flowable-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flowable-extension/flowable-extension.iml" filepath="$PROJECT_DIR$/flowable-extension/flowable-extension.iml" />
     </modules>
   </component>
 </project>

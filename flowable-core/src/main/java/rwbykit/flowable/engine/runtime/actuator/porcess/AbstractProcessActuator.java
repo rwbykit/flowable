@@ -3,13 +3,11 @@ package rwbykit.flowable.engine.runtime.actuator.porcess;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.Notification;
-import rwbykit.flowable.engine.Scheduler;
 import rwbykit.flowable.engine.notice.NotificationHelper;
 import rwbykit.flowable.engine.notice.ProcessNotice;
 import rwbykit.flowable.engine.runtime.actuator.AbstractActuator;
 import rwbykit.flowable.engine.runtime.scheduler.AbstractProcessScheduler;
 import rwbykit.flowable.model.Process;
-import rwbykit.flowable.model.enumeration.SchedulerType;
 
 import java.util.List;
 
@@ -50,6 +48,6 @@ public abstract class AbstractProcessActuator extends AbstractActuator<ProcessNo
      * @param context
      * @return
      */
-    protected abstract SchedulerType getSchedulerType(Context context);
+    /*protected abstract SchedulerType getSchedulerType(Context context);*/
 
 }

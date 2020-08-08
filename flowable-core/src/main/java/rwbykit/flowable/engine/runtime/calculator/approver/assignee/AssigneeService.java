@@ -9,7 +9,7 @@ import java.util.List;
  * @version 1.0
  * @since 2018年12月27日 下午5:22:37
  */
-interface AssigneeService {
+public interface AssigneeService {
 
     /**
      * 通过ID查询

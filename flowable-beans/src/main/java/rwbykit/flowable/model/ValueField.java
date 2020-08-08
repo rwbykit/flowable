@@ -1,6 +1,8 @@
 package rwbykit.flowable.model;
 
 
+import rwbykit.flowable.model.enumeration.ValueType;
+
 /**
  * 自定义当前字段
  * 
@@ -22,7 +24,7 @@ public class ValueField {
 
     /**
      * 值类型
-     * @see rwbykit.flowableTemp.model.enumeration.ValueType
+     * @see ValueType
      */
     private String valueType;
 

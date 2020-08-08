@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core.selector;
 
 import org.slf4j.Logger;
@@ -19,19 +20,21 @@ import rwbykit.flowableTemp.core.util.Strings;
 import rwbykit.flowable.model.Link;
 import rwbykit.flowable.model.Node;
 import rwbykit.flowable.model.Process;
-import rwbykit.flowableTemp.model.enumeration.ExecuteMode;
+import rwbykit.flowable.model.enumeration.ExecuteMode;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+*/
 /**
  * 节点路由选择器
  *
  * @author Cytus_
  * @version 1.0
  * @since 2018年6月26日 下午8:55:29
- */
+ *//*
+
 public class NodeSelector implements Selector<Context, Node> {
 
     private final static Logger logger = LoggerFactory.getLogger(NodeSelector.class);
@@ -86,25 +89,31 @@ public class NodeSelector implements Selector<Context, Node> {
         }
     }
 
-    /**
+    */
+/**
      * 针对指定节点，判断配置的关联关系
      *
      * @param srcNodeId
      * @param targetNodeId
      * @throws FlowableException
-     */
-    /*protected void assertNodeRelation(String srcNodeId, String targetNodeId) throws FlowableException {
+     *//*
+
+    */
+/*protected void assertNodeRelation(String srcNodeId, String targetNodeId) throws FlowableException {
         List<NvRoute> routes = ProcessConfigContext.getContext().getProcess().getRoute(srcNodeId);
         Asserts.assertCollectionNullOrEmpty(routes, "源节点[{}]未配置路由", srcNodeId);
         long count = routes.parallelStream().filter(s -> s.getTargetRef().equals(targetNodeId)).count();
         Asserts.assertMinNumber(count, 0, "源节点[{}], 目标节点[{}], 不存在路由关系", srcNodeId, targetNodeId);
-    }*/
+    }*//*
 
-    /**
+
+    */
+/**
      * 查询结束节点
      *
      * @return
-     */
+     *//*
+
     protected Node findEndNode(Context context) {
         Process process = context.getConfigService().getProcess();
         Node node = process.getNodes().values().parallelStream().filter(s -> NodeType.compare(NodeType.END, s.getType())).findFirst().orElse(null);
@@ -114,12 +123,14 @@ public class NodeSelector implements Selector<Context, Node> {
         return node;
     }
 
-    /**
+    */
+/**
      * 根据当前节点获取下一节点
      *
      * @param context
      * @return
-     */
+     *//*
+
     protected Node selectNextNode(Context context) {
 
         List<Link> links = context.getConfigService().getNode(context.getInstance().getNodeId()).getLinks();
@@ -179,3 +190,4 @@ public class NodeSelector implements Selector<Context, Node> {
 
 
 }
+*/

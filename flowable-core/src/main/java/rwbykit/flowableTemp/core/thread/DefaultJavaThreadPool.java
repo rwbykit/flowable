@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core.thread;
 
 import rwbykit.flowable.engine.Result;
@@ -14,13 +15,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * 默认的java线程池
  * 
  * @author Cytus_
  * @since 2018年12月18日 上午9:00:02
  * @version 1.0
- */
+ *//*
+
 public class DefaultJavaThreadPool implements ThreadPool {
 	
 	private String threadPoolName = "default";
@@ -159,3 +162,4 @@ public class DefaultJavaThreadPool implements ThreadPool {
 	}
 
 }
+*/

@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="flowable-beans" />
+        <module name="flowable-extension" />
         <module name="flowable-core" />
       </profile>
     </annotationProcessing>
@@ -15,6 +16,7 @@
       <module name="flowable" target="1.8" />
       <module name="flowable-beans" target="1.8" />
       <module name="flowable-core" target="1.8" />
+      <module name="flowable-extension" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

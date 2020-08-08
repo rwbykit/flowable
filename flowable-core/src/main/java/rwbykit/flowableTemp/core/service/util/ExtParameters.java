@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core.service.util;
 
 import com.alibaba.fastjson.JSONObject;
@@ -10,13 +11,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+*/
 /**
  * 流程扩展参数
  * 
  * @author Cytus_
  * @since 2018年12月26日 上午10:42:42
  * @version 1.0
- */
+ *//*
+
 public final class ExtParameters {
 
 	private final static ParameterService insExtParamsService = SpringContexts.getBean(ParameterService.class);
@@ -42,3 +45,4 @@ public final class ExtParameters {
 	}
 	
 }
+*/

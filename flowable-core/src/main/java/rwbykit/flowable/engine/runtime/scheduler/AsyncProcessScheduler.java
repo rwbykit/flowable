@@ -1,24 +1,13 @@
 package rwbykit.flowable.engine.runtime.scheduler;
 
-import rwbykit.flowableTemp.FlowableException;
-import rwbykit.flowable.engine.Result;
-import rwbykit.flowableTemp.core.runtime.Context;
-import com.war3.nova.beans.NvNode;
-import com.war3.nova.beans.NvProcess;
-import rwbykit.flowableTemp.core.CoreSelector;
-import rwbykit.flowableTemp.core.ProcessConfigContext;
-import rwbykit.flowableTemp.core.ProcessConstants;
-import rwbykit.flowableTemp.core.enumeration.ActuatorType;
-import rwbykit.flowableTemp.core.enumeration.RouteType;
-import rwbykit.flowable.engine.factory.ActuatorFactory;
-import rwbykit.flowable.engine.factory.SelectorFactory;
-import rwbykit.flowableTemp.core.service.util.Processes;
-import rwbykit.flowableTemp.core.thread.DefaultThreadResult;
-import rwbykit.flowableTemp.core.util.FlowableHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.engine.Actuator;
+import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.engine.FlowableException;
+import rwbykit.flowable.engine.Result;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -32,11 +21,23 @@ public class AsyncProcessScheduler extends AbstractProcessScheduler implements C
     
     private final static Logger logger = LoggerFactory.getLogger(AsyncProcessScheduler.class);
 
-    private Context context;
+    public AsyncProcessScheduler(List<SchedulerPostProcessor> schedulerPostProcessors) {
+        super(schedulerPostProcessors);
+    }
+
+    @Override
+    public Result<?> call() throws Exception {
+        return null;
+    }
+
+    @Override
+    public Context schedule(Actuator<Context, Context> object, Context inArgs) throws FlowableException {
+        return null;
+    }
+
+
     
-    private NvProcess process;
-    
-    public AsyncProcessScheduler(Context context, NvProcess process) {
+    /*public AsyncProcessScheduler(Context context, NvProcess process) {
         this.context = context;
         this.context.setProcessStatus(ProcessConstants.STATUS_RUNNING);
         this.process = process;
@@ -90,6 +91,6 @@ public class AsyncProcessScheduler extends AbstractProcessScheduler implements C
             Processes.updateStatus(context.getProcessInstId(), context.getProcessStatus());
         }
         return DefaultThreadResult.createSuccess(null);
-    }
+    }*/
 
 }

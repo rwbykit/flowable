@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core.engine;
 
 import rwbykit.flowableTemp.FlowableException;
@@ -22,13 +23,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
+*/
 /**
  * 默认引擎实现
  * 
  * @author Cytus_
  * @since 2018年12月13日 下午8:00:29
  * @version 1.0
- */
+ *//*
+
 public class NovaCoreProcessor implements CoreProcessor {
     
     private final static Logger logger = LoggerFactory.getLogger(NovaCoreProcessor.class);
@@ -100,3 +103,4 @@ public class NovaCoreProcessor implements CoreProcessor {
     }
 
 }
+*/

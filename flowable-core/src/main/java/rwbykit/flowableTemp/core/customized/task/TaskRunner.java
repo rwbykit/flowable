@@ -2,19 +2,10 @@ package rwbykit.flowableTemp.core.customized.task;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowable.engine.runtime.parameter.TaskParameter;
-import rwbykit.flowableTemp.Constants;
-import rwbykit.flowableTemp.FlowableException;
 import rwbykit.flowable.engine.Result;
-import rwbykit.flowableTemp.core.ProcessConfigContext;
+import rwbykit.flowable.engine.runtime.parameter.TaskParameter;
+import rwbykit.flowable.model.enumeration.ExecuteMode;
 import rwbykit.flowableTemp.core.ProcessConstants;
-import rwbykit.flowableTemp.core.customized.ObjectResult;
-import rwbykit.flowable.engine.runtime.runner.Runner;
-import rwbykit.flowable.engine.factory.RunnerFactory;
-import rwbykit.flowableTemp.core.util.FlowableHelper;
-import rwbykit.flowableTemp.model.enumeration.ExecuteMode;
-
-import java.util.Objects;
 
 /**
  * 任务执行
@@ -64,7 +55,7 @@ public class TaskRunner implements Runnable {
             return runnerResult;
         });*/
         
-        String errorMsg = null;
+        /*String errorMsg = null;
         try {
             logger.debug("任务实例[{}]执行开始", taskInstanceId);
             Runner<TaskParameter, Result<?>> runner = RunnerFactory.factory().getRunner(executeMode);
@@ -91,7 +82,7 @@ public class TaskRunner implements Runnable {
                 // Tasks.updateInsTaskStatus(nodeInstId, taskId, taskStatus, errorMsg);
             }
             
-        }
+        }*/
     }
     
     public Result<?> getResult() {

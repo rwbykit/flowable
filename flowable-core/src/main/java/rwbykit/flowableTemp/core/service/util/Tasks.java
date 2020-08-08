@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core.service.util;
 
 import rwbykit.flowableTemp.core.runtime.Context;
@@ -10,13 +11,15 @@ import rwbykit.flowableTemp.core.util.SpringContexts;
 
 import java.util.List;
 
+*/
 /**
  * 
  * 
  * @author Cytus_
  * @since 2018年12月15日 上午10:53:22
  * @version 1.0
- */
+ *//*
+
 public class Tasks {
     
     private static final TaskService insTaskService = SpringContexts.getBean(TaskService.class);
@@ -69,3 +72,4 @@ public class Tasks {
     }
     
 }
+*/

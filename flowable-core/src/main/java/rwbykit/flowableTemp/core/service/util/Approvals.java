@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core.service.util;
 
 import rwbykit.flowableTemp.Constants;
@@ -12,23 +13,27 @@ import rwbykit.flowableTemp.core.util.Strings;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * 服务伴生操作工具类
  * @author Cytus_
  * @since 2018年12月14日 上午10:19:05
  * @version 1.0
- */
+ *//*
+
 public final class Approvals {
 
     private final static ApprovalService insApprovalService = SpringContexts.getBean(ApprovalService.class);
     
-    /**
+    */
+/**
      * 初始化系统审批人信息
      * @param processInstId
      * @param nodeInstanceId
      * @param aprvResult
      * @param aprvComment
-     */
+     *//*
+
     public final static void initSystemAutoApproval(String processInstId, String nodeInstanceId, String aprvResult, String aprvComment) {
         ApprovalInstance approval = createPassApproval(ProcessConstants.SYSTEM_USER,
                 ProcessConstants.SYSTEM_USER_NAME, ProcessConstants.SYSTEM_ORG, ProcessConstants.SYSTEM_ORG_NAME, ProcessConstants.SYSTEM_INST_ORG);
@@ -38,30 +43,36 @@ public final class Approvals {
         insApprovalService.insert(approval);
     }
     
-    /**
+    */
+/**
      * 更新审批信息
      * @param insApproval
-     */
+     *//*
+
     public final static void updateApproval(ApprovalInstance insApproval) {
         insApprovalService.updateApproval(insApproval);
     }
     
-    /**
+    */
+/**
      * 查询实例节点下所有的审批信息
      * @param nodeInstanceId
      * @return
-     */
+     *//*
+
     public final static List<ApprovalInstance> getNodeAllApproval(String nodeInstanceId) {
         return insApprovalService.getAllByNodeInstId(nodeInstanceId);
     }
     
-    /**
+    */
+/**
      * 创建通过的审批人信息
      * @param aprvUser
      * @param aprvOrg
      * @param aprvInstOrg
      * @return
-     */
+     *//*
+
     public final static ApprovalInstance createPassApproval(String aprvUser, String aprvUserName, String aprvOrg, String aprvOrgName, String aprvInstOrg) {
         ApprovalInstance approval = new ApprovalInstance();
         approval.setApprovalId(Strings.getSequence());
@@ -76,12 +87,14 @@ public final class Approvals {
         return approval;
     }
     
-    /**
+    */
+/**
      * 批量插入审批人信息
      * @param processInstId
      * @param nodeInstId
      * @param approvers
-     */
+     *//*
+
     public final static void addApprovers(String processInstId, String nodeInstId, List<Approver> approvers) {
         List<ApprovalInstance> approvals = new ArrayList<>(approvers.size());
         for (Approver approver : approvers) {
@@ -110,3 +123,4 @@ public final class Approvals {
     
     
 }
+*/

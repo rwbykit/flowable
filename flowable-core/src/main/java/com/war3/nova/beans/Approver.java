@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @since 2018年12月14日 下午1:18:45
  * @version 1.0
  */
-public class Approver extends rwbykit.flowable.engine.runtime.model.Approver implements Serializable {
+public class Approver /*extends rwbykit.flowable.engine.runtime.model.Approver*/ implements Serializable {
 
     /**
      * 

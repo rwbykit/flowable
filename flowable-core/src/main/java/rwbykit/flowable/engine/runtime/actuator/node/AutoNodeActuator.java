@@ -31,7 +31,7 @@ public class AutoNodeActuator extends AbstractNodeActuator {
 
     @Override
     public Context nodeExecute(Context context) throws FlowableException {
-        AbstractTaskActuator actuator = ActuatorFactory.factory().getTaskActuator(TaskType.DEFAULT);
+        AbstractTaskActuator actuator = ActuatorFactory.factory().getTaskActuator(TaskType.DEFAULT.toString());
         Observable.create((ObservableOnSubscribe<Task>) emitter -> {
             TaskSelector taskSelector = SelectorFactory.factory().getSelector(Constants.SELECTOR_TASK);
             Task task = taskSelector.select(context);

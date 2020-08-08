@@ -57,7 +57,7 @@ public class Strings {
      * @return
      */
     public final static boolean nonEmpty(final CharSequence cs) {
-        return StringUtils.isNotEmpty(cs);
+        return !isEmpty(cs);
     }
     
     /**
@@ -93,7 +93,7 @@ public class Strings {
      * @return
      */
     public final static boolean isStrNotEmpty(final CharSequence cs) {
-        return isNotEmpty(cs) && !"null".equals(cs);
+        return nonEmpty(cs) && !"null".equals(cs);
     }
     
     /**
@@ -492,8 +492,7 @@ public class Strings {
         if (email == null || email.length() < 1 || email.length() > 256) {
             return false;
         }
-        Pattern pattern = Pattern
-                .compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+        Pattern pattern = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
         return pattern.matcher(email).matches();
     }
     
@@ -636,7 +635,7 @@ public class Strings {
      * @return
      */
     public final static String replaceNRT(String str) {
-        return isNotEmpty(str) ? Pattern.compile("\n*|\t|\r").matcher(str.replaceAll("  ", "")).replaceAll("") : null;
+        return nonEmpty(str) ? Pattern.compile("\n*|\t|\r").matcher(str.replaceAll("  ", "")).replaceAll("") : null;
     }
     
     /**

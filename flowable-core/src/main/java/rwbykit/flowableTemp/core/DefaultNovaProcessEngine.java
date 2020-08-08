@@ -1,3 +1,4 @@
+/*
 package rwbykit.flowableTemp.core;
 
 import rwbykit.flowable.engine.exception.UnsupportedOperateException;
@@ -20,13 +21,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * 默认的流程引擎处理
  * 
  * @author Cytus_
  * @since 2018年12月13日 下午7:37:43
  * @version 1.0
- */
+ *//*
+
 public class DefaultNovaProcessEngine implements NovaProcessEngine {
     
     private final static Logger logger = LoggerFactory.getLogger(DefaultNovaProcessEngine.class);
@@ -205,3 +208,4 @@ public class DefaultNovaProcessEngine implements NovaProcessEngine {
     }
 
 }
+*/

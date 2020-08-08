@@ -1,28 +1,12 @@
 package rwbykit.flowable.engine.runtime.scheduler;
 
-import rwbykit.flowableTemp.FlowableException;
-import rwbykit.flowableTemp.core.runtime.Context;
-import com.war3.nova.beans.NvInsNode;
-import com.war3.nova.beans.NvNode;
-import rwbykit.flowableTemp.core.CoreSelector;
-import rwbykit.flowableTemp.core.ProcessConfigContext;
-import rwbykit.flowableTemp.core.ProcessConstants;
-import rwbykit.flowableTemp.core.enumeration.ActuatorType;
-import rwbykit.flowableTemp.core.enumeration.NodeType;
-import rwbykit.flowableTemp.core.enumeration.RouteType;
-import rwbykit.flowable.engine.factory.ActuatorFactory;
-import rwbykit.flowable.engine.factory.SelectorFactory;
-import rwbykit.flowableTemp.core.service.util.Nodes;
-import rwbykit.flowableTemp.core.service.util.Processes;
-import rwbykit.flowableTemp.core.thread.ThreadPool;
-import rwbykit.flowableTemp.core.util.FlowableHelper;
-import rwbykit.flowableTemp.core.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import rwbykit.flowable.engine.Actuator;
+import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.engine.FlowableException;
 
-import java.util.Objects;
+import java.util.List;
 
 /**
  * 流程调度器
@@ -35,7 +19,16 @@ public class SyncProcessScheduler extends AbstractProcessScheduler {
 
     private final static Logger logger = LoggerFactory.getLogger(SyncProcessScheduler.class);
 
-    @Autowired
+    public SyncProcessScheduler(List<SchedulerPostProcessor> schedulerPostProcessors) {
+        super(schedulerPostProcessors);
+    }
+
+    @Override
+    public Context schedule(Actuator<Context, Context> object, Context inArgs) throws FlowableException {
+        return null;
+    }
+
+    /*@Autowired
     @Qualifier("asyncProcessThreadPool")
     private ThreadPool threadPool;
     
@@ -46,12 +39,12 @@ public class SyncProcessScheduler extends AbstractProcessScheduler {
         ProcessActuator actuator = ActuatorFactory.factory().getProcessActuator(ActuatorType.PROCESS);
 
         CoreSelector<NvNode> nodeRouteSelector = SelectorFactory.factory().getRouteSelector(RouteType.NODE);
-        /*
+        *//*
          * 当前节点为空，应为以下几种情况
          * 1：自动流程第一次调用
          * 2：自动流程异常后重新调起未传入当前节点ID
          * 3：人工流程异常
-         */
+         *//*
         if (Strings.isEmpty(context.getNodeId())) {
         
             // 1：自动流程第一次调用
@@ -74,20 +67,20 @@ public class SyncProcessScheduler extends AbstractProcessScheduler {
             }
             
         } 
-        /*
+        *//*
          * 当前节点不为空，应为以下几种情况
          * 1：人工节点提交
          * 2：自动流程异常后重新调起
-         */
+         *//*
         else {
             
             NvNode currNode = ProcessConfigContext.getContext().getProcess().getNode(context.getNodeId());
             
-            /*
+            *//*
              *  第一种情况处理，即人工节点提交，此时需要判断以下情况
              *  1：人工第一个节点提交
              *  2：非人工第一个节点提交
-             */
+             *//*
             if (NodeType.compare(NodeType.ARTI, currNode.getType())) {
                 NvNode startNode = this.getPreStartNode(ProcessConfigContext.getContext().getProcess(), context.getNodeId());
                 // 当前节点前置节点为开始节点， 单独处理
@@ -95,14 +88,14 @@ public class SyncProcessScheduler extends AbstractProcessScheduler {
                     doStartNodeScheduler(context, startNode);
                 } 
             } 
-            /*
+            *//*
              * 第二种情况， 自动流程异常后重新调起
-             */
+             *//*
             context = super.processSchedule(actuator, context);
             
-            /*else if (NodeType.compare(NodeType.AUTO, currNode.getType())) {
+            *//*else if (NodeType.compare(NodeType.AUTO, currNode.getType())) {
                 nova = super.processSchedule(actuator, nova);
-            }*/
+            }*//*
         }
         
         
@@ -140,6 +133,6 @@ public class SyncProcessScheduler extends AbstractProcessScheduler {
         
         return context;
         
-    }
+    }*/
     
 }

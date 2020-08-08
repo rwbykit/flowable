@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Lists {
+public final class Lists {
 
-    public final static <E> List<E> newArrayList(E... elements) {
+    public static <E> List<E> newArrayList(E... elements) {
         return new ArrayList<>(Arrays.asList(elements));
     }
 
-    public final static <E> List<E> immutableList(List<E> list) {
+    public static <E> List<E> immutableList(List<E> list) {
         if (Collections.isEmpty(list)) {
             return java.util.Collections.emptyList();
         } else if (list.size() == 1) {
@@ -20,7 +20,7 @@ public class Lists {
         }
     }
 
-    public final static <E> List<E> immutableList(E... elements) {
+    public static <E> List<E> immutableList(E... elements) {
         if (Collections.isEmpty(elements)) {
             return java.util.Collections.emptyList();
         } else if (elements.length == 1) {
@@ -28,6 +28,10 @@ public class Lists {
         } else {
             return java.util.Collections.unmodifiableList(newArrayList(elements));
         }
+    }
+
+    public static <E> List<E> emptyList() {
+        return java.util.Collections.emptyList();
     }
 
 }

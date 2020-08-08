@@ -1,8 +1,8 @@
 package rwbykit.flowable.engine.runtime.calculator.approver.assignee;
 
 import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.runtime.calculator.approver.AssigneeCalculator;
+import rwbykit.flowable.engine.runtime.current.CurrentInstance;
 import rwbykit.flowable.engine.runtime.current.Initiator;
 import rwbykit.flowable.engine.runtime.model.Approver;
 import rwbykit.flowable.engine.util.Strings;
@@ -26,16 +26,17 @@ public class GenericAssigneeCalculator implements AssigneeCalculator {
     private final static AssigneeService DEFAULT_ASSIGNEE_SERVICE = new DefaultAssigneeService();
 
     @Override
-    public List<Approver> calculate(Context context) throws FlowableException {
+    public List<Approver> calculate(Context context) {
         ArtifactNode node = context.getProcessConfigService().getNode(context.getCurrentInstance().getNodeId());
         Initiator initiator = context.getCurrentInstance().getInitiator();
+        CurrentInstance instance = context.getCurrentInstance().cloneCurrentInstance();
         return node.getAssignment().getAssignees().stream()
-                .map(assignee -> doCalculate(assignee, initiator))
+                .map(assignee -> doCalculate(assignee, initiator, instance))
                 .flatMap(List::parallelStream)
                 .collect(Collectors.toList());
     }
 
-    public List<Approver> doCalculate(Assignee assignee, Initiator initiator) {
+    public List<Approver> doCalculate(Assignee assignee, Initiator initiator, CurrentInstance currentInstance) {
         AssigneeService assigneeService = this.getAssigneeService();
         if (Objects.nonNull(assigneeService)) {
             List<AssigneeInformation> assigneeInformationList = assigneeService.getAssigneeInformation(Strings.safeSplit(assignee.getValue(), ";"));

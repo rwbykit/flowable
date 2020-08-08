@@ -1,6 +1,6 @@
 package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
 
-import rwbykit.flowableTemp.core.runtime.model.ApprovalInstance;
+import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 
 import java.io.Serializable;
 import java.util.List;

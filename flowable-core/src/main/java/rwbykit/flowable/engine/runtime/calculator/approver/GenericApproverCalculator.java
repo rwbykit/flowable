@@ -5,15 +5,14 @@ import org.slf4j.LoggerFactory;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.factory.CalculatorFactory;
+import rwbykit.flowable.engine.factory.ObjectFactory;
 import rwbykit.flowable.engine.runtime.model.Approver;
 import rwbykit.flowable.engine.util.Asserts;
 import rwbykit.flowable.engine.util.Collections;
 import rwbykit.flowable.engine.util.Utils;
 import rwbykit.flowable.model.ArtifactNode;
 import rwbykit.flowable.model.Assignee;
-import rwbykit.flowable.engine.factory.ObjectFactory;
-import rwbykit.flowableTemp.model.enumeration.ExecuteMode;
-
+import rwbykit.flowable.model.enumeration.ExecuteMode;
 
 import java.util.List;
 import java.util.Objects;
@@ -56,7 +55,10 @@ public class GenericApproverCalculator implements ApproverCalculator {
         }
 
         List<List<Approver>> listApprovers = assignees.parallelStream().map(s -> this.calculate(context, s)).collect(Collectors.toList());
-        List<Approver> approvers = afterCalculatorSet(context, listApprovers);
+
+        ApproverPolymerizationCalculator approverPolymerizationCalculator = CalculatorFactory.factory().getApproverPolymerizationCalculator(node.getAssignment().getPolymerizationType());
+        List<Approver> approvers = approverPolymerizationCalculator.calculate(listApprovers);
+        approvers = afterCalculatorSet(context, approvers);
         logger.info("节点实例[{}], 节点[{}]计算当前处理人结束, 审批人信息为:{}", context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId(), approvers.toString());
         return approvers;
     }
@@ -92,8 +94,8 @@ public class GenericApproverCalculator implements ApproverCalculator {
      * @param listApprovers
      * @return
      */
-    protected List<Approver> afterCalculatorSet(Context context, List<List<Approver>> listApprovers) throws FlowableException {
-        return listApprovers.stream().flatMap(List::stream).collect(Collectors.toList());
+    protected List<Approver> afterCalculatorSet(Context context, List<Approver> listApprovers) {
+        return listApprovers;
     }
 
     /**

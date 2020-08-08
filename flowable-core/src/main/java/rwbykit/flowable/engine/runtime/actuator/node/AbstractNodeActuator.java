@@ -93,8 +93,4 @@ public abstract class AbstractNodeActuator extends AbstractActuator<NodeNotice> 
     abstract Context nodeExecute(Context context) throws FlowableException;
 
 
-    @Override
-    public SchedulerType getSchedulerType(Context context) {
-        return SchedulerType.SYNC;
-    }
 }

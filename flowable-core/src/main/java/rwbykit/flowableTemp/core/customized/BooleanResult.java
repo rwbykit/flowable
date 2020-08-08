@@ -28,6 +28,7 @@ public class BooleanResult extends AbstractResult<Boolean> {
         return new BooleanResult(false, false, errorCode, errorMessage);
     }
     
+    @Override
     public Boolean getResult() {
         return Objects.isNull(result) ? false : result;
     }

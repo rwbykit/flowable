@@ -1,12 +1,12 @@
 package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
 
-import rwbykit.flowableTemp.FlowableException;
+import org.springframework.stereotype.Service;
+import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.Result;
-import rwbykit.flowableTemp.core.runtime.model.ApprovalInstance;
+import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 import rwbykit.flowableTemp.core.ProcessConstants;
 import rwbykit.flowableTemp.core.customized.BooleanResult;
 import rwbykit.flowableTemp.core.util.Numbers;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -21,11 +21,9 @@ import java.util.List;
 public class Two_ThirdsPassedMultiJoinSignRule implements CustomizedMultiJoinSignRule {
 
     @Override
-    public Result<?> execute(MultiJoinSignParameter parameter) throws FlowableException {
+    public Result<Boolean> calculate(MultiJoinSignParameter parameter) throws FlowableException {
         List<ApprovalInstance> approvals = parameter.getApprovals();
         long refuseNum = approvals.parallelStream().filter(s -> ProcessConstants.ARRV_RESULT_REFUSE.equals(s.getAprvResult())).count();
         return BooleanResult.createSuccess(Numbers.divide(refuseNum, approvals.size(), 2).compareTo(Numbers.divide(1, 3, 2)) < 0);
-        
     }
-
 }

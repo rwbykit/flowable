@@ -12,6 +12,7 @@
     <modules>
         <module>flowable-core</module>
         <module>flowable-beans</module>
+        <module>flowable-extension</module>
     </modules>
 
     <properties>

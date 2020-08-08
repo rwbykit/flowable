@@ -1,23 +1,18 @@
 package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
 
-import rwbykit.flowableTemp.Constants;
-import rwbykit.flowableTemp.FlowableException;
-import rwbykit.flowable.engine.Result;
-import rwbykit.flowableTemp.annotation.NovaMapper;
-import rwbykit.flowableTemp.core.runtime.model.ApprovalInstance;
 import com.war3.nova.beans.NvMulti;
 import com.war3.nova.beans.NvNode;
-import rwbykit.flowableTemp.core.ProcessConfigContext;
-import rwbykit.flowable.engine.runtime.runner.Runner;
-import rwbykit.flowableTemp.core.enumeration.ApproverType;
-import rwbykit.flowableTemp.model.enumeration.ExecuteMode;
-import rwbykit.flowableTemp.core.enumeration.MultiRuleType;
-import rwbykit.flowable.engine.factory.RunnerFactory;
-import rwbykit.flowableTemp.core.service.util.Approvals;
-import rwbykit.flowableTemp.core.util.SpringContexts;
-import rwbykit.flowableTemp.core.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.engine.FlowableException;
+import rwbykit.flowable.engine.Result;
+import rwbykit.flowable.engine.factory.RunnerFactory;
+import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
+import rwbykit.flowable.engine.runtime.runner.Runner;
+import rwbykit.flowableTemp.core.ProcessConfigContext;
+import rwbykit.flowableTemp.core.enumeration.MultiRuleType;
+import rwbykit.flowableTemp.core.util.SpringContexts;
+import rwbykit.flowableTemp.core.util.Strings;
 
 import java.util.List;
 
@@ -28,7 +23,6 @@ import java.util.List;
  * @since 2018年12月28日 下午3:17:16
  * @version 1.0
  */
-@NovaMapper(enumClass = ApproverType.class, enumValue = "MULTI", mapperName = Constants.ARTIFICIAL_APPROVAL_SUBMIT_SERVICE)
 public class MultiJoinSignArtiAprvSubmitService implements ArtificialApprovalSubmitService {
     
     private final static Logger logger = LoggerFactory.getLogger(MultiJoinSignArtiAprvSubmitService.class);
@@ -48,12 +42,11 @@ public class MultiJoinSignArtiAprvSubmitService implements ArtificialApprovalSub
             String beanName = SystemMultiRuleType.valueOf(nvMulti.getValue()).getValue();
             CustomizedMultiJoinSignRule rule = SpringContexts.getBean(beanName, CustomizedMultiJoinSignRule.class);
             logger.debug("节点实例[{}], 节点[{}]使用系统预定义会签规则执行开始", nodeInstId, nvNode.getId());
-            runnerResult = rule.execute(parameter);
+            runnerResult = null;//rule.execute(parameter);
             
         } else {
             logger.debug("节点实例[{}], 节点[{}]自定义会签规则执行开始", nodeInstId, nvNode.getId());
-            Runner<MultiJoinSignParameter, Result<?>> runner = (Runner<MultiJoinSignParameter, Result<?>>)
-                    RunnerFactory.factory().getObjectActuator(ExecuteMode.get(nvMulti.getExecutionMode()));
+            Runner<MultiJoinSignParameter, Result<?>> runner = RunnerFactory.factory().getRunner(nvMulti.getExecutionMode());
             runnerResult = runner.run(nvMulti.getValue(), parameter);
         }
         

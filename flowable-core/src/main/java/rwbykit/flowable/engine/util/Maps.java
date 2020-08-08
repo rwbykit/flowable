@@ -54,4 +54,16 @@ public class Maps {
         return targetMap;
     }
 
+    public static <K, V> Map<K, V> newConcurrentHashMap(int size) {
+        return new ConcurrentHashMap<K, V>(size);
+    }
+
+    public static <K, V> Map<K, V> emptyMap() {
+        return java.util.Collections.emptyMap();
+    }
+
+    public static <K, V> Map<K, V> unmodifiableMap(Map<? extends K, ? extends V> m) {
+        return java.util.Collections.unmodifiableMap(m);
+    }
+
 }

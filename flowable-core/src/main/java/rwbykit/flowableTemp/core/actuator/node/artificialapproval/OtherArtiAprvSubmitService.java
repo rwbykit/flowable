@@ -1,14 +1,12 @@
 package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
 
-import rwbykit.flowableTemp.Constants;
-import rwbykit.flowableTemp.FlowableException;
-import rwbykit.flowableTemp.core.runtime.model.ApprovalInstance;
 import com.war3.nova.beans.NvNode;
-import rwbykit.flowableTemp.core.ProcessConfigContext;
-import rwbykit.flowableTemp.core.ProcessConstants;
-import rwbykit.flowableTemp.core.service.util.Approvals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
+import rwbykit.flowableTemp.Constants;
+import rwbykit.flowableTemp.core.ProcessConfigContext;
+import rwbykit.flowableTemp.core.ProcessConstants;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class OtherArtiAprvSubmitService implements ArtificialApprovalSubmitServi
     private final static Logger logger = LoggerFactory.getLogger(OtherArtiAprvSubmitService.class);
     
     @Override
-    public ArtificialApprovalSubmitResult doSubmit(String processInstId, String nodeInstId) throws FlowableException {
+    public ArtificialApprovalSubmitResult doSubmit(String processInstId, String nodeInstId)  {
         List<ApprovalInstance> insApprovals = Approvals.getNodeAllApproval(nodeInstId);
         long notApprovalCount = insApprovals.parallelStream().filter(s -> !Constants.COMMMON_YESNO_YES.equals(s.getSubmitted())).count();
         NvNode nvNode = ProcessConfigContext.getContext().getCurrentNode();

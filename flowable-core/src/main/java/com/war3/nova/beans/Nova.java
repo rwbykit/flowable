@@ -1,6 +1,5 @@
 package com.war3.nova.beans;
 
-import rwbykit.flowableTemp.core.runtime.model.ApprovalInstance;
 
 import java.io.Serializable;
 import java.util.List;
@@ -40,7 +39,6 @@ public class Nova extends ToString implements Serializable {
     // 当前节点状态
     private String nodeStatus;
     // 审批意见
-    private ApprovalInstance instApproval;
     // 下一节点审批人员
     private List<Approver> nextApprovers;
     // 业务流水号
@@ -217,13 +215,6 @@ public class Nova extends ToString implements Serializable {
         this.nextNodeId = nextNodeId;
     }
 
-    public ApprovalInstance getInstApproval() {
-        return instApproval;
-    }
-
-    public void setInstApproval(ApprovalInstance instApproval) {
-        this.instApproval = instApproval;
-    }
 
     public List<Approver> getNextApprovers() {
         return nextApprovers;

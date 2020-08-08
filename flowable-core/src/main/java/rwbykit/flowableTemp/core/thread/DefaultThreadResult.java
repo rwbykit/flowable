@@ -25,7 +25,8 @@ public class DefaultThreadResult extends AbstractResult<Object> {
 	}
 	
 
-	public Object getResult() {
+	@Override
+    public Object getResult() {
 		return result;
 	}
 

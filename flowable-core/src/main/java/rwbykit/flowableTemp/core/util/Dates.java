@@ -368,7 +368,7 @@ public class Dates {
      */
     public final static Date parseDate(String date, String pattern) {
         try {
-            return (Strings.isNotEmpty(date)) ? new SimpleDateFormat(pattern).parse(date) : null;
+            return (Strings.nonEmpty(date)) ? new SimpleDateFormat(pattern).parse(date) : null;
         } catch (Exception e) {
         } 
         return null;
@@ -506,7 +506,7 @@ public class Dates {
      * @return
      */
     public final static boolean isLeapYear(String year) {
-        return Strings.isNotEmpty(year) ? isLeapYear(Integer.valueOf(year)) : false;
+        return Strings.nonEmpty(year) ? isLeapYear(Integer.valueOf(year)) : false;
     }
     
     /**
@@ -738,7 +738,7 @@ public class Dates {
      * @return
      */
     public final static String formatDate8To10(String date) {
-        return (Strings.isNotEmpty(date)) ? formatDateByDef(parseDate(date, PATTERN_DATE_COMPACT)) : null;
+        return (Strings.nonEmpty(date)) ? formatDateByDef(parseDate(date, PATTERN_DATE_COMPACT)) : null;
     }
     
     /**
@@ -747,7 +747,7 @@ public class Dates {
      * @return
      */
     public final static String formatDate10To8(String date) {
-        return Strings.isNotEmpty(date) ? formatDate(parseDateByDef(date), PATTERN_DATE_COMPACT) : null;
+        return Strings.nonEmpty(date) ? formatDate(parseDateByDef(date), PATTERN_DATE_COMPACT) : null;
     }
     
     /**
@@ -756,7 +756,7 @@ public class Dates {
      * @return
      */
     public final static String formatDateTime14To19(String date) {
-        return Strings.isNotEmpty(date) ? formatDate(parseDate(date, PATTERN_DATETIME_COMPACT), PATTERN_DATETIME) : null;
+        return Strings.nonEmpty(date) ? formatDate(parseDate(date, PATTERN_DATETIME_COMPACT), PATTERN_DATETIME) : null;
     }
     
     /**
@@ -765,7 +765,7 @@ public class Dates {
      * @return
      */
     public final static String formatDateTime19To14(String date) {
-        return Strings.isNotEmpty(date) ? formatDate(parseDate(date, PATTERN_DATETIME), PATTERN_DATETIME_COMPACT) : null;
+        return Strings.nonEmpty(date) ? formatDate(parseDate(date, PATTERN_DATETIME), PATTERN_DATETIME_COMPACT) : null;
     }
     
     /**
@@ -774,7 +774,7 @@ public class Dates {
      * @return
      */
     public final static String formatTime6To8(String date) {
-        return Strings.isNotEmpty(date) ? formatDate(parseDate(date, PATTERN_TIME_COMPACT), PATTERN_TIME) : null;
+        return Strings.nonEmpty(date) ? formatDate(parseDate(date, PATTERN_TIME_COMPACT), PATTERN_TIME) : null;
     }
     
     /**
@@ -783,7 +783,7 @@ public class Dates {
      * @return
      */
     public final static String formatTime8To6(String date) {
-        return Strings.isNotEmpty(date) ? formatDate(parseDate(date, PATTERN_TIME), PATTERN_TIME_COMPACT) : null;
+        return Strings.nonEmpty(date) ? formatDate(parseDate(date, PATTERN_TIME), PATTERN_TIME_COMPACT) : null;
     }
     
     /**
