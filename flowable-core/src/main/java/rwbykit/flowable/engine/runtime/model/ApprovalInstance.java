@@ -4,4 +4,8 @@ public interface ApprovalInstance {
     String getAprvResult();
 
     String getSubmitted();
+
+    String getNodeInstanceId();
+
+
 }

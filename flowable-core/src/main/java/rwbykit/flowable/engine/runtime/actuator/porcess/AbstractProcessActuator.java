@@ -36,18 +36,4 @@ public abstract class AbstractProcessActuator extends AbstractActuator<ProcessNo
                 .processStatus(context.getCurrentInstance().getProcessStatus())
                 .build();
     }
-
-    protected Context schedule(Context context) throws FlowableException {
-        AbstractProcessScheduler scheduler = null;
-        scheduler.schedule(this, context);
-        return context;
-    }
-
-    /**
-     * 获得调度者类型
-     * @param context
-     * @return
-     */
-    /*protected abstract SchedulerType getSchedulerType(Context context);*/
-
 }

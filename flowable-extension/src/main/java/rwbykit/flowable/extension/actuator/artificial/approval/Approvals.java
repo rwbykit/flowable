@@ -1,4 +1,4 @@
-package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
+package rwbykit.flowable.extension.actuator.artificial.approval;
 
 import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 

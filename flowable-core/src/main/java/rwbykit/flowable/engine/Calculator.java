@@ -2,20 +2,20 @@ package rwbykit.flowable.engine;
 
 /**
  * 计算器
- * @param <I> 入参
- * @param <O> 出参
+ * @param <In> 入参
+ * @param <Out> 出参
  * @author Cytus_
  * @since 2018年12月27日 下午2:23:58
  * @version 1.0
  */
-public interface Calculator<I, O> {
+public interface Calculator<In, Out> {
 
     /**
      * 计算
-     * @param arg
+     * @param in
      * @return
      * @throws
      */
-    O calculate(I arg) throws FlowableException;
+    Out calculate(In in) throws FlowableException;
     
 }

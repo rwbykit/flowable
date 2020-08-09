@@ -2,12 +2,12 @@ package rwbykit.flowable.engine;
 
 /**
  * 返回结果
- * @param <T>
+ * @param <R>
  * @author Cytus_
  * @since 2018年12月27日 下午2:26:24
  * @version 1.0
  */
-public interface Result<T> {
+public interface Result<R> {
     
     public final static int SUCCESS = 0;
     
@@ -15,7 +15,7 @@ public interface Result<T> {
     
     public final static int REFUSE = 1;
     
-    public T getResult();
+    public R getResult();
     
     public boolean isSuccess();
     

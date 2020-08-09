@@ -1,4 +1,4 @@
-package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
+package rwbykit.flowable.engine.runtime.actuator.node.artificial.approval;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

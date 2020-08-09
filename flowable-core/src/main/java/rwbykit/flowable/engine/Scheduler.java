@@ -14,10 +14,10 @@ public interface Scheduler<In, O, Out> {
     /**
      * 调度
      * @param object
-     * @param inArgs
+     * @param in
      * @return
      * @throws FlowableException
      */
-    Out schedule(O object, In inArgs) throws FlowableException;
+    Out schedule(O object, In in) throws FlowableException;
     
 }

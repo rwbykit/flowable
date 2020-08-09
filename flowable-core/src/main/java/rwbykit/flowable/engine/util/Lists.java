@@ -2,6 +2,8 @@ package rwbykit.flowable.engine.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public final class Lists {
@@ -9,6 +11,18 @@ public final class Lists {
     public static <E> List<E> newArrayList(E... elements) {
         return new ArrayList<>(Arrays.asList(elements));
     }
+
+    public static <E> List<E> newArrayList(Collection<E> collection) {
+        if (Collections.isEmpty(collection)) {
+            return new ArrayList<>(0);
+        }
+        return new ArrayList<>(collection);
+    }
+
+    public static <E> List<E> newLinkedList() {
+        return new LinkedList<>();
+    }
+
 
     public static <E> List<E> immutableList(List<E> list) {
         if (Collections.isEmpty(list)) {
@@ -33,5 +47,6 @@ public final class Lists {
     public static <E> List<E> emptyList() {
         return java.util.Collections.emptyList();
     }
+
 
 }

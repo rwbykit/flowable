@@ -17,6 +17,7 @@ import rwbykit.flowable.engine.runtime.selector.TaskSelector;
 import rwbykit.flowable.model.Task;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 自动节点执行器
@@ -32,36 +33,38 @@ public class AutoNodeActuator extends AbstractNodeActuator {
     @Override
     public Context nodeExecute(Context context) throws FlowableException {
         AbstractTaskActuator actuator = ActuatorFactory.factory().getTaskActuator(TaskType.DEFAULT.toString());
+        AtomicReference<Context> ctx = new AtomicReference<>(context);
         Observable.create((ObservableOnSubscribe<Task>) emitter -> {
             TaskSelector taskSelector = SelectorFactory.factory().getSelector(Constants.SELECTOR_TASK);
-            Task task = taskSelector.select(context);
+            Task task = taskSelector.select(ctx.get());
             if (Objects.nonNull(task) && !emitter.isDisposed()) {
-                context.addParam("taskId", task.getId());
+                ctx.get().addParam("taskId", task.getId());
                 emitter.onNext(task);
             } else if (Objects.isNull(task)) {
                 emitter.onComplete();
             }
         }).doOnNext(task -> {
-            logger.info(LoggerHelper.actuator_node_startMessage(context));
+            logger.info(LoggerHelper.actuator_node_startMessage(ctx.get()));
+
             try {
-                context.addParam(Constants.TASK_ID, task.getId());
-                actuator.execute(context);
+                ctx.get().addParam(Constants.TASK_ID, task.getId());
+                ctx.set(super.schedule(actuator, ctx.get(), "sync"));
             } catch (Exception e) {
-                this.handleException(context, Phase.TASK, e);
+                this.handleException(ctx.get(), Phase.TASK, e);
             }
-            logger.info(LoggerHelper.actuator_node_endMessage(context));
+            logger.info(LoggerHelper.actuator_node_endMessage(ctx.get()));
         }).doOnSubscribe(disposable -> {
-            if (context.getCurrentInstance().isError()) {
+            if (ctx.get().getCurrentInstance().isError()) {
                 disposable.dispose();
             }
         }).doOnError((e) -> {
-            this.handleException(context, Phase.TASK, e);
+            this.handleException(ctx.get(), Phase.TASK, e);
         }).doOnComplete(() -> {
-            context.getRuntimeService().getApprovalService().initSystemAutoApproval(
-                    context.getCurrentInstance().getProcessInstanceId(),
-                    context.getCurrentInstance().getNodeInstanceId(), "1", "系统默认通过!");
+            ctx.get().getRuntimeService().getApprovalService().initSystemAutoApproval(
+                    ctx.get().getCurrentInstance().getProcessInstanceId(),
+                    ctx.get().getCurrentInstance().getNodeInstanceId(), "1", "系统默认通过!");
         }).publish().connect();
-
+        context = ctx.get();
         if (context.getCurrentInstance().isError()) {
             throw new FlowableException(context.getCurrentInstance().errorCode(), context.getCurrentInstance().errorMessage());
         }

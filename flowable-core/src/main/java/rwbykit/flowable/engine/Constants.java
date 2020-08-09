@@ -25,6 +25,8 @@ public class Constants {
 
     public final static String TYPE_SELECTOR = "Selector";
 
+    public final static String TYPE_SCHEDULER = "Scheduler";
+
     public final static String TYPE_CALCULATOR = "Calculator";
 
     public final static String SELECTOR_TASK = "selectorTask";
@@ -39,5 +41,22 @@ public class Constants {
 
     // 默认的任务池用户名
     public static String POOL_USER_NAME = "任务池";
+
+    /**
+     * 通用是否 - 是
+     */
+    public final static String COMMMON_YESNO_YES = "1";
+
+    /**
+     * 通用是否 - 否
+     */
+    public final static String COMMON_YESNO_NO = "0";
+
+
+    // 审批状态-通过
+    public static String ARRV_RESULT_PASS = "01";
+
+    // 审批状态-拒绝
+    public static String ARRV_RESULT_REFUSE = STATUS_REFUSE;
 
 }

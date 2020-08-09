@@ -24,8 +24,8 @@ public class SyncProcessScheduler extends AbstractProcessScheduler {
     }
 
     @Override
-    public Context schedule(Actuator<Context, Context> object, Context inArgs) throws FlowableException {
-        return null;
+    public Context schedule(Actuator<Context, Context> actuator, Context context) throws FlowableException {
+        return actuator.execute(context);
     }
 
     /*@Autowired

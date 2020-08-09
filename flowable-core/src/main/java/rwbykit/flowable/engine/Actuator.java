@@ -2,20 +2,20 @@ package rwbykit.flowable.engine;
 
 /**
  * 执行器
- * @param <I> 入参
- * @param <O> 出参
+ * @param <In> 入参
+ * @param <Out> 出参
  * @author Cytus_
  * @since 2018年12月27日 下午2:23:33
  * @version 1.0
  */
-public interface Actuator<I, O> {
+public interface Actuator<In, Out> {
 
     /**
      * 执行
-     * @param arg
+     * @param in
      * @return
      * @throws FlowableException
      */
-    O execute(I arg) throws FlowableException;
+    Out execute(In in) throws FlowableException;
     
 }

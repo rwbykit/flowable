@@ -1,4 +1,4 @@
-package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
+package rwbykit.flowable.engine.runtime.actuator.node.artificial.approval;
 
 /**
  * 人工审批提交结果
@@ -9,6 +9,6 @@ package rwbykit.flowableTemp.core.actuator.node.artificialapproval;
  */
 public enum ArtificialApprovalSubmitResult {
     
-    PASS, REFUSE, UNCOMPLETED
+    PASS, REFUSE, UNCOMPLETED, HANG_UP
 
 }

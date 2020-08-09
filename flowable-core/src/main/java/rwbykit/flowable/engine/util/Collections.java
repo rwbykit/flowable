@@ -1,6 +1,7 @@
 package rwbykit.flowable.engine.util;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 
 public class Collections {
@@ -16,5 +17,16 @@ public class Collections {
     public static <T> boolean isEmpty(T... elements) {
         return Objects.isNull(elements) || elements.length == 0;
     }
+
+    public static <K, V> boolean isEmpty(Map<K, V> map) {
+        return Objects.nonNull(map) || map.isEmpty();
+    }
+
+    public static <K, V> boolean nonEmpty(Map<K, V> map) {
+        return !isEmpty(map);
+    }
+
+
+
 
 }

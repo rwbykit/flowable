@@ -2,8 +2,11 @@ package rwbykit.flowable.engine.beans.factory.support;
 
 import rwbykit.flowable.engine.FlowableRuntimeException;
 import rwbykit.flowable.engine.beans.factory.BeanFactory;
-import rwbykit.flowableTemp.core.util.FlowableHelper;
+import rwbykit.flowable.engine.util.Collections;
+import rwbykit.flowable.engine.util.Lists;
+import rwbykit.flowable.engine.util.Strings;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +27,15 @@ public class GenericBeanFactory implements BeanFactory {
                 return (T) objectMap.get(type);
             }
         }
-        throw new FlowableRuntimeException(FlowableHelper.formatMessage("Type[], Key[] not found!", category, type));
+        throw new FlowableRuntimeException(Strings.formatMessage("Type[], Key[] not found!", category, type));
+    }
+
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> List<T> getAllType(String category) {
+        Map<String, Object> typeMap = REGISTER_OBJECT.get(category);
+        return Collections.nonEmpty(typeMap) ? (List<T>) Lists.immutableList(Lists.newArrayList(typeMap.values())) : Lists.emptyList();
     }
 
     public void registerRuntimeObject(String category, String type, Object runtimeObject) {

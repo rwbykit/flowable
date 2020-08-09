@@ -6,6 +6,7 @@ import rwbykit.flowable.engine.Actuator;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.Result;
+import rwbykit.flowable.engine.factory.ThreadPoolFactory;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -17,7 +18,7 @@ import java.util.concurrent.Callable;
  * @since 2018年12月18日 上午8:45:25
  * @version 1.0
  */
-public class AsyncProcessScheduler extends AbstractProcessScheduler implements Callable<Result<?>> {
+public class AsyncProcessScheduler extends AbstractProcessScheduler {
     
     private final static Logger logger = LoggerFactory.getLogger(AsyncProcessScheduler.class);
 
@@ -26,13 +27,33 @@ public class AsyncProcessScheduler extends AbstractProcessScheduler implements C
     }
 
     @Override
-    public Result<?> call() throws Exception {
-        return null;
+    public Context schedule(Actuator<Context, Context> actuator, Context context) throws FlowableException {
+        ThreadPoolFactory.factory().addRunnable(AsyncRunner.of(actuator, context));
+        return context;
     }
 
-    @Override
-    public Context schedule(Actuator<Context, Context> object, Context inArgs) throws FlowableException {
-        return null;
+    private static class AsyncRunner implements Runnable {
+
+        private Actuator<Context, Context> actuator;
+        private Context context;
+
+        private AsyncRunner(Actuator<Context, Context> actuator, Context context) {
+            this.actuator = actuator;
+            this.context = context;
+        }
+
+        public static AsyncRunner of(Actuator<Context, Context> actuator, Context context) {
+            return new AsyncRunner(actuator, context);
+        }
+
+        @Override
+        public void run() {
+            try {
+                actuator.execute(context);
+            } catch (Exception e) {
+                logger.error("Async execute occur exception!", e);
+            }
+        }
     }
 
 

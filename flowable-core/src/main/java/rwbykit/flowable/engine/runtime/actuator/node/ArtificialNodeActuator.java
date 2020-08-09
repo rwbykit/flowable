@@ -6,10 +6,15 @@ import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.factory.CalculatorFactory;
+import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitActuator;
+import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitResult;
+import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitServiceFactory;
 import rwbykit.flowable.engine.runtime.calculator.approver.ApproverCalculator;
+import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 import rwbykit.flowable.engine.runtime.model.Approver;
 import rwbykit.flowable.engine.util.Utils;
 import rwbykit.flowable.model.ArtifactNode;
+import rwbykit.flowableTemp.core.beans.Approval;
 
 import java.util.List;
 import java.util.Objects;
@@ -45,28 +50,29 @@ public class ArtificialNodeActuator extends AbstractNodeActuator {
                 }
             }
 
-            // 第二次进入人工处理，一般来说是审批过后提交
-            if (Constants.STATUS_APPROVAL.equals(status) && Objects.nonNull(context.getParam("Approval"))) {
+            //  人工审批提交
+            if (Constants.STATUS_APPROVAL.equals(status)) {
                 logger.info("节点实例[{}], 节点[{}], 进入人工审批提交处理", context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId());
+                ApprovalInstance approvalInstance = context.getParam("Approval");
+                if (Objects.nonNull(approvalInstance)) {
+                    context.getRuntimeService().getApprovalService().update(approvalInstance);
+                }
 
-                // TODO 容我三思
-                /*context.getRuntimeService().getApprovalService().updateSubmittedStatus(context.getCurrentInstance().getNodeInstanceId(), Constants.COMMMON_YESNO_YES);
-
-                String approverType = ProcessConfigContext.getContext().getCurrentNode().getApproval().getApprovalType();
-
-                ArtificialApprovalSubmitService submitService = ArtificialApprovalSubmitServiceFactory.factory().getArtificialApprovalSubmitService(ApproverType.get(approverType));
-                ArtificialApprovalSubmitResult submitResult = submitService.doSubmit(context.getCurrentInstance().getProcessInstanceId(), context.getCurrentInstance().getNodeInstanceId());
-
+                ArtifactNode node = context.getProcessConfigService().getNode(context.getCurrentInstance().getNodeId());
+                String assignType = node.getAssignment().getAssignType();
+                ArtificialApprovalSubmitActuator submitActuator = ArtificialApprovalSubmitServiceFactory.factory().getArtificialApprovalSubmitService(assignType);
+                ArtificialApprovalSubmitResult submitResult = submitActuator.execute(context);
                 if (ArtificialApprovalSubmitResult.UNCOMPLETED.equals(submitResult)) {
                     logger.warn("节点实例[{}], 节点[{}]审批人尚未完全审批结束!", context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId());
                     context.getCurrentInstance().setNodeStatus(Constants.STATUS_APPROVAL);
                     return context;
                 } else {
                     context.getCurrentInstance().setNodeStatus(ArtificialApprovalSubmitResult.REFUSE.equals(submitResult) ? Constants.STATUS_REFUSE : Constants.STATUS_END);
-                }*/
-
+                }
                 logger.info("节点实例[{}], 节点[{}], 人工审批提交处理结束", context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId());
             }
+
+
         } catch (Exception e) {
             String errorMessage = Utils.formatMessage("节点实例[{}], 节点[{}]处理异常! cause by:{}",
                     context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId(), e.getMessage());

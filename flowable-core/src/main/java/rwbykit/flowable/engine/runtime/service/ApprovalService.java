@@ -1,5 +1,6 @@
 package rwbykit.flowable.engine.runtime.service;
 
+import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 import rwbykit.flowable.engine.runtime.model.Approver;
 import rwbykit.flowable.engine.util.Lists;
 
@@ -18,4 +19,9 @@ public interface ApprovalService {
 
     int countApprover(String nodeInstanceId);
 
+    void update(ApprovalInstance approvalInstance);
+
+    List<ApprovalInstance> getAllApprovalInstance(String nodeInstanceId);
+
+    void exclude(List<ApprovalInstance> nonSubmitted);
 }

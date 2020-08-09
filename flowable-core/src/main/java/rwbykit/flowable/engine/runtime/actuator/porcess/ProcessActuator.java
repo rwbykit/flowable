@@ -24,7 +24,7 @@ public class ProcessActuator extends AbstractProcessActuator {
         try {
             AbstractNodeActuator nodeActuator = ActuatorFactory.factory().getNodeActuator(null);
             logger.info("流程[{}], 流程实例[{}]调用开始", context.getCurrentInstance().getProcessId(), context.getCurrentInstance().getProcessInstanceId());
-            context = nodeActuator.execute(context);
+            context = super.schedule(nodeActuator::execute, context, "sync");
             logger.info("流程[{}], 流程实例[{}]调用结束", context.getCurrentInstance().getProcessId(), context.getCurrentInstance().getProcessInstanceId());
 
         } catch (Exception e) {

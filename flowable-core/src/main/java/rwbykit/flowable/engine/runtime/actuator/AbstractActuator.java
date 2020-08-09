@@ -7,16 +7,19 @@ import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.Notification;
 import rwbykit.flowable.engine.enumeration.Phase;
+import rwbykit.flowable.engine.factory.SchedulerFactory;
+import rwbykit.flowable.engine.runtime.scheduler.AbstractProcessScheduler;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
- * @param <T>
+ * @param <Notify>
  * @author Cytus_
  * @version 1.0
  * @since 2018年12月18日 上午8:28:13
  */
-public abstract class AbstractActuator<T> implements Actuator<Context, Context> {
+public abstract class AbstractActuator<Notify> implements Actuator<Context, Context> {
 
     private final static Logger logger = LoggerFactory.getLogger(AbstractActuator.class);
 
@@ -77,7 +80,7 @@ public abstract class AbstractActuator<T> implements Actuator<Context, Context> 
      * @return
      * @throws FlowableException
      */
-    public abstract List<? extends Notification<T>> getNotifications(Context context);
+    public abstract List<? extends Notification<Notify>> getNotifications(Context context);
 
     /**
      * 前通知
@@ -85,7 +88,7 @@ public abstract class AbstractActuator<T> implements Actuator<Context, Context> 
      * @param context
      */
     protected void beforeNotify(Context context) {
-        T notify = assembleNotify(context);
+        Notify notify = assembleNotify(context);
         getNotifications(context).forEach(notification -> notification.beforeNotify(notify));
     }
 
@@ -95,7 +98,7 @@ public abstract class AbstractActuator<T> implements Actuator<Context, Context> 
      * @param context
      */
     protected void afterNotify(Context context) {
-        T notify = assembleNotify(context);
+        Notify notify = assembleNotify(context);
         getNotifications(context).forEach(notification -> notification.afterNotify(notify));
     }
 
@@ -106,7 +109,7 @@ public abstract class AbstractActuator<T> implements Actuator<Context, Context> 
      * @param e
      */
     protected void exceptionNotify(Context context, Exception e) {
-        T notify = assembleNotify(context);
+        Notify notify = assembleNotify(context);
         getNotifications(context).forEach(notification -> notification.exceptionNotify(notify, e));
     }
 
@@ -116,7 +119,11 @@ public abstract class AbstractActuator<T> implements Actuator<Context, Context> 
      * @param context
      * @return
      */
-    protected abstract T assembleNotify(Context context);
+    protected abstract Notify assembleNotify(Context context);
 
+    protected Context schedule(Actuator<Context, Context> actuator, Context context, String schedulerType) throws FlowableException {
+        AbstractProcessScheduler scheduler = SchedulerFactory.factory().getScheduler(schedulerType);
+        return scheduler.schedule(actuator, context);
+    }
 
 }

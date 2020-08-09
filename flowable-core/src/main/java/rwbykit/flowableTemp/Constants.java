@@ -64,15 +64,7 @@ public final class Constants {
      */
     public final static String ARTIFICIAL_APPROVAL_SUBMIT_SERVICE = "artificialApprovalSubmitService";
     
-    /**
-     * 通用是否 - 是
-     */
-    public final static String COMMMON_YESNO_YES = "1";
-    
-    /**
-     * 通用是否 - 否
-     */
-    public final static String COMMON_YESNO_NO = "0";
+
 
     public final static String TYPE_CALCULATOR = "Calculator";
     public final static String TYPE_NODE = "Node";
