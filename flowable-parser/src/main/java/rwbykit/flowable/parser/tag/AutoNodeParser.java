@@ -1,4 +1,4 @@
-package rwbykit.flowable.parser.tag.node;
+package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Element;
 import rwbykit.flowable.core.model.AutoNode;

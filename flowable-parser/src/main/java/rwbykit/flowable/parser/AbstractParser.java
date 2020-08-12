@@ -32,37 +32,40 @@ public abstract class AbstractParser<T> implements Parser<T> {
         return parser.parse(element);
     }
 
-    protected void fillByAttribute(T t, Element element) {
+    protected <R> R fillByAttribute(R r, Element element) {
         List<Attribute> attributes = element.getAttributes();
-        attributes.forEach(attribute -> fillByAttribute(t, attribute));
+        attributes.forEach(attribute -> fillByAttribute(r, attribute));
+        return r;
     }
 
-    protected void fillByAttribute(T t, Attribute attribute) {
-        fillByAttribute(t, attribute, null);
+    protected <R> R fillByAttribute(R r, Attribute attribute) {
+        return fillByAttribute(r, attribute, null);
     }
 
-    protected <C> void fillByAttribute(T t, Attribute attribute, Converter<C> converter) {
+    protected <C, R> R fillByAttribute(R r, Attribute attribute, Converter<C> converter) {
         String name = attribute.getName();
-        Method method = getSetterMethod(t.getClass(), name);
+        Method method = getSetterMethod(r.getClass(), name);
         if (Objects.nonNull(method)) {
             try {
                 Object value = Objects.nonNull(converter) ? converter.convert(attribute.getValue()) : attribute.getValue();
-                method.invoke(t, value);
+                method.invoke(r, value);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return r;
     }
 
-    protected void fillByAttribute(T t, Element element, String name) {
-        fillByAttribute(t, element, name);
+    protected <R> R fillByAttribute(R r, Element element, String name) {
+        return fillByAttribute(r, element, name);
     }
 
-    protected <C> void fillByAttribute(T t, Element element, String name, Converter<C> converter) {
+    protected <C, R> R fillByAttribute(R r, Element element, String name, Converter<C> converter) {
         Attribute attribute = element.getAttribute(name);
         if (Objects.nonNull(attribute)) {
-            fillByAttribute(t, attribute, converter);
+            fillByAttribute(r, attribute, converter);
         }
+        return r;
     }
 
     private <R> Parser<R> getParser(Element element) {

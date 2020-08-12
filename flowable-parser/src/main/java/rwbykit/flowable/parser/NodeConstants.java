@@ -24,5 +24,6 @@ public final class NodeConstants {
 
     public final static String NODE_NAME_TASK = "task";
 
+    public final static String NODE_NAME_ASSIGNEE = "assignee";
 
 }
