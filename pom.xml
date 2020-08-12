@@ -12,7 +12,7 @@
     <modules>
         <module>flowable-core</module>
         <module>flowable-extension</module>
-        <module>flowable-analysis</module>
+        <module>flowable-parser</module>
         <module>flowable-engine</module>
     </modules>
 
