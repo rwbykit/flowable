@@ -5,7 +5,7 @@ import rwbykit.flowable.engine.Result;
 import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
 import rwbykit.flowable.extension.actuator.artificial.approval.MultiJoinSignParameter;
 import rwbykit.flowableTemp.core.ProcessConstants;
-import rwbykit.flowableTemp.core.customized.BooleanResult;
+import rwbykit.flowable.extension.BooleanResult;
 import rwbykit.flowableTemp.core.util.Numbers;
 
 import java.util.List;

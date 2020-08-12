@@ -1,7 +1,9 @@
+/*
 package rwbykit.flowableTemp.core.thread;
 
 import rwbykit.flowable.engine.AbstractResult;
 
+*/
 /**
  * 
  * 
@@ -10,7 +12,8 @@ import rwbykit.flowable.engine.AbstractResult;
  * @since 2018年5月28日 上午11:15:36
  * @version 1.0
  *
- */
+ *//*
+
 public class DefaultThreadResult extends AbstractResult<Object> {
 	
 	private Object result;
@@ -31,3 +34,4 @@ public class DefaultThreadResult extends AbstractResult<Object> {
 	}
 
 }
+*/

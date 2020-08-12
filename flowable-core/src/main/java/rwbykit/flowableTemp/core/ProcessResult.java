@@ -1,8 +1,5 @@
 package rwbykit.flowableTemp.core;
 
-import rwbykit.flowable.war3.beans.Approver;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,8 +24,7 @@ public class ProcessResult implements Serializable {
     
     private String nextNodeId;
     
-    private List<Approver> nextApprovers;
-    
+
     private String nextScheduleMode;
     
     private boolean result;
@@ -92,13 +88,6 @@ public class ProcessResult implements Serializable {
         this.nextNodeId = nextNodeId;
     }
     
-    public List<Approver> getNextApprovers() {
-        return nextApprovers;
-    }
-
-    public void setNextApprovers(List<Approver> nextApprovers) {
-        this.nextApprovers = nextApprovers;
-    }
 
     public void setResult(boolean result) {
         this.result = result;
@@ -112,9 +101,6 @@ public class ProcessResult implements Serializable {
         this.nextScheduleMode = nextScheduleMode;
     }
     
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
 
     public boolean isSuccess() {
         return isSuccess;

@@ -2,12 +2,14 @@ package rwbykit.flowable.extension.calculator.approver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.core.annotation.Type;
+import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.runtime.calculator.approver.GenericApproverCalculator;
 import rwbykit.flowable.engine.runtime.model.Approver;
-import rwbykit.flowable.engine.util.Collections;
-import rwbykit.flowable.model.ArtifactNode;
+import rwbykit.flowable.core.util.Collections;
+import rwbykit.flowable.core.model.ArtifactNode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  *
  */
+@Type(category = Constants.TYPE_CALCULATOR_APPROVER, type = "Appoint")
 public class AppointApproverCalculator extends GenericApproverCalculator {
     
     private static Logger logger = LoggerFactory.getLogger(AppointApproverCalculator.class);

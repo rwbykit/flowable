@@ -1,17 +1,18 @@
 package rwbykit.flowable.extension.calculator.approver.assignee;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.core.annotation.Type;
+import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.runtime.calculator.approver.assignee.AssigneeInformation;
 import rwbykit.flowable.engine.runtime.calculator.approver.assignee.GenericAssigneeCalculator;
 import rwbykit.flowable.engine.runtime.current.CurrentInstance;
 import rwbykit.flowable.engine.runtime.current.Initiator;
 import rwbykit.flowable.engine.runtime.model.Approver;
-import rwbykit.flowable.engine.util.Collections;
-import rwbykit.flowable.engine.util.Lists;
-import rwbykit.flowable.engine.util.Maps;
-import rwbykit.flowable.model.Assignee;
+import rwbykit.flowable.core.util.Collections;
+import rwbykit.flowable.core.util.Lists;
+import rwbykit.flowable.core.util.Maps;
+import rwbykit.flowable.core.model.Assignee;
 
 import java.util.List;
 import java.util.Map;
@@ -20,11 +21,12 @@ import java.util.stream.Collectors;
 
 /**
  * 关联关系审批人配置
- * 
+ *
  * @author Cytus_
+ * @version 1.0
  * @since 2018年12月27日 下午5:36:26
- * @version 1.0                                                                                                 
  */
+@Type(category = Constants.TYPE_CALCULATOR_ASSIGNEE, type = "Relationship")
 public class InitiatorRelationshipCalculator extends GenericAssigneeCalculator {
 
     private final static Logger logger = LoggerFactory.getLogger(InitiatorRelationshipCalculator.class);
@@ -54,5 +56,5 @@ public class InitiatorRelationshipCalculator extends GenericAssigneeCalculator {
         }
         return Lists.emptyList();
     }
-    
+
 }

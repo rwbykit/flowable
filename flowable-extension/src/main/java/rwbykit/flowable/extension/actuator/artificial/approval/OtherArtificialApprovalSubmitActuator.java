@@ -7,7 +7,7 @@ import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.Abstrac
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitResult;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.DefaultArtificialApprovalSubmit;
 import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
-import rwbykit.flowable.model.ArtifactNode;
+import rwbykit.flowable.core.model.ArtifactNode;
 
 import java.util.List;
 

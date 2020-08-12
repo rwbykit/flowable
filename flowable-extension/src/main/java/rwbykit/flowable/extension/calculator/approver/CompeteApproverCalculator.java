@@ -2,6 +2,8 @@ package rwbykit.flowable.extension.calculator.approver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.core.annotation.Type;
+import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.runtime.calculator.approver.GenericApproverCalculator;
 import rwbykit.flowable.engine.runtime.model.Approver;
@@ -15,6 +17,7 @@ import java.util.List;
  * @version 1.0
  * @since 2018年12月28日 下午1:31:43
  */
+@Type(category = Constants.TYPE_CALCULATOR_APPROVER, type = "Compete")
 public class CompeteApproverCalculator extends GenericApproverCalculator {
 
     private final static Logger logger = LoggerFactory.getLogger(CompeteApproverCalculator.class);

@@ -2,6 +2,8 @@ package rwbykit.flowable.extension.calculator.approver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.core.annotation.Type;
+import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
 import rwbykit.flowable.engine.FlowableException;
 import rwbykit.flowable.engine.runtime.calculator.approver.ApprovalProcess;
@@ -18,6 +20,7 @@ import java.util.List;
  * @version 1.0
  * @since 2018年6月21日 下午3:09:21
  */
+@Type(category = Constants.TYPE_CALCULATOR_APPROVER, type = "Pool")
 public class PoolApproverCalculator extends GenericApproverCalculator {
 
     private static Logger logger = LoggerFactory.getLogger(PoolApproverCalculator.class);

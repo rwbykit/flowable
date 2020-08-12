@@ -1,12 +1,5 @@
 package rwbykit.flowableTemp.core;
 
-import rwbykit.flowable.war3.beans.NvListener;
-import rwbykit.flowable.war3.beans.NvNode;
-import rwbykit.flowable.war3.beans.NvProcess;
-import rwbykit.flowable.war3.beans.NvTask;
-
-import java.util.List;
-
 /**
  * 流程配置的上线文线程对象
  * 
@@ -50,34 +43,6 @@ public class ProcessConfigContext {
         return this.process;
     }
     
-    public List<NvListener> getNodeListener(String nodeId) {
-        NvNode node = this.process.getNode().get(nodeId);
-        return node.getListeners();
-    }
 
-    public String getNodeId() {
-        return nodeId;
-    }
-
-    public void setNodeId(String nodeId) {
-        this.nodeId = nodeId;
-    }
-
-    public String getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
-    }
-    
-    public NvTask getCurrentTask() {
-        return getCurrentNode().getTask(taskId);
-    }
-    
-    public NvNode getCurrentNode() {
-        return process.getNode(nodeId);
-    }
-    
     
 }

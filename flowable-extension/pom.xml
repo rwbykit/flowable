@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>rwbykit.flowable</groupId>
-            <artifactId>flowable-core</artifactId>
+            <artifactId>flowable-engine</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
