@@ -1,6 +1,6 @@
 package rwbykit.flowable.engine.exception;
 
-import rwbykit.flowable.engine.FlowableException;
+import rwbykit.flowable.core.FlowableException;
 
 public class UnsupportedOperateException extends FlowableException {
 

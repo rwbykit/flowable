@@ -1,5 +1,6 @@
-package rwbykit.flowable.engine.factory.support;
+package rwbykit.flowable.engine.factory;
 
+import rwbykit.flowable.core.factory.support.GenericFactoryAware;
 import rwbykit.flowable.engine.Actuator;
 import rwbykit.flowable.engine.Calculator;
 import rwbykit.flowable.engine.Constants;
@@ -9,17 +10,17 @@ import rwbykit.flowable.engine.Selector;
 import rwbykit.flowable.engine.runtime.runner.Runner;
 import rwbykit.flowable.core.util.Asserts;
 
-public class Factory extends GenericFactoryAware {
+public class RuntimeObjectFactory extends GenericFactoryAware {
 
     private static class FactoryHolder {
-        private static final Factory FACTORY = new Factory();
+        private static final RuntimeObjectFactory RUNTIME_OBJECT_FACTORY = new RuntimeObjectFactory();
     }
 
-    private Factory() {
+    private RuntimeObjectFactory() {
     }
 
-    public final static Factory factory() {
-        return Factory.FactoryHolder.FACTORY;
+    public final static RuntimeObjectFactory factory() {
+        return RuntimeObjectFactory.FactoryHolder.RUNTIME_OBJECT_FACTORY;
     }
 
 

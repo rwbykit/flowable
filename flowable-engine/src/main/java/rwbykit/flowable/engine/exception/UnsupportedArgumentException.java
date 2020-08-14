@@ -1,6 +1,6 @@
 package rwbykit.flowable.engine.exception;
 
-import rwbykit.flowable.engine.FlowableRuntimeException;
+import rwbykit.flowable.core.FlowableRuntimeException;
 
 public class UnsupportedArgumentException extends FlowableRuntimeException {
 

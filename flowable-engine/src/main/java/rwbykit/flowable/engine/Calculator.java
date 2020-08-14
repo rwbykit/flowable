@@ -1,5 +1,7 @@
 package rwbykit.flowable.engine;
 
+import rwbykit.flowable.core.FlowableException;
+
 /**
  * 计算器
  * @param <In> 入参

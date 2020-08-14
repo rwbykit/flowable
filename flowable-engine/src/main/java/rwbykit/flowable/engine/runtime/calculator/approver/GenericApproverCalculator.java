@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.FlowableException;
-import rwbykit.flowable.engine.factory.support.Factory;
+import rwbykit.flowable.core.FlowableException;
+import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
 import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.ApproverPolymerizationCalculator;
 import rwbykit.flowable.engine.runtime.model.Approver;
 import rwbykit.flowable.core.util.Asserts;
@@ -35,7 +35,7 @@ public class GenericApproverCalculator implements ApproverCalculator {
 
     public List<Approver> calculate(Context context, Assignee assignee) {
         try {
-            AssigneeCalculator calculator = Factory.factory().getApproverRangeCalculator(assignee.getType());
+            AssigneeCalculator calculator = RuntimeObjectFactory.factory().getApproverRangeCalculator(assignee.getType());
             context.addParam(AssigneeCalculator.ASSIGNEES, assignee);
             List<Approver> approvers = calculator.calculate(context);
             context.removeParam(AssigneeCalculator.ASSIGNEES);
@@ -59,7 +59,7 @@ public class GenericApproverCalculator implements ApproverCalculator {
 
         List<List<Approver>> listApprovers = assignees.parallelStream().map(s -> this.calculate(context, s)).collect(Collectors.toList());
 
-        ApproverPolymerizationCalculator approverPolymerizationCalculator = Factory.factory().getApproverPolymerizationCalculator(node.getAssignment().getPolymerizationType());
+        ApproverPolymerizationCalculator approverPolymerizationCalculator = RuntimeObjectFactory.factory().getApproverPolymerizationCalculator(node.getAssignment().getPolymerizationType());
         List<Approver> approvers = approverPolymerizationCalculator.calculate(listApprovers);
         approvers = afterCalculatorSet(context, approvers);
         logger.info("节点实例[{}], 节点[{}]计算当前处理人结束, 审批人信息为:{}", context.getCurrentInstance().getNodeInstanceId(), context.getCurrentInstance().getNodeId(), approvers.toString());
@@ -80,7 +80,7 @@ public class GenericApproverCalculator implements ApproverCalculator {
         }
         ExecuteMode executeMode = ExecuteMode.get(node.getAssignment().getAfterAssignmentMode().getRunMode());
         Asserts.isEquals(CUSTOMIZED_APPROVER_AUTH_EXECUTION_MODES, executeMode, "Unsupported Execution Mode[{}]!", executeMode.toString());
-        CustomizedApproverAuthority customizedApproverAuthority = Factory.factory().getObject(executeMode.name(),
+        CustomizedApproverAuthority customizedApproverAuthority = RuntimeObjectFactory.factory().getObject(executeMode.name(),
                 node.getAssignment().getAfterAssignmentMode().getRunValue());
         return customizedApproverAuthority.doCustomizedAuthority(
                 ApprovalProcess.builder()

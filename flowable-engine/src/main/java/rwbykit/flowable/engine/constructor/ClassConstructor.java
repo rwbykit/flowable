@@ -3,7 +3,7 @@ package rwbykit.flowable.engine.constructor;
 import rwbykit.flowable.core.Constructor;
 import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.FlowableRuntimeException;
+import rwbykit.flowable.core.FlowableRuntimeException;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

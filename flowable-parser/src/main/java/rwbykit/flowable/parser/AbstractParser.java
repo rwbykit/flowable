@@ -2,6 +2,7 @@ package rwbykit.flowable.parser;
 
 import org.jdom2.Attribute;
 import org.jdom2.Element;
+import rwbykit.flowable.core.parser.Parser;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public abstract class AbstractParser<T> implements Parser<T> {
+public abstract class AbstractParser<T> implements Parser<Element, T> {
 
 
     protected <R> List<R> parseChildrens(List<Element> elements) {
@@ -18,7 +19,7 @@ public abstract class AbstractParser<T> implements Parser<T> {
             return Collections.emptyList();
         }
 
-        Parser<R> parser = getParser(elements.get(0));
+        AbstractParser<R> parser = getParser(elements.get(0));
         if (Objects.isNull(parser)) {
             throw new RuntimeException("");
         }
@@ -28,7 +29,7 @@ public abstract class AbstractParser<T> implements Parser<T> {
 
 
     protected <R> R parseChildren(Element element) {
-        Parser<R> parser = getParser(element);
+        AbstractParser<R> parser = getParser(element);
         return parser.parse(element);
     }
 
@@ -68,9 +69,9 @@ public abstract class AbstractParser<T> implements Parser<T> {
         return r;
     }
 
-    private <R> Parser<R> getParser(Element element) {
+    private <R> AbstractParser<R> getParser(Element element) {
         String type = element.getAttributeValue("type");
-        Parser<R> parser = ParserFactory.factory().getParser(type);
+        AbstractParser<R> parser = ParserFactory.factory().getParser(type);
         if (Objects.isNull(parser)) {
             parser = ParserFactory.factory().getParser(element.getName());
         }

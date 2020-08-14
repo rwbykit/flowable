@@ -17,6 +17,11 @@
             <artifactId>flowable-engine</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>rwbykit.flowable</groupId>
+            <artifactId>flowable-parser</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

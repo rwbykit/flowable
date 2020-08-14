@@ -3,7 +3,7 @@ package rwbykit.flowable.engine.runtime.actuator.task;
 import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.FlowableException;
+import rwbykit.flowable.core.FlowableException;
 
 /**
  * 自动任务执行

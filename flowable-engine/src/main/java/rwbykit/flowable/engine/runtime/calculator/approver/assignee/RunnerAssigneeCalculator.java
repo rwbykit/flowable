@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.FlowableException;
-import rwbykit.flowable.engine.FlowableRuntimeException;
-import rwbykit.flowable.engine.factory.support.Factory;
+import rwbykit.flowable.core.FlowableException;
+import rwbykit.flowable.core.FlowableRuntimeException;
+import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
 import rwbykit.flowable.engine.runtime.current.Initiator;
 import rwbykit.flowable.engine.runtime.model.Approver;
 import rwbykit.flowable.engine.runtime.runner.Runner;
@@ -54,7 +54,7 @@ public class RunnerAssigneeCalculator extends GenericAssigneeCalculator {
 
     protected final static List<AssigneeInformation> execute(String executeMode, String value, AssigneeParameter parameter) {
         try {
-            Runner<AssigneeParameter, AssignedResult> runner = Factory.factory().getRunner(executeMode);
+            Runner<AssigneeParameter, AssignedResult> runner = RuntimeObjectFactory.factory().getRunner(executeMode);
             AssignedResult result = runner.run(value, parameter);
             if (result.isSuccess()) {
                 return result.getResult();

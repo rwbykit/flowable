@@ -1,7 +1,7 @@
-package rwbykit.flowable.engine.factory.support;
+package rwbykit.flowable.core.factory.support;
 
-import rwbykit.flowable.engine.factory.ObjectFactory;
-import rwbykit.flowable.engine.factory.ObjectFactoryAware;
+import rwbykit.flowable.core.factory.ObjectFactory;
+import rwbykit.flowable.core.factory.ObjectFactoryAware;
 
 public class GenericFactoryAware implements ObjectFactoryAware {
 

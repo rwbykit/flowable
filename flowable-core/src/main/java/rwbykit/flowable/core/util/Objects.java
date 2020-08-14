@@ -22,4 +22,11 @@ public class Objects {
         return null;
     }
 
+    public static final boolean nonNull(Object object) {
+        return object != null;
+    }
+
+    public static final boolean isNull(Object object) {
+        return object == null;
+    }
 }

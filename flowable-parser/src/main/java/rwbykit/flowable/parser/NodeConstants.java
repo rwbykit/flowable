@@ -2,7 +2,7 @@ package rwbykit.flowable.parser;
 
 public final class NodeConstants {
 
-    public final static String NODE_NAME_PROCESS = "process";
+    public final static String NODE_NAME_PROCESS = "flow";
 
     public final static String NODE_NAME_VIEW_PAGE = "viewPage";
 
@@ -25,5 +25,7 @@ public final class NodeConstants {
     public final static String NODE_NAME_TASK = "task";
 
     public final static String NODE_NAME_ASSIGNEE = "assignee";
+
+    public final static String CATEGORY_PARSER = "Parser";
 
 }

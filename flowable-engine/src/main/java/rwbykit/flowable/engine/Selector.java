@@ -1,6 +1,8 @@
 package rwbykit.flowable.engine;
 
 
+import rwbykit.flowable.core.FlowableException;
+
 /**
  * 选择器
  * @param <In> 入参

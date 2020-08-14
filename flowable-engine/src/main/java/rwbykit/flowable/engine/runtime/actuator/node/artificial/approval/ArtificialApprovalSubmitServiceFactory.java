@@ -2,8 +2,8 @@ package rwbykit.flowable.engine.runtime.actuator.node.artificial.approval;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowable.engine.FlowableRuntimeException;
-import rwbykit.flowable.engine.factory.support.GenericFactoryAware;
+import rwbykit.flowable.core.FlowableRuntimeException;
+import rwbykit.flowable.core.factory.support.GenericFactoryAware;
 import rwbykit.flowable.core.util.Asserts;
 import rwbykit.flowable.core.util.Collections;
 

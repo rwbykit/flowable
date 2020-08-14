@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.engine.Actuator;
 import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.FlowableException;
+import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.engine.Notification;
 import rwbykit.flowable.engine.enumeration.Phase;
-import rwbykit.flowable.engine.factory.support.Factory;
+import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
 import rwbykit.flowable.engine.runtime.scheduler.AbstractProcessScheduler;
 
 import java.util.List;
@@ -121,7 +121,7 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
     protected abstract Notify assembleNotify(Context context);
 
     protected Context schedule(Actuator<Context, Context> actuator, Context context, String schedulerType) throws FlowableException {
-        AbstractProcessScheduler scheduler = Factory.factory().getScheduler(schedulerType);
+        AbstractProcessScheduler scheduler = RuntimeObjectFactory.factory().getScheduler(schedulerType);
         return scheduler.schedule(actuator, context);
     }
 

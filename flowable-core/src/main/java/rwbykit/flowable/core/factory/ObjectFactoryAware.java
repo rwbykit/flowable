@@ -1,4 +1,4 @@
-package rwbykit.flowable.engine.factory;
+package rwbykit.flowable.core.factory;
 
 public interface ObjectFactoryAware {
 

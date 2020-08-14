@@ -1,5 +1,7 @@
 package rwbykit.flowable.parser;
 
+import rwbykit.flowable.core.parser.Parser;
+
 public class ParserFactory {
 
     private static class ParserFactoryHolder {
@@ -13,7 +15,7 @@ public class ParserFactory {
         return ParserFactory.ParserFactoryHolder.FACTORY;
     }
 
-    public <T, R extends Parser<T>> R getParser(String type) {
+    public <T, R, P extends Parser<T, R>> P getParser(String type) {
         return null;
     }
 

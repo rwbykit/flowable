@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.engine.Constants;
 import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.FlowableException;
+import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.engine.enumeration.Phase;
 import rwbykit.flowable.engine.enumeration.TaskType;
-import rwbykit.flowable.engine.factory.support.Factory;
+import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
 import rwbykit.flowable.engine.runtime.LoggerHelper;
 import rwbykit.flowable.engine.runtime.actuator.task.AbstractTaskActuator;
 import rwbykit.flowable.engine.runtime.selector.TaskSelector;
@@ -33,10 +33,10 @@ public class AutoNodeActuator extends AbstractNodeActuator {
 
     @Override
     public Context nodeExecute(Context context) throws FlowableException {
-        AbstractTaskActuator actuator = Factory.factory().getTaskActuator(TaskType.DEFAULT.toString());
+        AbstractTaskActuator actuator = RuntimeObjectFactory.factory().getTaskActuator(TaskType.DEFAULT.toString());
         AtomicReference<Context> ctx = new AtomicReference<>(context);
         Observable.create((ObservableOnSubscribe<Task>) emitter -> {
-            TaskSelector taskSelector = Factory.factory().getSelector(Constants.SELECTOR_TASK);
+            TaskSelector taskSelector = RuntimeObjectFactory.factory().getSelector(Constants.SELECTOR_TASK);
             Task task = taskSelector.select(ctx.get());
             if (Objects.nonNull(task) && !emitter.isDisposed()) {
                 ctx.get().addParam("taskId", task.getId());
