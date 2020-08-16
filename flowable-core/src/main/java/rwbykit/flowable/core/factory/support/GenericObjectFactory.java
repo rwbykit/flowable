@@ -4,6 +4,7 @@ import rwbykit.flowable.core.FlowableRuntimeException;
 import rwbykit.flowable.core.factory.ObjectFactory;
 import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.util.Lists;
+import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.core.util.Strings;
 
 import java.util.List;
@@ -13,9 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GenericObjectFactory implements ObjectFactory {
 
-    private static Map<String, Map<String, Object>> REGISTER_OBJECT = new ConcurrentHashMap<>();
+    private static Map<String, Map<String, Object>> REGISTER_OBJECT = null;
 
-    public GenericObjectFactory() {
+    public GenericObjectFactory(Map<String, Map<String, Object>> registerObject) {
+        REGISTER_OBJECT = Maps.immutable(registerObject);
     }
 
     @Override
@@ -36,17 +38,6 @@ public class GenericObjectFactory implements ObjectFactory {
     public <T> List<T> getAllType(String category) {
         Map<String, Object> typeMap = REGISTER_OBJECT.get(category);
         return Collections.nonEmpty(typeMap) ? (List<T>) Lists.immutable(Lists.newArrayList(typeMap.values())) : Lists.emptyList();
-    }
-
-    public void registerRuntimeObject(String category, String type, Object runtimeObject) {
-        synchronized (REGISTER_OBJECT) {
-            Map<String, Object> typeMap = REGISTER_OBJECT.get(category);
-            if (Objects.isNull(typeMap)) {
-                typeMap = new ConcurrentHashMap<>(8);
-            }
-            typeMap.putIfAbsent(type, runtimeObject);
-            REGISTER_OBJECT.put(category, typeMap);
-        }
     }
 
 }

@@ -110,7 +110,7 @@ public final class Flowable {
 
         @Override
         public Configuration<?> configure() {
-            return null;
+            return new ConfigurationImpl(registers);
         }
 
         @Override
