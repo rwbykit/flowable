@@ -1,6 +1,6 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.ViewPage;
+import rwbykit.flowable.core.model.parser.ViewPage;
 
 /**
  * 审批业务挂在页面配置
@@ -16,6 +16,7 @@ public class ViewPageImpl implements ViewPage, Comparable<ViewPage> {
      */
     private String path;
 
+    @Override
     public String getPath() {
         return path;
     }

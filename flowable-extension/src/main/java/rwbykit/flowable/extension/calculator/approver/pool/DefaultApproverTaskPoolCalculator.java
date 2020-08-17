@@ -3,10 +3,10 @@ package rwbykit.flowable.extension.calculator.approver.pool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.engine.runtime.calculator.approver.ApprovalProcess;
 import rwbykit.flowable.engine.runtime.calculator.approver.ApproverTaskPoolCalculator;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.util.Lists;
 
 import java.util.List;

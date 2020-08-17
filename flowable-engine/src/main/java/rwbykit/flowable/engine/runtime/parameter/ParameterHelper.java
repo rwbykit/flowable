@@ -1,10 +1,10 @@
 package rwbykit.flowable.engine.runtime.parameter;
 
-import rwbykit.flowable.core.model.ValueField;
+import rwbykit.flowable.core.model.parser.ValueField;
 import rwbykit.flowable.core.util.Collections;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.engine.enumeration.FieldType;
-import rwbykit.flowable.engine.runtime.model.Approval;
+import rwbykit.flowable.core.model.runtime.Approval;
 import rwbykit.flowableTemp.core.util.FlowableHelper;
 
 import java.util.HashMap;

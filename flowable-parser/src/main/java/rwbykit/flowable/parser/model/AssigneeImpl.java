@@ -1,6 +1,6 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Assignee;
+import rwbykit.flowable.core.model.parser.Assignee;
 
 public class AssigneeImpl implements Assignee {
 

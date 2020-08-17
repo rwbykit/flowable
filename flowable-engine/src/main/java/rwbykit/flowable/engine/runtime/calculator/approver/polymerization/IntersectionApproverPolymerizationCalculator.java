@@ -1,8 +1,8 @@
 package rwbykit.flowable.engine.runtime.calculator.approver.polymerization;
 
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowableTemp.core.util.FlowableHelper;
 
 import java.util.Collections;

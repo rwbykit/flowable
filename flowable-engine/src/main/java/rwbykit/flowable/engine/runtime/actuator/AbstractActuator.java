@@ -2,12 +2,12 @@ package rwbykit.flowable.engine.runtime.actuator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowable.engine.Actuator;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Actuator;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
-import rwbykit.flowable.engine.Notification;
-import rwbykit.flowable.engine.enumeration.Phase;
-import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
+import rwbykit.flowable.core.Notification;
+import rwbykit.flowable.core.enumeration.Phase;
+import rwbykit.flowable.engine.factory.GenericObjectFactory;
 import rwbykit.flowable.engine.runtime.scheduler.AbstractProcessScheduler;
 
 import java.util.List;
@@ -121,7 +121,7 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
     protected abstract Notify assembleNotify(Context context);
 
     protected Context schedule(Actuator<Context, Context> actuator, Context context, String schedulerType) throws FlowableException {
-        AbstractProcessScheduler scheduler = RuntimeObjectFactory.factory().getScheduler(schedulerType);
+        AbstractProcessScheduler scheduler = GenericObjectFactory.factory().getScheduler(schedulerType);
         return scheduler.schedule(actuator, context);
     }
 

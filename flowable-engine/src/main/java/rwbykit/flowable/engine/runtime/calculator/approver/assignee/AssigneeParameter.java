@@ -1,6 +1,6 @@
 package rwbykit.flowable.engine.runtime.calculator.approver.assignee;
 
-import rwbykit.flowable.engine.runtime.current.Initiator;
+import rwbykit.flowable.core.current.Initiator;
 
 import java.io.Serializable;
 

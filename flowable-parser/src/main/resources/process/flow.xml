@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<flow>
+    <node id="node1" type="start" name="开始节点" />
+    <node id="node2" type="auto" name="自动任务">
+        <task id="node1taski" name="任务1" runMode="class" scheduleType="sync" order="1" value="com.cn.com.yusys.abc">
+            <field name="field" value="abcedaf" valueType="context"/>
+        </task>
+        <task id="node1task2" name="节点1任务2" runMode="bean" scheduleType="async" order="2" value="beanName">
+            <field name="field111111" value="asdv" valueType="constant"/>
+        </task>
+        <listener classType="rwbykit.flowableTemp.beans.Beans" runMode="BEANS" />
+        <listener classType="rwbykit.flowableTemp.invoke.Invoke" runMode="INVOKE" />
+    </node>
+    <node id="node2" type="artifact" name="人工任务">
+        <viewPage path="pages/content/abc.html" order="1"/>
+        <viewPage path="pages/context/ddddddddd/ass.js" order="2"/>
+        <assignment maxNumber="10" assignType="pool" polymerizationType="union" assigneeType="random">
+            <assignees type="O" value="5000" />
+            <assignees type="U" value="admin" />
+        </assignment>
+        <property hang="1" weak="2" />
+    </node>
+    <node id="node1" type="end" name="开始节点" />
+    <viewPage path="/homeas/sdb" order="1"/>
+    <viewPage path="/vew/page" order="10"/>
+    <property hang="yew" weak="eow" />
+    <listener classType="rwbykit.flowableTemp.beans.Beans" runMode="BEANS" />
+    <listener classType="rwbykit.flowableTemp.invoke.Invoke" runMode="INVOKE" />
+</flow>

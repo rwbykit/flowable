@@ -1,15 +1,15 @@
 package rwbykit.flowable.engine.runtime.calculator.approver.assignee;
 
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.engine.runtime.calculator.approver.AssigneeCalculator;
-import rwbykit.flowable.engine.runtime.current.CurrentInstance;
-import rwbykit.flowable.engine.runtime.current.Initiator;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.current.CurrentInstance;
+import rwbykit.flowable.core.current.Initiator;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.util.Strings;
-import rwbykit.flowable.core.model.ArtifactNode;
-import rwbykit.flowable.core.model.Assignee;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
+import rwbykit.flowable.core.model.parser.Assignee;
 
 import java.util.Collections;
 import java.util.List;

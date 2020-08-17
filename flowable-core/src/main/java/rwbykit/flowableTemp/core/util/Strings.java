@@ -19,7 +19,9 @@ public class Strings {
 
     public static final char CHAR_ZERROR = '0';
 
-    private static final String CHAR_SPACE = " ";
+    private static final char CHAR_SPACE = ' ';
+
+    public static final String SPACE = " ";
 
     /**
      * 方向：左
@@ -46,7 +48,7 @@ public class Strings {
      * @return 为空返回true；
      */
     public final static boolean isEmpty(final CharSequence cs) {
-        return false;
+        return cs == null || cs.length() == 0;
     }
 
     /**
@@ -66,7 +68,14 @@ public class Strings {
      * @return 为空 或者为" "返回true；
      */
     public final static boolean isBlank(final CharSequence cs) {
-        return false;
+        if (nonEmpty(cs)) {
+            for (int i = 0; i < cs.length(); i++) {
+                if (CHAR_SPACE != cs.charAt(i)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -75,8 +84,8 @@ public class Strings {
      * @param cs
      * @return 不为空 或者不为" "返回true；
      */
-    public final static boolean isNotBlank(final CharSequence cs) {
-        return false;
+    public final static boolean nonBlank(final CharSequence cs) {
+        return !isBlank(cs);
     }
 
     /**
@@ -85,7 +94,7 @@ public class Strings {
      * @param cs
      * @return
      */
-    public final static boolean isStrEmpty(final CharSequence cs) {
+    public final static boolean strEmpty(final CharSequence cs) {
         return isEmpty(cs) || "null".equals(cs);
     }
 
@@ -95,8 +104,8 @@ public class Strings {
      * @param cs
      * @return
      */
-    public final static boolean isStrNotEmpty(final CharSequence cs) {
-        return nonEmpty(cs) && !"null".equals(cs);
+    public final static boolean nonStrEmpty(final CharSequence cs) {
+        return !strEmpty(cs);
     }
 
     /**
@@ -315,7 +324,7 @@ public class Strings {
      * @return 填充后的字符串
      */
     public final static String fill(String source, int len, int align) {
-        return fill(source, CHAR_SPACE, len, align);
+        return fill(source, SPACE, len, align);
     }
 
     /**
@@ -602,7 +611,7 @@ public class Strings {
      * @return 填充空格后的字符串
      */
     public final static String getBlankStr(int length) {
-        return getBlankStr(CHAR_SPACE, length);
+        return getBlankStr(SPACE, length);
     }
 
     /**
@@ -628,7 +637,7 @@ public class Strings {
      */
     public final static String getBlankStr(String str, int length, boolean isCutout) {
         if (isEmpty(str)) {
-            str = CHAR_SPACE;
+            str = SPACE;
         }
         return fill(str, length, isCutout);
     }

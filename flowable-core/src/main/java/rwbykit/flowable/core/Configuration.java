@@ -5,12 +5,14 @@ import rwbykit.flowable.core.factory.ObjectFactoryAware;
 
 public interface Configuration<T extends Configuration<T>> {
 
-    Configuration<?> byDefaultObjectFactory();
-
     Configuration<?> buildObjectFactory(ObjectFactory objectFactory);
 
     Configuration<?> buildObjectFactoryAware(ObjectFactoryAware factoryAware);
 
-    void setFlowPath(String... path);
+    Configuration<?> setFlowPath(String... path);
+
+    Configuration<?> byDefaultConfiguration();
+
+    FlowableFactory getFlowableFactory();
 
 }

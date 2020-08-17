@@ -2,12 +2,12 @@ package rwbykit.flowable.extension.actuator.artificial.approval;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowable.engine.Constants;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.AbstractArtificialApprovalSubmitActuator;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitResult;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.DefaultArtificialApprovalSubmit;
-import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
-import rwbykit.flowable.core.model.ArtifactNode;
+import rwbykit.flowable.core.model.runtime.ApprovalInstance;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
 
 import java.util.List;
 

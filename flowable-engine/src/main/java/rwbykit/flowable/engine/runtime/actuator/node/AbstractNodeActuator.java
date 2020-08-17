@@ -1,17 +1,17 @@
 package rwbykit.flowable.engine.runtime.actuator.node;
 
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
-import rwbykit.flowable.engine.Notification;
-import rwbykit.flowable.engine.enumeration.Phase;
+import rwbykit.flowable.core.Notification;
+import rwbykit.flowable.core.enumeration.Phase;
 import rwbykit.flowable.engine.notice.NodeNotice;
 import rwbykit.flowable.engine.notice.NotificationHelper;
 import rwbykit.flowable.engine.runtime.actuator.AbstractActuator;
-import rwbykit.flowable.engine.runtime.current.CurrentInstance;
-import rwbykit.flowable.engine.runtime.model.NodeInstance;
+import rwbykit.flowable.core.current.CurrentInstance;
+import rwbykit.flowable.core.model.runtime.NodeInstance;
 import rwbykit.flowable.engine.runtime.InstanceService;
-import rwbykit.flowable.core.model.Node;
+import rwbykit.flowable.core.model.parser.Node;
 
 import java.util.List;
 

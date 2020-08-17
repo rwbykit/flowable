@@ -1,8 +1,8 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Link;
-import rwbykit.flowable.core.model.Listener;
-import rwbykit.flowable.core.model.Node;
+import rwbykit.flowable.core.model.parser.Link;
+import rwbykit.flowable.core.model.parser.Listener;
+import rwbykit.flowable.core.model.parser.Node;
 
 import java.util.List;
 

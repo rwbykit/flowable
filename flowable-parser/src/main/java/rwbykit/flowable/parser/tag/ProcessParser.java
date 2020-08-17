@@ -1,8 +1,8 @@
 package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Element;
-import rwbykit.flowable.core.model.Node;
-import rwbykit.flowable.core.model.Process;
+import rwbykit.flowable.core.model.parser.Node;
+import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.parser.AbstractParser;

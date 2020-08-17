@@ -1,7 +1,7 @@
 package rwbykit.flowable.engine.runtime.parameter;
 
 
-import rwbykit.flowable.engine.runtime.model.Approval;
+import rwbykit.flowable.core.model.runtime.Approval;
 
 import java.io.Serializable;
 import java.util.List;

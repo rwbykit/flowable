@@ -2,7 +2,7 @@ package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Attribute;
 import org.jdom2.Element;
-import rwbykit.flowable.core.model.Property;
+import rwbykit.flowable.core.model.parser.Property;
 import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.parser.AbstractParser;
 import rwbykit.flowable.parser.NodeConstants;

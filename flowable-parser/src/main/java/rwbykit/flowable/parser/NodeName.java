@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Repeatable(NodeName.NodeNames.class)
 public @interface NodeName {
 
@@ -17,7 +17,7 @@ public @interface NodeName {
 
     @Documented
     @Target(ElementType.TYPE)
-    @Retention(RetentionPolicy.CLASS)
+    @Retention(RetentionPolicy.RUNTIME)
     public @interface NodeNames {
         NodeName[] value();
     }

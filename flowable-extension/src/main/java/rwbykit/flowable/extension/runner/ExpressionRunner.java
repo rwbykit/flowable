@@ -2,7 +2,7 @@ package rwbykit.flowable.extension.runner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowable.engine.Result;
+import rwbykit.flowable.core.Result;
 import rwbykit.flowable.engine.runtime.runner.Runner;
 import rwbykit.flowable.extension.ObjectResult;
 

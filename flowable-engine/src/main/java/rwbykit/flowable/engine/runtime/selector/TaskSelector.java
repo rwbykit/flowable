@@ -2,15 +2,15 @@ package rwbykit.flowable.engine.runtime.selector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.Selector;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.Context;
+import rwbykit.flowable.core.Selector;
 import rwbykit.flowable.engine.runtime.LoggerHelper;
-import rwbykit.flowable.engine.runtime.model.TaskInstance;
+import rwbykit.flowable.core.model.runtime.TaskInstance;
 import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.util.Strings;
-import rwbykit.flowable.core.model.AutoNode;
-import rwbykit.flowable.core.model.Task;
+import rwbykit.flowable.core.model.parser.AutoNode;
+import rwbykit.flowable.core.model.parser.Task;
 
 import java.util.List;
 import java.util.stream.Collectors;

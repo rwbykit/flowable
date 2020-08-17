@@ -2,29 +2,32 @@ package rwbykit.flowable.parser;
 
 import org.jdom2.Attribute;
 import org.jdom2.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.parser.Parser;
+import rwbykit.flowable.core.util.Lists;
+import rwbykit.flowable.core.util.Strings;
+import rwbykit.flowable.parser.converter.Converters;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class AbstractParser<T> implements Parser<Element, T> {
 
+    private final static Logger logger = LoggerFactory.getLogger(AbstractParser.class);
 
     protected <R> List<R> parseChildrens(List<Element> elements) {
         if (Objects.isNull(elements) || elements.isEmpty()) {
-            return Collections.emptyList();
+            return Lists.emptyList();
         }
 
-        AbstractParser<R> parser = getParser(elements.get(0));
-        if (Objects.isNull(parser)) {
-            throw new RuntimeException("");
-        }
-
-        return elements.stream().map(parser::parse).collect(Collectors.toList());
+        return elements.stream().map(element -> {
+            AbstractParser<R> parser = getParser(element);
+            return parser.parse(element);
+        }).collect(Collectors.toList());
     }
 
 
@@ -45,20 +48,22 @@ public abstract class AbstractParser<T> implements Parser<Element, T> {
 
     protected <C, R> R fillByAttribute(R r, Attribute attribute, Converter<C> converter) {
         String name = attribute.getName();
-        Method method = getSetterMethod(r.getClass(), name);
+        Field field = getField(r.getClass(), name);
+        Method method = getSetterMethod(r.getClass(), field, name);
         if (Objects.nonNull(method)) {
             try {
-                Object value = Objects.nonNull(converter) ? converter.convert(attribute.getValue()) : attribute.getValue();
+                Object value = Objects.nonNull(Converters.getConverter(converter, field.getType())) ?
+                        converter.convert(attribute.getValue()) : attribute.getValue();
                 method.invoke(r, value);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         return r;
     }
 
     protected <R> R fillByAttribute(R r, Element element, String name) {
-        return fillByAttribute(r, element, name);
+        return fillByAttribute(r, element, name, null);
     }
 
     protected <C, R> R fillByAttribute(R r, Element element, String name, Converter<C> converter) {
@@ -70,37 +75,45 @@ public abstract class AbstractParser<T> implements Parser<Element, T> {
     }
 
     private <R> AbstractParser<R> getParser(Element element) {
+        AbstractParser<R> parser = null;
         String type = element.getAttributeValue("type");
-        AbstractParser<R> parser = ParserFactory.factory().getParser(type);
-        if (Objects.isNull(parser)) {
+        if (Strings.isEmpty(type)) {
             parser = ParserFactory.factory().getParser(element.getName());
+        } else {
+            parser = ParserFactory.factory().getParser(type);
+            if (Objects.isNull(parser)) {
+                parser = ParserFactory.factory().getParser(element.getName());
+            }
         }
         return parser;
     }
 
-    private Method getSetterMethod(Class<?> clazz, String name) {
-
+    private static Method getSetterMethod(Class<?> classType, Field field, String name) {
+        Method method = null;
         try {
-            Field field = clazz.getDeclaredField(name);
-            String upperIndexName = upperIndexChar(name, 0);
-            Method method = clazz.getMethod("set" + upperIndexName, field.getType());
-            if (Objects.isNull(method)) {
-                return clazz.getMethod("add" + upperIndexName, field.getType());
+            if (Objects.nonNull(field)) {
+                String upperIndexName = Strings.upperIndexChar(name, 0);
+                method = classType.getMethod("set" + upperIndexName, field.getType());
+                if (Objects.isNull(method)) {
+                    method = classType.getMethod("add" + upperIndexName, field.getType());
+                }
             }
         } catch (Exception e) {
-
+            logger.error(e.getMessage());
         }
-        return null;
+        return method;
 
     }
 
-    private String upperIndexChar(String value, int index) {
-        if (value.length() < index) {
-            return value;
+    private static Field getField(Class<?> classType, String name) {
+        try{
+            if (classType.equals(Object.class)) {
+                return null;
+            }
+            return classType.getDeclaredField(name);
+        } catch (NoSuchFieldException e) {
+            return getField(classType.getSuperclass(), name);
         }
-        StringBuilder builder = new StringBuilder(value);
-        builder.setCharAt(index, Character.toUpperCase(builder.charAt(index)));
-        return builder.toString();
     }
 
 }

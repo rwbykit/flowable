@@ -1,7 +1,7 @@
 package rwbykit.flowable.extension.calculator.approver;
 
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.engine.runtime.calculator.approver.GenericApproverCalculator;
 
 

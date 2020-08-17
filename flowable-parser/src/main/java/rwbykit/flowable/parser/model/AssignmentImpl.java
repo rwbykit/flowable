@@ -1,8 +1,8 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Assignee;
-import rwbykit.flowable.core.model.Assignment;
-import rwbykit.flowable.core.model.AssignmentMode;
+import rwbykit.flowable.core.model.parser.Assignee;
+import rwbykit.flowable.core.model.parser.Assignment;
+import rwbykit.flowable.core.model.parser.AssignmentMode;
 import rwbykit.flowable.core.model.enumeration.AssignType;
 import rwbykit.flowable.core.model.enumeration.AssigneeType;
 import rwbykit.flowable.core.model.enumeration.PolymerizationType;

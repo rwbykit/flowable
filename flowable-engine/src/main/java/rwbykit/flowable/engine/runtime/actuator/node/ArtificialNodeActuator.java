@@ -3,18 +3,18 @@ package rwbykit.flowable.engine.runtime.actuator.node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
-import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
+import rwbykit.flowable.engine.factory.GenericObjectFactory;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitActuator;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitResult;
 import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitServiceFactory;
 import rwbykit.flowable.engine.runtime.calculator.approver.ApproverCalculator;
-import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.model.runtime.ApprovalInstance;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.util.Utils;
-import rwbykit.flowable.core.model.ArtifactNode;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
 
 import java.util.List;
 import java.util.Objects;
@@ -92,7 +92,7 @@ public class ArtificialNodeActuator extends AbstractNodeActuator {
     protected Context handleApprover(Context context) throws FlowableException {
         context.getCurrentInstance().setNodeStatus(Constants.STATUS_APPROVAL);
         ArtifactNode node = context.getProcessConfigService().getNode(context.getCurrentInstance().getNodeId());
-        ApproverCalculator approverCalculator = RuntimeObjectFactory.factory().getApproverCalculator(node.getAssignment().getAssigneeType());
+        ApproverCalculator approverCalculator = GenericObjectFactory.factory().getApproverCalculator(node.getAssignment().getAssigneeType());
         List<Approver> approvers = approverCalculator.calculate(context);
         context.getRuntimeService().getApprovalService().initialize(context.getCurrentInstance().getProcessInstanceId(), context.getCurrentInstance().getNodeInstanceId(), approvers);
         context.addParam("nextApprovers", approvers);

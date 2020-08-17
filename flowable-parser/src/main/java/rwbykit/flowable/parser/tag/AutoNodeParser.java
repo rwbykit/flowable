@@ -1,8 +1,9 @@
 package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Element;
-import rwbykit.flowable.core.model.AutoNode;
-import rwbykit.flowable.core.model.Task;
+import rwbykit.flowable.core.model.parser.AutoNode;
+import rwbykit.flowable.core.model.parser.Task;
+import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.parser.AbstractParser;
 import rwbykit.flowable.parser.NodeConstants;
@@ -19,6 +20,8 @@ public class AutoNodeParser extends AbstractParser<AutoNode> {
     public AutoNode parse(Element element) {
         AutoNodeImpl node = new AutoNodeImpl();
         this.fillByAttribute(node, element);
+        node.setListeners(Lists.immutable(this.parseChildrens(element.getChildren(NodeConstants.NODE_NAME_LISTENER))));
+        node.setLinks(Lists.immutable(this.parseChildrens(element.getChildren(NodeConstants.NODE_NAME_LINK))));
         List<Task> tasks = this.parseChildrens(element.getChildren(NodeConstants.NODE_NAME_TASK));
         Map<String, Task> taskMap = new ConcurrentHashMap<>(tasks.size());
         tasks.forEach(task -> taskMap.put(task.getId(), task));

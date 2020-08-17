@@ -1,6 +1,6 @@
 package rwbykit.flowable.engine.runtime.calculator.approver;
 
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.model.runtime.Approver;
 
 import java.util.List;
 

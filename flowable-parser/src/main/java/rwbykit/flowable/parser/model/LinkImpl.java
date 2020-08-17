@@ -1,7 +1,7 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Link;
-import rwbykit.flowable.core.model.ValueField;
+import rwbykit.flowable.core.model.parser.Link;
+import rwbykit.flowable.core.model.parser.ValueField;
 
 import java.util.List;
 

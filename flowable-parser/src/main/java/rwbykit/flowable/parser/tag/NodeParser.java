@@ -1,6 +1,6 @@
 package rwbykit.flowable.parser.tag;
 
-import rwbykit.flowable.core.model.Node;
+import rwbykit.flowable.core.model.parser.Node;
 import rwbykit.flowable.parser.NodeConstants;
 import rwbykit.flowable.parser.NodeName;
 import rwbykit.flowable.parser.model.NodeImpl;

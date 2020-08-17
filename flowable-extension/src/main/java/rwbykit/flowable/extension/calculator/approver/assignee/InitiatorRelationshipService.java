@@ -1,8 +1,8 @@
 package rwbykit.flowable.extension.calculator.approver.assignee;
 
-import rwbykit.flowable.engine.TypesSupported;
+import rwbykit.flowable.core.TypesSupported;
 import rwbykit.flowable.engine.runtime.calculator.approver.assignee.AssigneeInformation;
-import rwbykit.flowable.engine.runtime.current.Initiator;
+import rwbykit.flowable.core.current.Initiator;
 
 import java.util.List;
 

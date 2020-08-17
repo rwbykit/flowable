@@ -1,7 +1,7 @@
 package rwbykit.flowable.engine.runtime.calculator.approver.assignee;
 
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
+import rwbykit.flowable.core.Constants;
 
 /**
  * 人员角色相关计算器

@@ -3,10 +3,10 @@ package rwbykit.flowable.engine.runtime.runner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.FlowableException;
-import rwbykit.flowable.engine.Result;
-import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
+import rwbykit.flowable.core.Result;
+import rwbykit.flowable.engine.factory.GenericObjectFactory;
 import rwbykit.flowable.core.model.enumeration.ExecuteMode;
 
 /**
@@ -24,7 +24,7 @@ public class InvokeClassRunner<R, P> implements Runner<P, Result<R>> {
     
     @Override
     public Result<R> run(String value, P parameter) throws FlowableException {
-        RunnerActuator<R, P> runnerActuator = RuntimeObjectFactory.factory().getObject(ExecuteMode.INVOKE.name(), value);
+        RunnerActuator<R, P> runnerActuator = GenericObjectFactory.factory().getObject(ExecuteMode.INVOKE.name(), value);
         logger.info("当前为自定义Class模式执行!");
         return runnerActuator.execute(parameter);
     }

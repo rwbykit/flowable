@@ -2,17 +2,17 @@ package rwbykit.flowable.extension.calculator.approver.assignee;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.runtime.calculator.approver.assignee.AssigneeInformation;
-import rwbykit.flowable.engine.runtime.calculator.approver.assignee.GenericAssigneeCalculator;
-import rwbykit.flowable.engine.runtime.current.CurrentInstance;
-import rwbykit.flowable.engine.runtime.current.Initiator;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.current.CurrentInstance;
+import rwbykit.flowable.core.current.Initiator;
+import rwbykit.flowable.core.model.parser.Assignee;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.core.util.Maps;
-import rwbykit.flowable.core.model.Assignee;
+import rwbykit.flowable.engine.runtime.calculator.approver.assignee.AssigneeInformation;
+import rwbykit.flowable.engine.runtime.calculator.approver.assignee.GenericAssigneeCalculator;
 
 import java.util.List;
 import java.util.Map;
@@ -34,15 +34,14 @@ public class InitiatorRelationshipCalculator extends GenericAssigneeCalculator {
     private static Map<String, InitiatorRelationshipService> INITIATOR_RELATIONSHIP_SERVICE_MAP;
 
     public InitiatorRelationshipCalculator(List<InitiatorRelationshipService> initiatorRelationshipServices) {
+        Map<String, InitiatorRelationshipService> initiatorRelationshipServiceMap = null;
         if (Collections.nonEmpty(initiatorRelationshipServices)) {
-            Map<String, InitiatorRelationshipService> initiatorRelationshipServiceMap = Maps.newConcurrentHashMap(initiatorRelationshipServices.size());
-            initiatorRelationshipServices.stream().forEach(service -> {
+            initiatorRelationshipServiceMap = Maps.newConcurrentHashMap(initiatorRelationshipServices.size());
+            for (InitiatorRelationshipService service : initiatorRelationshipServices) {
                 initiatorRelationshipServiceMap.putIfAbsent(service.getSupportedType(), service);
-            });
-            INITIATOR_RELATIONSHIP_SERVICE_MAP = Maps.unmodifiableMap(initiatorRelationshipServiceMap);
-        } else {
-            INITIATOR_RELATIONSHIP_SERVICE_MAP = Maps.emptyMap();
+            };
         }
+        INITIATOR_RELATIONSHIP_SERVICE_MAP = Maps.immutable(initiatorRelationshipServiceMap);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Collections {
 
     public static <T> boolean isEmpty(Collection<T> collection) {
-        return Objects.isNull(collection) || !collection.isEmpty();
+        return Objects.isNull(collection) || collection.isEmpty();
     }
 
     public static <T> boolean nonEmpty(Collection<T> collection) {
@@ -19,7 +19,7 @@ public class Collections {
     }
 
     public static <K, V> boolean isEmpty(Map<K, V> map) {
-        return Objects.nonNull(map) || map.isEmpty();
+        return Objects.isNull(map) || map.isEmpty();
     }
 
     public static <K, V> boolean nonEmpty(Map<K, V> map) {

@@ -7,6 +7,7 @@ import rwbykit.flowable.core.parser.Parser;
 import rwbykit.flowable.core.util.Asserts;
 import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.util.Lists;
+import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.core.util.Objects;
 import rwbykit.flowable.parser.NodeConstants;
 import rwbykit.flowable.parser.NodeName;
@@ -53,7 +54,9 @@ public final class Flowable {
                     PropertyParser.class,
                     TaskParser.class,
                     ViewPageParser.class));
-
+            registerObject.entrySet().stream().forEach(entry -> {
+                registers.put(entry.getKey(), Maps.immutable(entry.getValue()));
+            });
         }
 
 
@@ -63,7 +66,7 @@ public final class Flowable {
                 parserMap = new ConcurrentHashMap<>(classTypes.size());
                 registerMap.put(NodeConstants.CATEGORY_PARSER, parserMap);
             }
-            for (Class<? extends Parser<T, R>> classType : classTypes) {
+            for (Class<?> classType : classTypes) {
                 Object parser = Objects.newInstance(classType);
                 if (Objects.nonNull(parser)) {
                     if (classType.isAnnotationPresent(NodeName.class)) {

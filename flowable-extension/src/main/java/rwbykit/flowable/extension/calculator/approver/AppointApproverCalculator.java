@@ -3,13 +3,13 @@ package rwbykit.flowable.extension.calculator.approver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.engine.runtime.calculator.approver.GenericApproverCalculator;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.util.Collections;
-import rwbykit.flowable.core.model.ArtifactNode;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
 
 import java.util.List;
 import java.util.stream.Collectors;

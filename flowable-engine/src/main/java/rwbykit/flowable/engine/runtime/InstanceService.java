@@ -1,6 +1,6 @@
 package rwbykit.flowable.engine.runtime;
 
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Context;
 
 public interface InstanceService {
 

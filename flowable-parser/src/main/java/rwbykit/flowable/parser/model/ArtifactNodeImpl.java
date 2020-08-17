@@ -1,9 +1,9 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.ArtifactNode;
-import rwbykit.flowable.core.model.Assignment;
-import rwbykit.flowable.core.model.Property;
-import rwbykit.flowable.core.model.ViewPage;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
+import rwbykit.flowable.core.model.parser.Assignment;
+import rwbykit.flowable.core.model.parser.Property;
+import rwbykit.flowable.core.model.parser.ViewPage;
 
 import java.util.List;
 

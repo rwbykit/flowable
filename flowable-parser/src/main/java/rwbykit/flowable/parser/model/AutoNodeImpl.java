@@ -1,8 +1,8 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.AutoNode;
-import rwbykit.flowable.core.model.QuickQuery;
-import rwbykit.flowable.core.model.Task;
+import rwbykit.flowable.core.model.parser.AutoNode;
+import rwbykit.flowable.core.model.parser.QuickQuery;
+import rwbykit.flowable.core.model.parser.Task;
 import rwbykit.flowable.parser.NodeConstants;
 import rwbykit.flowable.parser.NodeName;
 

@@ -3,15 +3,15 @@ package rwbykit.flowable.engine.runtime.calculator.approver.assignee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.engine.Constants;
-import rwbykit.flowable.engine.Context;
+import rwbykit.flowable.core.Constants;
+import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.core.FlowableRuntimeException;
-import rwbykit.flowable.engine.factory.RuntimeObjectFactory;
-import rwbykit.flowable.engine.runtime.current.Initiator;
-import rwbykit.flowable.engine.runtime.model.Approver;
+import rwbykit.flowable.engine.factory.GenericObjectFactory;
+import rwbykit.flowable.core.current.Initiator;
+import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.engine.runtime.runner.Runner;
-import rwbykit.flowable.core.model.ArtifactNode;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +54,7 @@ public class RunnerAssigneeCalculator extends GenericAssigneeCalculator {
 
     protected final static List<AssigneeInformation> execute(String executeMode, String value, AssigneeParameter parameter) {
         try {
-            Runner<AssigneeParameter, AssignedResult> runner = RuntimeObjectFactory.factory().getRunner(executeMode);
+            Runner<AssigneeParameter, AssignedResult> runner = GenericObjectFactory.factory().getRunner(executeMode);
             AssignedResult result = runner.run(value, parameter);
             if (result.isSuccess()) {
                 return result.getResult();

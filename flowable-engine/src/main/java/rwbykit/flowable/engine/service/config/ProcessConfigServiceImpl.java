@@ -1,9 +1,10 @@
 package rwbykit.flowable.engine.service.config;
 
-import rwbykit.flowable.core.model.AutoNode;
-import rwbykit.flowable.core.model.Node;
-import rwbykit.flowable.core.model.Process;
-import rwbykit.flowable.core.model.Task;
+import rwbykit.flowable.core.model.parser.AutoNode;
+import rwbykit.flowable.core.model.parser.Node;
+import rwbykit.flowable.core.model.parser.Process;
+import rwbykit.flowable.core.model.parser.Task;
+import rwbykit.flowable.core.service.ProcessConfigService;
 
 public class ProcessConfigServiceImpl implements ProcessConfigService {
 

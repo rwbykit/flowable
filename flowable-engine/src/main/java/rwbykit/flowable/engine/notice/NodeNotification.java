@@ -1,6 +1,6 @@
 package rwbykit.flowable.engine.notice;
 
-import rwbykit.flowable.engine.Notification;
+import rwbykit.flowable.core.Notification;
 
 public interface NodeNotification extends Notification<NodeNotice> {
 }

@@ -1,6 +1,6 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.RunMode;
+import rwbykit.flowable.core.model.parser.RunMode;
 
 /**
  * 运行模式

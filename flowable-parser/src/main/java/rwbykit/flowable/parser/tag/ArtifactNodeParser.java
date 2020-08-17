@@ -1,7 +1,7 @@
 package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Element;
-import rwbykit.flowable.core.model.ArtifactNode;
+import rwbykit.flowable.core.model.parser.ArtifactNode;
 import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.parser.AbstractParser;
 import rwbykit.flowable.parser.NodeConstants;

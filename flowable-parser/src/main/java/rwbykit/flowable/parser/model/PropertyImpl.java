@@ -1,6 +1,6 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Property;
+import rwbykit.flowable.core.model.parser.Property;
 
 import java.util.Map;
 

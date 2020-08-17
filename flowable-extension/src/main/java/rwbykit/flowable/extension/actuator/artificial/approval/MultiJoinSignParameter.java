@@ -1,6 +1,6 @@
 package rwbykit.flowable.extension.actuator.artificial.approval;
 
-import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
+import rwbykit.flowable.core.model.runtime.ApprovalInstance;
 
 import java.io.Serializable;
 import java.util.List;

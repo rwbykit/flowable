@@ -1,6 +1,6 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Listener;
+import rwbykit.flowable.core.model.parser.Listener;
 
 public class ListenerImpl extends RunModeImpl implements Listener {
 

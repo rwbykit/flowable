@@ -1,8 +1,8 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Listener;
-import rwbykit.flowable.core.model.Task;
-import rwbykit.flowable.core.model.ValueField;
+import rwbykit.flowable.core.model.parser.Listener;
+import rwbykit.flowable.core.model.parser.Task;
+import rwbykit.flowable.core.model.parser.ValueField;
 import rwbykit.flowable.core.model.enumeration.SchedulerType;
 
 import java.util.List;

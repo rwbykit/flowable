@@ -1,7 +1,7 @@
 package rwbykit.flowable.engine.runtime;
 
-import rwbykit.flowable.engine.Context;
-import rwbykit.flowable.engine.runtime.current.CurrentInstance;
+import rwbykit.flowable.core.Context;
+import rwbykit.flowable.core.current.CurrentInstance;
 import rwbykit.flowableTemp.core.util.FlowableHelper;
 
 public class LoggerHelper {

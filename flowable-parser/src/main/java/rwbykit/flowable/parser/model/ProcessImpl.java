@@ -1,11 +1,11 @@
 package rwbykit.flowable.parser.model;
 
-import rwbykit.flowable.core.model.Listener;
-import rwbykit.flowable.core.model.Node;
-import rwbykit.flowable.core.model.Process;
-import rwbykit.flowable.core.model.Property;
-import rwbykit.flowable.core.model.QuickQuery;
-import rwbykit.flowable.core.model.ViewPage;
+import rwbykit.flowable.core.model.parser.Listener;
+import rwbykit.flowable.core.model.parser.Node;
+import rwbykit.flowable.core.model.parser.Process;
+import rwbykit.flowable.core.model.parser.Property;
+import rwbykit.flowable.core.model.parser.QuickQuery;
+import rwbykit.flowable.core.model.parser.ViewPage;
 
 import java.util.ArrayList;
 import java.util.List;
