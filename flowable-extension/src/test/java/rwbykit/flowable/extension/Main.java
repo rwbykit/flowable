@@ -1,5 +1,6 @@
-package rwbykit.flowable;
+package rwbykit.flowable.extension;
 
+import rwbykit.flowable.Flowable;
 import rwbykit.flowable.core.FlowableFactory;
 
 public class Main {

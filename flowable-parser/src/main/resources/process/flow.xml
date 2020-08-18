@@ -1,29 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<flow>
-    <node id="node1" type="start" name="开始节点" />
-    <node id="node2" type="auto" name="自动任务">
+<flow id="limitApproval" name="额度审批流程" status="ACTIVE" version="20200818112601" description="测试银行额度审批流程">
+
+    <node id="start" type="start" name="开始节点">
+        <link id="start-link" name="默认连线" type="" sourceRef="start" targetRef="arti-node1" />
+    </node>
+    <node id="arti-node1" type="artifact" name="客户经理发起" description="客户经理发起">
+        <viewPage path="pages/content/startPage" order="1"/>
+        <viewPage path="pages/context/startCustomPage" order="2"/>
+        <assignment maxNumber="10" assignType="fixed" polymerizationType="union" assigneeType="random">
+            <assignee type="O" value="5000" />
+            <assignee type="U" value="admin" />
+        </assignment>
+        <property hang="1" weak="2" />
+        <link id="node3-link1" name="默认连线111111111111111" type="" sourceRef="node3" targetRef="node5" />
+    </node>
+    <node id="node1" type="auto" name="自动任务">
         <task id="node1taski" name="任务1" runMode="class" scheduleType="sync" order="1" value="com.cn.com.yusys.abc">
-            <field name="field" value="abcedaf" valueType="context"/>
+            <valueField name="field" value="abcedaf" valueType="context"/>
         </task>
         <task id="node1task2" name="节点1任务2" runMode="bean" scheduleType="async" order="2" value="beanName">
-            <field name="field111111" value="asdv" valueType="constant"/>
+            <valueField name="field111111" value="asdv" valueType="constant"/>
         </task>
         <listener classType="rwbykit.flowableTemp.beans.Beans" runMode="BEANS" />
         <listener classType="rwbykit.flowableTemp.invoke.Invoke" runMode="INVOKE" />
+        <link id="node2-link1" name="默认连线" type="" sourceRef="node2" targetRef="node3">
+            <valueField name="field" value="abcedaf" valueType="context"/>
+        </link>
+        <link id="node2-link2" name="默认连线111111111111111" type="" sourceRef="node2" targetRef="node4" />
     </node>
-    <node id="node2" type="artifact" name="人工任务">
+    <node id="node3" type="artifact" name="人工任务1">
         <viewPage path="pages/content/abc.html" order="1"/>
         <viewPage path="pages/context/ddddddddd/ass.js" order="2"/>
         <assignment maxNumber="10" assignType="pool" polymerizationType="union" assigneeType="random">
-            <assignees type="O" value="5000" />
-            <assignees type="U" value="admin" />
+            <assignee type="O" value="5000" />
+            <assignee type="U" value="admin" />
         </assignment>
         <property hang="1" weak="2" />
+        <link id="node3-link1" name="默认连线111111111111111" type="" sourceRef="node3" targetRef="node5" />
     </node>
-    <node id="node1" type="end" name="开始节点" />
-    <viewPage path="/homeas/sdb" order="1"/>
-    <viewPage path="/vew/page" order="10"/>
-    <property hang="yew" weak="eow" />
-    <listener classType="rwbykit.flowableTemp.beans.Beans" runMode="BEANS" />
-    <listener classType="rwbykit.flowableTemp.invoke.Invoke" runMode="INVOKE" />
+    <node id="node4" type="artifact" name="人工任务2">
+        <viewPage path="pages/content/mbb/abc.html" order="1"/>
+        <viewPage path="pages/context/mbb/ddddddddd/ass.js" order="2"/>
+        <assignment maxNumber="10" assignType="pool" polymerizationType="union" assigneeType="random">
+            <assignee type="O" value="5000" />
+            <assignee type="U" value="admin" />
+        </assignment>
+        <property hang="11" weak="22" />
+        <link id="node3-link1" name="默认连线111111111111111" type="" sourceRef="node4" targetRef="node5" />
+    </node>
+    <node id="node5" type="end" name="结束节点" />
+    <viewPage path="page/content/limit/viewCustom" order="1"/>
+    <viewPage path="page/content/limit/viewLimit" order="10"/>
+    <property hang="Y" weak="Y" />
+    <listener classType="rwbykit.flowable.extension.listener.LimitApprovalProcessListener" runMode="BEANS" />
+    <listener classType="rwbykit.flowable.extension.listener.LimitApprovalProcessExceptionListener" runMode="INVOKE" />
 </flow>

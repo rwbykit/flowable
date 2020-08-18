@@ -15,9 +15,9 @@ import rwbykit.flowable.parser.tag.ArtifactNodeParser;
 import rwbykit.flowable.parser.tag.AssigneeParser;
 import rwbykit.flowable.parser.tag.AssignmentParser;
 import rwbykit.flowable.parser.tag.AutoNodeParser;
+import rwbykit.flowable.parser.tag.GenericNodeParser;
 import rwbykit.flowable.parser.tag.LinkParser;
 import rwbykit.flowable.parser.tag.ListenerParser;
-import rwbykit.flowable.parser.tag.NodeParser;
 import rwbykit.flowable.parser.tag.ProcessParser;
 import rwbykit.flowable.parser.tag.PropertyParser;
 import rwbykit.flowable.parser.tag.TaskParser;
@@ -49,7 +49,7 @@ public final class Flowable {
                     AutoNodeParser.class,
                     LinkParser.class,
                     ListenerParser.class,
-                    NodeParser.class,
+                    GenericNodeParser.class,
                     ProcessParser.class,
                     PropertyParser.class,
                     TaskParser.class,

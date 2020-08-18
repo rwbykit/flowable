@@ -24,10 +24,13 @@ public abstract class AbstractParser<T> implements Parser<Element, T> {
             return Lists.emptyList();
         }
 
-        return elements.stream().map(element -> {
-            AbstractParser<R> parser = getParser(element);
-            return parser.parse(element);
-        }).collect(Collectors.toList());
+        return elements.stream()
+                .map(element -> {
+                    AbstractParser<R> parser = getParser(element);
+                    return Objects.nonNull(parser) ? parser.parse(element) : null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
 
@@ -106,7 +109,7 @@ public abstract class AbstractParser<T> implements Parser<Element, T> {
     }
 
     private static Field getField(Class<?> classType, String name) {
-        try{
+        try {
             if (classType.equals(Object.class)) {
                 return null;
             }
