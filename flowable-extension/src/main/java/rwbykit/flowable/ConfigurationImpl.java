@@ -3,6 +3,9 @@ package rwbykit.flowable;
 import rwbykit.flowable.core.Configuration;
 import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableFactory;
+import rwbykit.flowable.core.cache.CacheManager;
+import rwbykit.flowable.core.cache.MemoryProcessCache;
+import rwbykit.flowable.core.cache.ProcessCache;
 import rwbykit.flowable.core.factory.ObjectFactory;
 import rwbykit.flowable.core.factory.ObjectFactoryAware;
 import rwbykit.flowable.core.factory.support.RegisteredObjectFactory;
@@ -20,6 +23,7 @@ class ConfigurationImpl implements Configuration<ConfigurationImpl> {
     private ObjectFactory objectFactory;
     private Map<String, Map<String, Object>> registerObject;
     private String[] processPaths;
+    private ProcessCache processCache;
 
     ConfigurationImpl(Map<String, Map<String, Object>> registerObject) {
         this.registerObject = registerObject;
@@ -48,13 +52,21 @@ class ConfigurationImpl implements Configuration<ConfigurationImpl> {
         this.objectFactory = new RegisteredObjectFactory(registerObject);
         GenericObjectFactory.factory().setObjectFactory(this.objectFactory);
         ParserFactory.factory().setObjectFactory(this.objectFactory);
-        processPaths = new String[]{"classpath*:process/*.xml"};
+        this.processPaths = new String[]{"classpath*:process/*.xml"};
+        this.processCache = new MemoryProcessCache();
         return this;
     }
 
     @Override
     public FlowableFactory getFlowableFactory() {
+        CacheManager.setProcessCache(this.processCache);
         Context context = Context.of(new RuntimeServiceImpl(), new HistoryServiceImpl());
         return FlowableFactoryImpl.of(context, new ParserServiceImpl(processPaths), new ProcessEngineServiceImpl());
+    }
+
+    @Override
+    public Configuration<?> setProcessCache(ProcessCache processCache) {
+        this.processCache = processCache;
+        return this;
     }
 }

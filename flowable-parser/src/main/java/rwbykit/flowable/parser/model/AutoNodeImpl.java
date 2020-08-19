@@ -1,7 +1,7 @@
 package rwbykit.flowable.parser.model;
 
 import rwbykit.flowable.core.model.parser.AutoNode;
-import rwbykit.flowable.core.model.parser.QuickQuery;
+import rwbykit.flowable.core.model.parser.QuickSearch;
 import rwbykit.flowable.core.model.parser.Task;
 import rwbykit.flowable.parser.NodeConstants;
 import rwbykit.flowable.parser.NodeName;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @NodeName(NodeConstants.NODE_NAME_LISTENER)
-public class AutoNodeImpl extends NodeImpl implements AutoNode, QuickQuery {
+public class AutoNodeImpl extends NodeImpl implements AutoNode, QuickSearch {
 
     private Map<String, Task> tasks;
 
@@ -25,7 +25,7 @@ public class AutoNodeImpl extends NodeImpl implements AutoNode, QuickQuery {
     }
 
     @Override
-    public <T> T find(String property, String id) {
+    public <T> T search(String property, String id) {
         if ("tasks".equals(property)) {
             return (T) tasks.get(id);
         }

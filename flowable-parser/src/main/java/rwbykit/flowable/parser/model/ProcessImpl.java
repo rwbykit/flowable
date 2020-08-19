@@ -4,14 +4,14 @@ import rwbykit.flowable.core.model.parser.Listener;
 import rwbykit.flowable.core.model.parser.Node;
 import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.model.parser.Property;
-import rwbykit.flowable.core.model.parser.QuickQuery;
+import rwbykit.flowable.core.model.parser.QuickSearch;
 import rwbykit.flowable.core.model.parser.ViewPage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProcessImpl implements Process, QuickQuery {
+public class ProcessImpl implements Process, QuickSearch {
 
     private String id;
 
@@ -113,7 +113,7 @@ public class ProcessImpl implements Process, QuickQuery {
     }
 
     @Override
-    public <T> T find(String property, String id) {
+    public <T> T search(String property, String id) {
         if ("nodes".equals(property)) {
             return (T) nodes.get(id);
         }
