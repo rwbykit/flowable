@@ -3,14 +3,11 @@ package rwbykit.flowable.parser.model;
 import rwbykit.flowable.core.model.parser.AutoNode;
 import rwbykit.flowable.core.model.parser.QuickSearch;
 import rwbykit.flowable.core.model.parser.Task;
-import rwbykit.flowable.parser.NodeConstants;
-import rwbykit.flowable.parser.NodeName;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@NodeName(NodeConstants.NODE_NAME_LISTENER)
 public class AutoNodeImpl extends NodeImpl implements AutoNode, QuickSearch {
 
     private Map<String, Task> tasks;

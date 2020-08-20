@@ -3,6 +3,8 @@ package rwbykit.flowable.core;
 import rwbykit.flowable.core.cache.ProcessCache;
 import rwbykit.flowable.core.factory.ObjectFactory;
 import rwbykit.flowable.core.factory.ObjectFactoryAware;
+import rwbykit.flowable.core.service.HistoryService;
+import rwbykit.flowable.core.service.RuntimeService;
 
 public interface Configuration<T extends Configuration<T>> {
 
@@ -17,5 +19,7 @@ public interface Configuration<T extends Configuration<T>> {
     FlowableFactory getFlowableFactory();
 
     Configuration<?> setProcessCache(ProcessCache processCache);
+
+    Configuration<?> buildContext(RuntimeService runtimeService, HistoryService historyService);
 
 }

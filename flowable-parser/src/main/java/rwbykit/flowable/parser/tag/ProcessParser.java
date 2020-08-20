@@ -1,20 +1,20 @@
 package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Element;
+import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.core.model.parser.Node;
 import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.parser.AbstractParser;
 import rwbykit.flowable.parser.NodeConstants;
-import rwbykit.flowable.parser.NodeName;
 import rwbykit.flowable.parser.model.ProcessImpl;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@NodeName(NodeConstants.NODE_NAME_PROCESS)
+@Type(category = NodeConstants.CATEGORY_PARSER, type = NodeConstants.NODE_NAME_PROCESS)
 public class ProcessParser extends AbstractParser<Process> {
 
     @Override

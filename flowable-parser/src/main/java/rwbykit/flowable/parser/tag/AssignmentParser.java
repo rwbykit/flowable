@@ -1,15 +1,15 @@
 package rwbykit.flowable.parser.tag;
 
 import org.jdom2.Element;
+import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.core.model.parser.Assignment;
 import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.parser.AbstractParser;
 import rwbykit.flowable.parser.NodeConstants;
-import rwbykit.flowable.parser.NodeName;
 import rwbykit.flowable.parser.model.AssignmentImpl;
 import rwbykit.flowable.parser.model.AssignmentModeImpl;
 
-@NodeName(NodeConstants.NODE_NAME_ASSIGNMENT)
+@Type(category = NodeConstants.CATEGORY_PARSER, type = NodeConstants.NODE_NAME_ASSIGNMENT)
 public class AssignmentParser extends AbstractParser<Assignment> {
     @Override
     public Assignment parse(Element element) {

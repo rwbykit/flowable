@@ -7,6 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import rwbykit.flowable.core.FlowableRuntimeException;
+import rwbykit.flowable.core.cache.CacheManager;
 import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.service.ProcessParseService;
 import rwbykit.flowable.core.util.Asserts;
@@ -41,10 +42,11 @@ public class ParserServiceImpl implements ProcessParseService {
     @Override
     public void parse(String... paths) {
         Asserts.nonEmpty(Arrays.asList(paths), " Resolution path cannot be empty !");
-        doParse(paths);
+        List<Process> processes = doParse(paths);
+        processes.forEach(CacheManager::addProcess);
     }
 
-    protected static Map<String, List<Process>> doParse(String[] paths) {
+    protected static List<Process> doParse(String[] paths) {
         Map<String, List<Process>> processMap = doParse0(paths).stream()
                 .sorted(Comparator.comparing(process -> Strings.builder(process.getId(), process.getVersion())))
                 .collect(Collectors.groupingBy(process -> Strings.builder(process.getId(), "-", process.getVersion()), Collectors.toList()));
@@ -55,10 +57,9 @@ public class ParserServiceImpl implements ProcessParseService {
                 .map(key -> Strings.replace(key, "-", "->"))
                 .collect(Collectors.toList());
         if (repeatKeys.size() > 0) {
-
             throw new FlowableRuntimeException(" There are currently duplicate process versions as follows: \n " + repeatKeys);
         }
-        return processMap;
+        return processMap.values().stream().flatMap(List::stream).collect(Collectors.toList());
     }
 
     private static List<Process> doParse0(String[] paths) {

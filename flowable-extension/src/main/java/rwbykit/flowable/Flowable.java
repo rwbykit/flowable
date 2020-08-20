@@ -3,14 +3,40 @@ package rwbykit.flowable;
 import rwbykit.flowable.core.Configuration;
 import rwbykit.flowable.core.GenericBootstrap;
 import rwbykit.flowable.core.annotation.Type;
-import rwbykit.flowable.core.parser.Parser;
 import rwbykit.flowable.core.util.Asserts;
-import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.util.Lists;
 import rwbykit.flowable.core.util.Maps;
 import rwbykit.flowable.core.util.Objects;
-import rwbykit.flowable.parser.NodeConstants;
-import rwbykit.flowable.parser.NodeName;
+import rwbykit.flowable.engine.runtime.actuator.node.ArtificialNodeActuator;
+import rwbykit.flowable.engine.runtime.actuator.node.AutoNodeActuator;
+import rwbykit.flowable.engine.runtime.actuator.node.EndNodeActuator;
+import rwbykit.flowable.engine.runtime.actuator.node.StartNodeActuator;
+import rwbykit.flowable.engine.runtime.actuator.node.SubProcessNodeActuator;
+import rwbykit.flowable.engine.runtime.actuator.porcess.ProcessActuator;
+import rwbykit.flowable.engine.runtime.actuator.task.AutoTaskActuator;
+import rwbykit.flowable.engine.runtime.calculator.approver.GenericApproverCalculator;
+import rwbykit.flowable.engine.runtime.calculator.approver.assignee.GenericAssigneeCalculator;
+import rwbykit.flowable.engine.runtime.calculator.approver.assignee.RunnerAssigneeCalculator;
+import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.ApproverPolymerizationCalculator;
+import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.IntersectionApproverPolymerizationCalculator;
+import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.UnionApproverPolymerizationCalculator;
+import rwbykit.flowable.engine.runtime.runner.InvokeClassRunner;
+import rwbykit.flowable.engine.runtime.scheduler.AsyncProcessScheduler;
+import rwbykit.flowable.engine.runtime.scheduler.SyncProcessScheduler;
+import rwbykit.flowable.engine.runtime.selector.TaskSelector;
+import rwbykit.flowable.extension.calculator.approver.AppointApproverCalculator;
+import rwbykit.flowable.extension.calculator.approver.CompeteApproverCalculator;
+import rwbykit.flowable.extension.calculator.approver.MultiApproverCalculator;
+import rwbykit.flowable.extension.calculator.approver.MultiJointlySignApproverCalculator;
+import rwbykit.flowable.extension.calculator.approver.PoolApproverCalculator;
+import rwbykit.flowable.extension.calculator.approver.RandomApproverCalculator;
+import rwbykit.flowable.extension.calculator.approver.assignee.InitiatorRelationshipCalculator;
+import rwbykit.flowable.extension.calculator.approver.pool.DefaultApproverTaskPoolCalculator;
+import rwbykit.flowable.extension.calculator.artificial.approval.HalfVetoMultiJoinSignRuleCalculator;
+import rwbykit.flowable.extension.calculator.artificial.approval.OneVoteVetoMultiJoinSignRuleCalculator;
+import rwbykit.flowable.extension.calculator.artificial.approval.Two_ThirdsPassedMultiJoinSignRuleCalculator;
+import rwbykit.flowable.extension.runner.ExpressionRunner;
+import rwbykit.flowable.extension.runner.SpringBeanRunner;
 import rwbykit.flowable.parser.tag.ArtifactNodeParser;
 import rwbykit.flowable.parser.tag.AssigneeParser;
 import rwbykit.flowable.parser.tag.AssignmentParser;
@@ -23,27 +49,26 @@ import rwbykit.flowable.parser.tag.PropertyParser;
 import rwbykit.flowable.parser.tag.TaskParser;
 import rwbykit.flowable.parser.tag.ViewPageParser;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class Flowable {
 
-
     public static GenericBootstrap byDefaultRegister() {
         return new GenericBootstrapImpl();
     }
-
 
     private static class GenericBootstrapImpl implements GenericBootstrap {
 
         private static Map<String, Map<String, Object>> registers = new ConcurrentHashMap<>();
 
         static {
-
             Map<String, Map<String, Object>> registerObject = new ConcurrentHashMap<>();
 
-            registerParser(registerObject, Lists.newArrayList(ArtifactNodeParser.class,
+            // register parser
+            registerObject(registerObject, Lists.newArrayList(ArtifactNodeParser.class,
                     AssigneeParser.class,
                     AssignmentParser.class,
                     AutoNodeParser.class,
@@ -54,100 +79,121 @@ public final class Flowable {
                     PropertyParser.class,
                     TaskParser.class,
                     ViewPageParser.class));
-            registerObject.entrySet().stream().forEach(entry -> {
-                registers.put(entry.getKey(), Maps.immutable(entry.getValue()));
-            });
+
+            // register actuator
+            registerObject(registerObject, Lists.newArrayList(ProcessActuator.class,
+                    AutoNodeActuator.class,
+                    ArtificialNodeActuator.class,
+                    StartNodeActuator.class,
+                    EndNodeActuator.class,
+                    SubProcessNodeActuator.class,
+                    AutoTaskActuator.class));
+
+            // register polymerization calculator
+            registerObject(registerObject, Lists.newArrayList(ApproverPolymerizationCalculator.class,
+                    IntersectionApproverPolymerizationCalculator.class,
+                    UnionApproverPolymerizationCalculator.class));
+
+            // register assignee calculator
+            registerObject(registerObject, Lists.newArrayList(GenericAssigneeCalculator.class,
+                    RunnerAssigneeCalculator.class,
+                    InitiatorRelationshipCalculator.class));
+
+            // register approver calculator
+            registerObject(registerObject, Lists.newArrayList(GenericApproverCalculator.class,
+                    CompeteApproverCalculator.class,
+                    AppointApproverCalculator.class,
+                    MultiApproverCalculator.class,
+                    MultiJointlySignApproverCalculator.class,
+                    PoolApproverCalculator.class,
+                    RandomApproverCalculator.class));
+
+            // register runner
+            registerObject(registerObject, Lists.newArrayList(InvokeClassRunner.class,
+                    ExpressionRunner.class,
+                    SpringBeanRunner.class));
+
+            // register approval rule calculator
+            registerObject(registerObject, Lists.newArrayList(HalfVetoMultiJoinSignRuleCalculator.class,
+                    OneVoteVetoMultiJoinSignRuleCalculator.class,
+                    Two_ThirdsPassedMultiJoinSignRuleCalculator.class));
+
+            // register approver task pool calculator
+            registerObject(registerObject, Lists.newArrayList(DefaultApproverTaskPoolCalculator.class));
+
+            // register scheduler
+            registerObject(registerObject, Lists.newArrayList(AsyncProcessScheduler.class,
+                    SyncProcessScheduler.class));
+
+            // register selector
+            registerObject(registerObject, Lists.newArrayList(TaskSelector.class));
+
+            registers.putAll(registerObject);
+
         }
 
-
-        private static <T, R> void registerParser(Map<String, Map<String, Object>> registerMap, List<Class<? extends Parser>> classTypes) {
-            Map<String, Object> parserMap = registerMap.get(NodeConstants.CATEGORY_PARSER);
-            if (Objects.isNull(parserMap)) {
-                parserMap = new ConcurrentHashMap<>(classTypes.size());
-                registerMap.put(NodeConstants.CATEGORY_PARSER, parserMap);
-            }
+        private static void registerObject(Map<String, Map<String, Object>> registerMap, List<Class<?>> classTypes) {
             for (Class<?> classType : classTypes) {
-                Object parser = Objects.newInstance(classType);
-                if (Objects.nonNull(parser)) {
-                    if (classType.isAnnotationPresent(NodeName.class)) {
-                        NodeName nodeName = parser.getClass().getAnnotation(NodeName.class);
-                        parserMap.put(nodeName.value(), parser);
-                    } else if (classType.isAnnotationPresent(NodeName.NodeNames.class)) {
-                        NodeName.NodeNames nodeNames = parser.getClass().getAnnotation(NodeName.NodeNames.class);
-                        for (NodeName nodeName : nodeNames.value()) {
-                            parserMap.put(nodeName.value(), parser);
-                        }
-                    }
+                Object object = Objects.newInstance(classType);
+                registerObject(registerMap, object);
+            }
+        }
+
+        public static void registerObject(Map<String, Map<String, Object>> registerMap, Object object) {
+            if (Objects.nonNull(object)) {
+                Class<?> classType = object.getClass();
+                if (classType.isAnnotationPresent(Type.class)) {
+                    Type type = classType.getAnnotation(Type.class);
+                    registerObject(registerMap, type.category(), type.type(), object);
+                } else if (classType.isAnnotationPresent(Type.Types.class)) {
+                    Type.Types types = classType.getAnnotation(Type.Types.class);
+                    Arrays.stream(types.value()).forEach(type -> registerObject(registerMap, type.category(), type.type(), object));
                 }
             }
-            ;
         }
 
-
-        @Override
-        public <T, R> GenericBootstrap registerParser(Parser<T, R> parser) {
-            return this.registerParsers(Lists.immutable(parser));
-        }
-
-        @Override
-        public <T, R> GenericBootstrap registerParsers(List<? extends Parser<T, R>> parsers) {
-            parsers.forEach(parser -> {
-                Class classType = parser.getClass();
-                if (classType.isAnnotationPresent(NodeName.class)) {
-                    NodeName nodeName = parser.getClass().getAnnotation(NodeName.class);
-                    registerParser(nodeName.value(), parser);
-                } else if (classType.isAnnotationPresent(NodeName.NodeNames.class)) {
-                    NodeName.NodeNames nodeNames = parser.getClass().getAnnotation(NodeName.NodeNames.class);
-                    for (NodeName nodeName : nodeNames.value()) {
-                        registerParser(nodeName.value(), parser);
-                    }
-                }
-            });
-            return this;
-        }
-
-        @Override
-        public <T, R> GenericBootstrap registerParser(String parserName, Parser<T, R> parser) {
-            return registerRuntimeObject(NodeConstants.CATEGORY_PARSER, parserName, parser);
+        private static void registerObject(Map<String, Map<String, Object>> registerMap, String category, String type, Object object) {
+            Map<String, Object> typeMap = registerMap.get(category);
+            if (Objects.isNull(typeMap)) {
+                typeMap = new ConcurrentHashMap<>(8);
+                registerMap.put(category, typeMap);
+            }
+            typeMap.put(type, object);
         }
 
         @Override
         public Configuration<?> configure() {
+            registers.entrySet().stream().forEach(entry -> {
+                registers.put(entry.getKey(), Maps.immutable(entry.getValue()));
+            });
+            registers = Maps.immutable(registers);
             return new ConfigurationImpl(registers);
         }
 
         @Override
-        public GenericBootstrap registerRuntimeObject(Object object) {
-            if (Objects.nonNull(object) && object.getClass().isAnnotationPresent(Type.class)) {
-                Type type = object.getClass().getAnnotation(Type.class);
-                registerRuntimeObject(type.category(), type.type(), object);
-            }
+        public GenericBootstrap register(Object object) {
+            registerObject(registers, object);
             return this;
         }
 
         @Override
-        public GenericBootstrap registerRuntimeObject(Class<?> classType) {
-            return registerRuntimeObject(Objects.newInstance(classType));
+        public GenericBootstrap register(Class<?> classType) {
+            return register(Objects.newInstance(classType));
         }
 
 
         @Override
-        public GenericBootstrap registerRuntimeObject(String category, String type, Object object) {
+        public GenericBootstrap register(String category, String type, Object object) {
             Asserts.nonEmpty(category, "Category must not empty!");
             Asserts.nonEmpty(type, "Type must not empty!");
             Asserts.nonNull(object, "Register object must not null!");
-            Map<String, Object> categoryMap = registers.get(category);
-            if (Collections.isEmpty(categoryMap)) {
-                categoryMap = new ConcurrentHashMap();
-                registers.put(category, categoryMap);
-            }
-            categoryMap.put(type, object);
+            registerObject(registers, category, type, object);
             return this;
         }
 
         @Override
-        public GenericBootstrap registerRuntimeObject(String category, String type, Class<?> classType) {
-            return registerRuntimeObject(category, type, Objects.newInstance(classType));
+        public GenericBootstrap register(String category, String type, Class<?> classType) {
+            return register(category, type, Objects.newInstance(classType));
         }
 
     }
