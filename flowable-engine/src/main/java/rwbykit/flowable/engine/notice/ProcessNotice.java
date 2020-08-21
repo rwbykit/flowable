@@ -1,5 +1,9 @@
 package rwbykit.flowable.engine.notice;
 
+/**
+ * process notice object
+ *
+ */
 public class ProcessNotice {
 
     private String processId;
