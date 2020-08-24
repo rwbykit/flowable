@@ -3,7 +3,7 @@ package rwbykit.flowableTemp.core;
 
 import rwbykit.flowable.war3.beans.Approver;
 import rwbykit.flowable.engine.FlowableException;
-import rwbykit.flowable.engine.runtime.model.ApprovalInstance;
+import rwbykit.flowable.engine.model.ApprovalInstance;
 
 import java.util.List;
 import java.util.Map;

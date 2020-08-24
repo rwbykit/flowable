@@ -1,4 +1,4 @@
-package rwbykit.flowable.extension.service;
+package rwbykit.flowable.engine.service;
 
 import rwbykit.flowable.core.model.parser.AutoNode;
 import rwbykit.flowable.core.model.parser.Node;
@@ -50,11 +50,11 @@ public class ProcessConfigServiceImpl implements ProcessConfigService {
     }
 
     private static boolean isQuickSearch(Object object) {
-        return QuickSearch.class.isInstance(object);
+        return object instanceof QuickSearch;
     }
 
     private static boolean isAutoNode(Node node) {
-        return AutoNode.class.isInstance(node);
+        return node instanceof AutoNode;
     }
 
 }

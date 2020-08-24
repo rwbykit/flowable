@@ -22,6 +22,7 @@ public class AutoNodeImpl extends NodeImpl implements AutoNode, QuickSearch {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T search(String property, String id) {
         if ("tasks".equals(property)) {
             return (T) tasks.get(id);

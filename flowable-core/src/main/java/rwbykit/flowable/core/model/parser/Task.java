@@ -27,7 +27,4 @@ public interface Task extends RunMode {
 
     public List<Listener> getListeners();
 
-
-    public String getTaskClassType();
-
 }

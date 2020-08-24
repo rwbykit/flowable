@@ -37,7 +37,7 @@ public final class Context {
         this.params = new ConcurrentHashMap<>(8);
     }
 
-    public final static Context of(RuntimeService runtimeService, HistoryService historyService) {
+    public static Context of(RuntimeService runtimeService, HistoryService historyService) {
         return new Context(runtimeService, historyService);
     }
 
@@ -65,6 +65,7 @@ public final class Context {
         return this.temporaryContext.getContextParam(key);
     }
 
+    @SuppressWarnings("unchecked")
     private <T> T getParam(Map<String, Object> params, String key) {
         if (Objects.isNull(params)) {
             params = new ConcurrentHashMap<>(8);

@@ -7,7 +7,7 @@ import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.service.ProcessConfigService;
 import rwbykit.flowable.core.service.ProcessEngineService;
 import rwbykit.flowable.core.service.ProcessParseService;
-import rwbykit.flowable.extension.service.ProcessConfigServiceImpl;
+import rwbykit.flowable.engine.service.ProcessConfigServiceImpl;
 
 public class FlowableFactoryImpl implements FlowableFactory {
 

@@ -16,7 +16,7 @@ public interface TaskService<T extends TaskInstance> {
     T initialize(String nodeInstanceId, Task task);
 
 
-    boolean modifyInstanceStatus(String nodeInstanceId, String status, String errorCode, String errorMessage);
+    boolean modifyInstanceStatus(String taskInstanceId, String status, String errorCode, String errorMessage);
 
 
     List<T> getAllTaskInstances(String nodeInstanceId);

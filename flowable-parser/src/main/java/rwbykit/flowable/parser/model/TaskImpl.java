@@ -36,11 +36,6 @@ public class TaskImpl extends RunModeImpl implements Task {
     private List<ValueField> fields;
 
     /**
-     * 任务执行类配置
-     */
-    private String taskClassType;
-
-    /**
      * 监听者
      */
     private List<Listener> listeners;
@@ -127,12 +122,4 @@ public class TaskImpl extends RunModeImpl implements Task {
         this.listeners = listeners;
     }
 
-    @Override
-    public String getTaskClassType() {
-        return taskClassType;
-    }
-
-    public void setTaskClassType(String taskClassType) {
-        this.taskClassType = taskClassType;
-    }
 }

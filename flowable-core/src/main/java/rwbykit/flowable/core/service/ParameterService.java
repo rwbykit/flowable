@@ -1,4 +1,6 @@
 package rwbykit.flowable.core.service;
 
-public interface ParameterService {
+import rwbykit.flowable.core.model.runtime.ParameterInstance;
+
+public interface ParameterService<T extends ParameterInstance> {
 }

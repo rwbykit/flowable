@@ -14,8 +14,8 @@ import rwbykit.flowable.core.service.RuntimeService;
 import rwbykit.flowable.core.util.Objects;
 import rwbykit.flowable.engine.ProcessEngineServiceImpl;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
-import rwbykit.flowable.extension.service.HistoryServiceImpl;
-import rwbykit.flowable.extension.service.RuntimeServiceImpl;
+import rwbykit.flowable.engine.service.HistoryServiceImpl;
+import rwbykit.flowable.engine.service.RuntimeServiceImpl;
 import rwbykit.flowable.parser.ParserFactory;
 import rwbykit.flowable.parser.ParserServiceImpl;
 
@@ -65,7 +65,8 @@ class ConfigurationImpl implements Configuration<ConfigurationImpl> {
     public FlowableFactory getFlowableFactory() {
         CacheManager.setProcessCache(processCache);
         if (Objects.isNull(context)) {
-            context = Context.of(new RuntimeServiceImpl(), new HistoryServiceImpl());
+            // TODO 实例化修改
+            // context = Context.of(new RuntimeServiceImpl(), new HistoryServiceImpl());
         }
         return FlowableFactoryImpl.of(context, new ParserServiceImpl(processPaths), new ProcessEngineServiceImpl());
     }

@@ -1,4 +1,4 @@
-package rwbykit.flowable.extension.runtime.model;
+package rwbykit.flowable.engine.model;
 
 import rwbykit.flowable.core.model.runtime.ProcessInstance;
 
