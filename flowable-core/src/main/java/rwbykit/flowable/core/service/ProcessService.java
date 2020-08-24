@@ -1,4 +1,6 @@
 package rwbykit.flowable.core.service;
 
-public interface ProcessService {
+import rwbykit.flowable.core.model.runtime.ProcessInstance;
+
+public interface ProcessService<T extends ProcessInstance> {
 }

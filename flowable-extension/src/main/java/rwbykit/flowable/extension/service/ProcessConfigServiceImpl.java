@@ -6,6 +6,9 @@ import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.model.parser.QuickSearch;
 import rwbykit.flowable.core.model.parser.Task;
 import rwbykit.flowable.core.service.ProcessConfigService;
+import rwbykit.flowable.core.util.Asserts;
+
+import java.util.Optional;
 
 public class ProcessConfigServiceImpl implements ProcessConfigService {
 
@@ -29,10 +32,21 @@ public class ProcessConfigServiceImpl implements ProcessConfigService {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends Task> T getTask(String nodeId, String taskId) {
         Node node = this.getNode(nodeId);
+        Asserts.nonNull(node, "Not found current node id[{}]!", nodeId);
         return isQuickSearch(node) ? ((QuickSearch) node).search("tasks", taskId) :
-                isAutoNode(node) ? (T) ((AutoNode) node).getTasks().stream().filter(task -> task.getId().equals(taskId)).findFirst().orElse(null) : null;
+                isAutoNode(node) ?
+                        (T) Optional.of(node)
+                                .map(AutoNode.class::cast)
+                                .get()
+                                .getTasks()
+                                .stream()
+                                .filter(task -> task.getId().equals(taskId))
+                                .findFirst()
+                                .orElse(null)
+                        : null;
     }
 
     private static boolean isQuickSearch(Object object) {

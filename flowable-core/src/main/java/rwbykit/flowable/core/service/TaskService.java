@@ -5,7 +5,7 @@ import rwbykit.flowable.core.model.parser.Task;
 
 import java.util.List;
 
-public interface TaskService {
+public interface TaskService<T extends TaskInstance> {
 
     /**
      * 初始化
@@ -13,11 +13,11 @@ public interface TaskService {
      * @param task
      * @return
      */
-    TaskInstance initialize(String nodeInstanceId, Task task);
+    T initialize(String nodeInstanceId, Task task);
 
 
     boolean modifyInstanceStatus(String nodeInstanceId, String status, String errorCode, String errorMessage);
 
 
-    List<TaskInstance> getAllTaskInstances(String nodeInstanceId);
+    List<T> getAllTaskInstances(String nodeInstanceId);
 }
