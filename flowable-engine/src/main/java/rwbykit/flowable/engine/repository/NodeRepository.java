@@ -10,4 +10,6 @@ public interface NodeRepository {
 
     NodeInstanceImpl getByNodeInstanceId(String nodeInstanceId);
 
+    NodeInstanceImpl getByProcessInstanceId(String processInstanceId);
+
 }

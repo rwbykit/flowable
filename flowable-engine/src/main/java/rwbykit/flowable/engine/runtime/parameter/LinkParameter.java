@@ -1,7 +1,6 @@
 package rwbykit.flowable.engine.runtime.parameter;
 
-
-import rwbykit.flowable.core.model.runtime.Approval;
+import rwbykit.flowable.core.model.runtime.ApprovalInstance;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,23 +24,11 @@ public class LinkParameter implements Serializable {
 
     private Map<String, Object> params;
 
-    private List<Approval> approvals;
+    private List<ApprovalInstance> approvalInstances;
 
     private String nodeId;
 
     private String processId;
-
-    LinkParameter(String bizNo, Map<String, Object> params, List<Approval> approvals, String nodeId, String processId) {
-        this.bizNo = bizNo;
-        this.params = params;
-        this.approvals = approvals;
-        this.nodeId = nodeId;
-        this.processId = processId;
-    }
-
-    public static LinkParameterBuilder builder() {
-        return new LinkParameterBuilder();
-    }
 
     public String getBizNo() {
         return bizNo;
@@ -59,12 +46,12 @@ public class LinkParameter implements Serializable {
         this.params = params;
     }
 
-    public List<Approval> getApprovals() {
-        return approvals;
+    public List<ApprovalInstance> getApprovalInstances() {
+        return approvalInstances;
     }
 
-    public void setApprovals(List<Approval> approvals) {
-        this.approvals = approvals;
+    public void setApprovalInstances(List<ApprovalInstance> approvalInstances) {
+        this.approvalInstances = approvalInstances;
     }
 
     public String getNodeId() {
@@ -83,14 +70,18 @@ public class LinkParameter implements Serializable {
         this.processId = processId;
     }
 
-    public static class LinkParameterBuilder {
+    public static LinkParameterBuilder builder() {
+        return new LinkParameterBuilder();
+    }
+
+    public static final class LinkParameterBuilder {
         private String bizNo;
         private Map<String, Object> params;
-        private List<Approval> approvals;
+        private List<ApprovalInstance> approvalInstances;
         private String nodeId;
         private String processId;
 
-        LinkParameterBuilder() {
+        private LinkParameterBuilder() {
         }
 
         public LinkParameterBuilder bizNo(String bizNo) {
@@ -103,8 +94,8 @@ public class LinkParameter implements Serializable {
             return this;
         }
 
-        public LinkParameterBuilder approvals(List<Approval> approvals) {
-            this.approvals = approvals;
+        public LinkParameterBuilder approvalInstances(List<ApprovalInstance> approvalInstances) {
+            this.approvalInstances = approvalInstances;
             return this;
         }
 
@@ -119,11 +110,13 @@ public class LinkParameter implements Serializable {
         }
 
         public LinkParameter build() {
-            return new LinkParameter(bizNo, params, approvals, nodeId, processId);
-        }
-
-        public String toString() {
-            return "LinkParameter.LinkParameterBuilder(bizNo=" + this.bizNo + ", params=" + this.params + ", approvals=" + this.approvals + ", nodeId=" + this.nodeId + ", processId=" + this.processId + ")";
+            LinkParameter linkParameter = new LinkParameter();
+            linkParameter.setBizNo(bizNo);
+            linkParameter.setParams(params);
+            linkParameter.setApprovalInstances(approvalInstances);
+            linkParameter.setNodeId(nodeId);
+            linkParameter.setProcessId(processId);
+            return linkParameter;
         }
     }
 }

@@ -20,7 +20,8 @@ public class NodeNotice {
 
     public NodeNotice(){}
 
-    public NodeNotice(String processId, String processInstanceId, String nodeId, String nodeInstanceId, String nodeName, String nodeType, String nodeStatus, String bizNo) {
+    public NodeNotice(String processId, String processInstanceId, String nodeId, String nodeInstanceId,
+                      String nodeName, String nodeType, String nodeStatus, String bizNo) {
         this.processId = processId;
         this.processInstanceId = processInstanceId;
         this.nodeId = nodeId;
@@ -34,7 +35,6 @@ public class NodeNotice {
     public static NodeNoticeBuilder builder() {
         return new NodeNoticeBuilder();
     }
-
 
     public static class NodeNoticeBuilder {
         private String processId;

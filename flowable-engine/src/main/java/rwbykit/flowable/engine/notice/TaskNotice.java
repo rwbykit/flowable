@@ -19,7 +19,8 @@ public class TaskNotice {
     public TaskNotice() {
     }
 
-    public TaskNotice(String processId, String processInstanceId, String nodeId, String nodeInstanceId, String taskId, String taskName, String taskStatus) {
+    public TaskNotice(String processId, String processInstanceId, String nodeId, String nodeInstanceId,
+                      String taskId, String taskName, String taskStatus) {
         this.processId = processId;
         this.processInstanceId = processInstanceId;
         this.nodeId = nodeId;

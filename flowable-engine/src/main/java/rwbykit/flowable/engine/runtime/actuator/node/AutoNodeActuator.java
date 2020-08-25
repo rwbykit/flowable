@@ -46,7 +46,6 @@ public class AutoNodeActuator extends AbstractNodeActuator {
             }
         }).doOnNext(task -> {
             logger.info(LoggerHelper.actuator_node_startMessage(ctx.get()));
-
             try {
                 ctx.get().addParam(Constants.TASK_ID, task.getId());
                 ctx.set(super.schedule(actuator, ctx.get(), "sync"));

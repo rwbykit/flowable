@@ -1,8 +1,7 @@
-package rwbykit.flowableTemp.core;
+package rwbykit.flowable.core.service;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 流程操作结果集
@@ -23,7 +22,6 @@ public class ProcessResult implements Serializable {
     private String nodeInstId;
     
     private String nextNodeId;
-    
 
     private String nextScheduleMode;
     

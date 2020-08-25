@@ -1,6 +1,7 @@
 package rwbykit.flowable.engine.runtime.parameter;
 
 import rwbykit.flowable.core.model.parser.ValueField;
+import rwbykit.flowable.core.model.runtime.ApprovalInstance;
 import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.Context;
 import rwbykit.flowable.engine.enumeration.FieldType;
@@ -28,10 +29,10 @@ public final class ParameterHelper {
                 .build();
     }
 
-    public final static LinkParameter createLinkParameter(Context context, List<Approval> insApprovals, List<ValueField> valueFields) {
+    public final static LinkParameter createLinkParameter(Context context, List<ApprovalInstance> approvalInstances, List<ValueField> valueFields) {
         return LinkParameter.builder()
                 .bizNo(context.getCurrentInstance().getBizNo())
-                .approvals(insApprovals)
+                .approvalInstances(approvalInstances)
                 .processId(context.getCurrentInstance().getProcessId())
                 .nodeId(context.getCurrentInstance().getNodeId())
                 .params(paramExchange(context, valueFields))

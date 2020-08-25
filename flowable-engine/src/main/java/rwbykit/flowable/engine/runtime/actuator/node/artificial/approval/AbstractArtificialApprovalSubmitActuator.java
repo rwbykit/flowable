@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractArtificialApprovalSubmitActuator implements ArtificialApprovalSubmitActuator {
 
     @Override
-    public ArtificialApprovalSubmitResult execute(Context context) throws FlowableException {
+    public ArtificialApprovalSubmitResult execute(Context context) {
         List<ApprovalInstance> approvalInstances = context.getRuntimeService().getApprovalService().getAllApprovalInstance(context.getCurrentInstance().getNodeInstanceId());
         ArtificialApprovalSubmitResult result = doSubmit(context.getProcessConfigService().getNode(context.getCurrentInstance().getNodeId()), approvalInstances);
         afterSubmitSet(context, approvalInstances);

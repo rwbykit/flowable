@@ -11,21 +11,22 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-public class NotificationHelper {
+public final class NotificationHelper {
 
     private final static Map<String, Notification<?>> NOTIFICATION_MAP = new ConcurrentHashMap<>(8);
 
-    public final static Notification<?> getNotification(String className) {
+    public static Notification<?> getNotification(String className) {
         return NOTIFICATION_MAP.computeIfAbsent(className, (type) -> Objects.newInstance(className));
     }
 
-    public final static List<Notification<?>> getNotifications(List<String> classNames) {
+    public static List<Notification<?>> getNotifications(List<String> classNames) {
         return Collections.nonEmpty(classNames) ?
                 classNames.stream().map(NotificationHelper::getNotification).collect(Collectors.toList()) :
                 Lists.emptyList();
     }
 
-    public final static <T> List<Notification<T>> getNotificationsByType(List<Listener> listeners) {
+    @SuppressWarnings("unchecked")
+    public static <T> List<Notification<T>> getNotificationsByType(List<Listener> listeners) {
         return Collections.nonEmpty(listeners) ?
                 listeners.stream()
                         .map(Listener::getClassType)

@@ -70,4 +70,8 @@ public class Strings {
         return builder.toString();
     }
 
+    public static boolean ignoreCaseCompare(String s1, String s2) {
+        return s1.equalsIgnoreCase(s2);
+    }
+
 }

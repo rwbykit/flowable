@@ -17,4 +17,6 @@ public interface NodeService<T extends NodeInstance> {
 
     boolean modifyInstanceStatus(String nodeInstanceId, String status, String errorCode, String errorMessage);
 
+    T getByProcessInstanceId(String processInstanceId);
+
 }

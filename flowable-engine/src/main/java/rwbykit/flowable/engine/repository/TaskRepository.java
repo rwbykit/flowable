@@ -8,13 +8,11 @@ public interface TaskRepository {
 
     int insert(TaskInstanceImpl taskInstance);
 
-
     int update(TaskInstanceImpl taskInstance);
-
 
     TaskInstanceImpl getByTaskInstanceId(String taskInstanceId);
 
-    List<TaskInstanceImpl> getByNodeInstanceId(String nodeIntanceId);
+    List<TaskInstanceImpl> getByNodeInstanceId(String nodeInstanceId);
 
 }
 

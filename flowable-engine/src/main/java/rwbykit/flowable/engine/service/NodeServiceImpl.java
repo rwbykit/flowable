@@ -46,4 +46,9 @@ public class NodeServiceImpl implements NodeService<NodeInstanceImpl> {
         Asserts.isEquals(record, 1, "Node instance id[{}], The number of affected items is not 1 , modify status failure!", nodeInstanceId);
         return record == 1;
     }
+
+    @Override
+    public NodeInstanceImpl getByProcessInstanceId(String processInstanceId) {
+        return nodeRepository.getByProcessInstanceId(processInstanceId);
+    }
 }
