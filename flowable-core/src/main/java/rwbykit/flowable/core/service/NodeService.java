@@ -19,4 +19,6 @@ public interface NodeService<T extends NodeInstance> {
 
     T getByProcessInstanceId(String processInstanceId);
 
+    T getByNodeInstanceId(String nodeInstanceId);
+
 }

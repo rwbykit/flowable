@@ -41,6 +41,8 @@ public class Constants {
 
     public final static String TYPE_CONSTRUCTOR = "Constructor";
 
+    public final static String DEFAULT = "Default";
+
 
     // 默认的任务池用户编号
     public static String POOL_USER = "PoolUser";
@@ -64,5 +66,21 @@ public class Constants {
 
     // 审批状态-拒绝
     public static String ARRV_RESULT_REFUSE = STATUS_REFUSE;
+
+    /**
+     * 系统默认错误码
+     */
+    public final static String SYSTEM_ERROR_CODE = "999999";
+
+    /**
+     * 系统默认错误信息
+     */
+    public final static String SYSTEM_ERROR_MESSAGE = "System Exception!";
+
+    public final static String NEXT_NODE_ID = "NextNodeId";
+
+    public final static String NEXT_APPROVERS = "NextApprovers";
+
+    public final static String CURRENT_APPROVAL_INSTANCE = "CurrentApprovalInstance";
 
 }

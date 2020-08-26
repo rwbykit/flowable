@@ -51,4 +51,9 @@ public class NodeServiceImpl implements NodeService<NodeInstanceImpl> {
     public NodeInstanceImpl getByProcessInstanceId(String processInstanceId) {
         return nodeRepository.getByProcessInstanceId(processInstanceId);
     }
+
+    @Override
+    public NodeInstanceImpl getByNodeInstanceId(String nodeInstanceId) {
+        return null;
+    }
 }

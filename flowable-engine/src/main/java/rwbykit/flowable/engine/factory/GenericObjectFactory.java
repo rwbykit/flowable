@@ -23,6 +23,9 @@ public class GenericObjectFactory extends GenericFactoryAware {
         return GenericObjectFactory.FactoryHolder.RUNTIME_OBJECT_FACTORY;
     }
 
+    public <I, O, R extends Actuator<I, O>> R getProcessActuator(String processType) {
+        return getActuator(Constants.TYPE_ACTUATOR_PROCESS, processType);
+    }
 
     /**
      * 获取节点执行器

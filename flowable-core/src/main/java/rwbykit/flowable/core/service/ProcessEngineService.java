@@ -58,12 +58,10 @@ public interface ProcessEngineService {
      *
      * @param processInstanceId 流程实例id
      * @param nodeInstanceId    节点实例Id
-     * @param nodeId        节点id
-     * @return
      * @throws FlowableException
      */
 
-    ProcessResult continueProcess(String processInstanceId, String nodeInstanceId, String nodeId) throws FlowableException;
+    ProcessResult continueProcess(String processInstanceId, String nodeInstanceId) throws FlowableException;
 
 
     /**
@@ -72,12 +70,12 @@ public interface ProcessEngineService {
      * @param processInstanceId 当前流程实例
      * @param subProcessId  子流程ID
      * @param initiator     启动者信息
-     * @param extParams     扩展参数
+     * @param params     扩展参数
      * @return
      * @throws FlowableException
      */
 
-    ProcessResult submitSubProcess(String processInstanceId, String subProcessId, Initiator initiator, Map<String, Object> extParams) throws FlowableException;
+    ProcessResult submitSubProcess(String processInstanceId, String subProcessId, Initiator initiator, Map<String, Object> params) throws FlowableException;
 
 
     /**
@@ -125,25 +123,25 @@ public interface ProcessEngineService {
      * 拿回
      *
      * @param processInstanceId      流程实例编号
-     * @param takeBacknodeInstanceId 拿回节点实例号
+     * @param takeBackNodeInstanceId 拿回节点实例号
      * @param takeBackApprover   拿回人
      * @return
      * @throws FlowableException
      */
 
-    ProcessResult takeBack(String processInstanceId, String takeBacknodeInstanceId, Approver takeBackApprover) throws FlowableException;
+    ProcessResult takeBack(String processInstanceId, String takeBackNodeInstanceId, Approver takeBackApprover) throws FlowableException;
 
 
     /**
      * 退回
      *
      * @param processInstanceId        流程实例号
-     * @param returnBacknodeInstanceId 退回节点实例号
+     * @param returnBackNodeInstanceId 退回节点实例号
      * @param returnBackApprover   退回人
      * @return
      * @throws FlowableException
      */
 
-    ProcessResult returnBack(String processInstanceId, String returnBacknodeInstanceId, Approver returnBackApprover) throws FlowableException;
+    ProcessResult returnBack(String processInstanceId, String returnBackNodeInstanceId, Approver returnBackApprover) throws FlowableException;
 }
 

@@ -74,14 +74,14 @@ public final class Context {
     }
 
     public Context newContext(ProcessConfigService processConfigService, Map<String, Object> params) {
-        return newContext(processConfigService, params);
+        return newContext(processConfigService, null, params);
     }
 
     public Context newContext(ProcessConfigService processConfigService, CurrentInstance currentInstance, Map<String, Object> params) {
         Context context = of(this.getRuntimeService(), this.getHistoryService());
         context.temporaryContext.currentInstance = currentInstance;
         context.temporaryContext.processConfigService = processConfigService;
-
+        context.params = params;
         return context;
     }
 

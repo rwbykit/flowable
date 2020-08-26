@@ -68,7 +68,7 @@ class ConfigurationImpl implements Configuration<ConfigurationImpl> {
             // TODO 实例化修改
             // context = Context.of(new RuntimeServiceImpl(), new HistoryServiceImpl());
         }
-        return FlowableFactoryImpl.of(context, new ParserServiceImpl(processPaths), new ProcessEngineServiceImpl());
+        return FlowableFactoryImpl.of(context, new ParserServiceImpl(processPaths));
     }
 
     @Override

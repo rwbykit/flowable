@@ -5,77 +5,58 @@ import java.io.Serializable;
 
 /**
  * 流程操作结果集
- * 
+ *
  * @author Cytus_
- * @since 2018年12月21日 上午11:36:20
  * @version 1.0
+ * @since 2018年12月21日 上午11:36:20
  */
 public class ProcessResult implements Serializable {
-    
+
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
 
-    private String processInstId;
-    
-    private String nodeInstId;
-    
+    private String processInstanceId;
+
+    private String nodeInstanceId;
+
     private String nextNodeId;
 
     private String nextScheduleMode;
-    
-    private boolean result;
-    
+
     protected boolean isSuccess;
-    
+
     protected String errorCode;
-    
+
     protected String errorMessage;
-    
+
     public ProcessResult() {
         super();
     }
-    
-    public ProcessResult(boolean isSuccess, String errorCode, String errorMessage) {
-        this.isSuccess = isSuccess;
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-    }
-    
-    public ProcessResult(boolean result, boolean isSuccess, String errorCode, String errorMessage) {
-        this.isSuccess = isSuccess;
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-        this.result = result;
-    }
-    
-    public final static ProcessResult success() {
-        return new ProcessResult(true, true, null, null);
-    }
-    
-    public final static ProcessResult failure(String errorCode, String errorMsg) {
-        return new ProcessResult(false, false, errorCode, errorMsg);
+
+    public final static ProcessResultBuilder success() {
+        return new ProcessResultBuilder(true, null, null);
     }
 
-    public Boolean getResult() {
-        return this.result;
+    public final static ProcessResultBuilder failure(String errorCode, String errorMsg) {
+        return new ProcessResultBuilder(false, errorCode, errorMsg);
     }
 
-    public String getProcessInstId() {
-        return processInstId;
+    public String getProcessInstanceId() {
+        return processInstanceId;
     }
 
-    public void setProcessInstId(String processInstId) {
-        this.processInstId = processInstId;
+    public void setProcessInstanceId(String processInstanceId) {
+        this.processInstanceId = processInstanceId;
     }
 
-    public String getNodeInstId() {
-        return nodeInstId;
+    public String getNodeInstanceId() {
+        return nodeInstanceId;
     }
 
-    public void setNodeInstId(String nodeInstId) {
-        this.nodeInstId = nodeInstId;
+    public void setNodeInstanceId(String nodeInstanceId) {
+        this.nodeInstanceId = nodeInstanceId;
     }
 
     public String getNextNodeId() {
@@ -85,11 +66,6 @@ public class ProcessResult implements Serializable {
     public void setNextNodeId(String nextNodeId) {
         this.nextNodeId = nextNodeId;
     }
-    
-
-    public void setResult(boolean result) {
-        this.result = result;
-    }
 
     public String getNextScheduleMode() {
         return nextScheduleMode;
@@ -98,14 +74,13 @@ public class ProcessResult implements Serializable {
     public void setNextScheduleMode(String nextScheduleMode) {
         this.nextScheduleMode = nextScheduleMode;
     }
-    
 
     public boolean isSuccess() {
         return isSuccess;
     }
 
-    public void setSuccess(boolean isSuccess) {
-        this.isSuccess = isSuccess;
+    public void setSuccess(boolean success) {
+        isSuccess = success;
     }
 
     public String getErrorCode() {
@@ -123,5 +98,67 @@ public class ProcessResult implements Serializable {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-    
+
+    public static final class ProcessResultBuilder {
+        protected boolean isSuccess;
+        protected String errorCode;
+        protected String errorMessage;
+        private String processInstanceId;
+        private String nodeInstanceId;
+        private String nextNodeId;
+        private String nextScheduleMode;
+
+        ProcessResultBuilder(boolean isSuccess, String errorCode, String errorMessage) {
+            this.isSuccess = isSuccess;
+            this.errorCode = errorCode;
+            this.errorMessage = errorMessage;
+        }
+
+        public ProcessResultBuilder processInstanceId(String processInstanceId) {
+            this.processInstanceId = processInstanceId;
+            return this;
+        }
+
+        public ProcessResultBuilder nodeInstanceId(String nodeInstanceId) {
+            this.nodeInstanceId = nodeInstanceId;
+            return this;
+        }
+
+        public ProcessResultBuilder nextNodeId(String nextNodeId) {
+            this.nextNodeId = nextNodeId;
+            return this;
+        }
+
+        public ProcessResultBuilder nextScheduleMode(String nextScheduleMode) {
+            this.nextScheduleMode = nextScheduleMode;
+            return this;
+        }
+
+        public ProcessResultBuilder isSuccess(boolean isSuccess) {
+            this.isSuccess = isSuccess;
+            return this;
+        }
+
+        public ProcessResultBuilder errorCode(String errorCode) {
+            this.errorCode = errorCode;
+            return this;
+        }
+
+        public ProcessResultBuilder errorMessage(String errorMessage) {
+            this.errorMessage = errorMessage;
+            return this;
+        }
+
+        public ProcessResult build() {
+            ProcessResult processResult = new ProcessResult();
+            processResult.setProcessInstanceId(processInstanceId);
+            processResult.setNodeInstanceId(nodeInstanceId);
+            processResult.setNextNodeId(nextNodeId);
+            processResult.setNextScheduleMode(nextScheduleMode);
+            processResult.setErrorCode(errorCode);
+            processResult.setErrorMessage(errorMessage);
+            processResult.isSuccess = this.isSuccess;
+            return processResult;
+        }
+    }
 }

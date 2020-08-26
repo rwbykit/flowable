@@ -7,6 +7,7 @@ import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.service.ProcessConfigService;
 import rwbykit.flowable.core.service.ProcessEngineService;
 import rwbykit.flowable.core.service.ProcessParseService;
+import rwbykit.flowable.engine.ProcessEngineServiceImpl;
 import rwbykit.flowable.engine.service.ProcessConfigServiceImpl;
 
 public class FlowableFactoryImpl implements FlowableFactory {
@@ -15,14 +16,14 @@ public class FlowableFactoryImpl implements FlowableFactory {
     private ProcessParseService processParseService;
     private ProcessEngineService processEngineService;
 
-    private FlowableFactoryImpl(Context context, ProcessParseService processParseService, ProcessEngineService processEngineService) {
+    private FlowableFactoryImpl(Context context, ProcessParseService processParseService) {
         this.context = context;
         this.processParseService = processParseService;
-        this.processEngineService = processEngineService;
+        this.processEngineService = new ProcessEngineServiceImpl(this);
     }
 
-    public static FlowableFactoryImpl of(Context context, ProcessParseService processParseService, ProcessEngineService processEngineService) {
-        return new FlowableFactoryImpl(context, processParseService, processEngineService);
+    public static FlowableFactoryImpl of(Context context, ProcessParseService processParseService) {
+        return new FlowableFactoryImpl(context, processParseService);
     }
 
     @Override

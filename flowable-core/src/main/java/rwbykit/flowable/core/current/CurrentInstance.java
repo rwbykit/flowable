@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.enumeration.Phase;
+import rwbykit.flowable.core.model.runtime.ProcessInstance;
 
 import java.util.Objects;
 
@@ -33,6 +34,11 @@ public class CurrentInstance {
         this.process = process;
         this.bizNo = bizNo;
         this.initiator = initiator;
+    }
+
+    public final static CurrentInstance of(Initiator initiator, String bizNo, ProcessInstance processInstance) {
+        return of(initiator, bizNo, CurrentProcess.of(processInstance.getProcessId(), processInstance.getProcessInstanceId(),
+                processInstance.getMainProcessInstanceId(), processInstance.getProcessStatus()));
     }
 
     public final static CurrentInstance of(Initiator initiator, String bizNo, CurrentProcess process) {

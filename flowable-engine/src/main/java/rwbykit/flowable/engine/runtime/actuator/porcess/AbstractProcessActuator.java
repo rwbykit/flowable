@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class AbstractProcessActuator extends AbstractActuator<ProcessNotice> {
 
     @Override
-    public List<? extends Notification<ProcessNotice>> getNotifications(Context context) {
+    protected List<? extends Notification<ProcessNotice>> getNotifications(Context context) {
         Process process = context.getProcessConfigService().getProcess();
         return NotificationHelper.getNotificationsByType(process.getListeners());
     }

@@ -1,6 +1,6 @@
 package rwbykit.flowable.core.current;
 
-class CurrentProcess {
+public class CurrentProcess {
 
     private String processId;
 

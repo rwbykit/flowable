@@ -70,7 +70,7 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
      * @return
      * @throws FlowableException
      */
-    public abstract Context doExecute(Context context) throws FlowableException;
+    protected abstract Context doExecute(Context context) throws FlowableException;
 
     /**
      * 获得配置的监听器
@@ -79,7 +79,7 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
      * @return
      * @throws FlowableException
      */
-    public abstract List<? extends Notification<Notify>> getNotifications(Context context);
+    protected abstract List<? extends Notification<Notify>> getNotifications(Context context);
 
     /**
      * 前通知
