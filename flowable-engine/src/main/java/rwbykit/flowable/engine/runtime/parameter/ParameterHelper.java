@@ -5,7 +5,6 @@ import rwbykit.flowable.core.model.runtime.ApprovalInstance;
 import rwbykit.flowable.core.util.Collections;
 import rwbykit.flowable.core.Context;
 import rwbykit.flowable.engine.enumeration.FieldType;
-import rwbykit.flowable.core.model.runtime.Approval;
 import rwbykit.flowableTemp.core.util.FlowableHelper;
 
 import java.util.HashMap;

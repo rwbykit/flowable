@@ -32,7 +32,7 @@ public class ArtificialNodeActuator extends AbstractNodeActuator {
     private final static Logger logger = LoggerFactory.getLogger(ArtificialNodeActuator.class);
 
     @Override
-    public Context nodeExecute(Context context) throws FlowableException {
+    public Context doExecute(Context context) throws FlowableException {
         String status = context.getCurrentInstance().getNodeStatus();
         try {
             // 第一次进入人工处理，仅用计算审批人员信息即可

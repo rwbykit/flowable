@@ -19,7 +19,7 @@ public class EndNodeActuator extends AbstractNodeActuator {
     private final static Logger logger = LoggerFactory.getLogger(EndNodeActuator.class);
 
     @Override
-    public Context nodeExecute(Context context) {
+    public Context doExecute(Context context) {
         logger.info("流程实例[{}], 结束节点执行开始!", context.getCurrentInstance().getProcessInstanceId());
         context.getCurrentInstance().setNodeStatus(Constants.STATUS_END);
         logger.info("流程实例[{}], 结束节点执行结束!", context.getCurrentInstance().getProcessInstanceId());

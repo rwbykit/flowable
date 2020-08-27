@@ -6,8 +6,10 @@ import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.core.annotation.Type;
+import rwbykit.flowable.core.util.Asserts;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
 import rwbykit.flowable.engine.runtime.actuator.node.AbstractNodeActuator;
+import rwbykit.flowable.engine.runtime.selector.NodeSelector;
 
 /**
  * 流程处理器
@@ -27,7 +29,7 @@ public class ProcessActuator extends AbstractProcessActuator {
         try {
             AbstractNodeActuator nodeActuator = GenericObjectFactory.factory().getNodeActuator(null);
             logger.info("流程[{}], 流程实例[{}]调用开始", context.getCurrentInstance().getProcessId(), context.getCurrentInstance().getProcessInstanceId());
-            context = super.schedule(nodeActuator::execute, context, "sync");
+            context = super.schedule(nodeActuator::execute, context);
             logger.info("流程[{}], 流程实例[{}]调用结束", context.getCurrentInstance().getProcessId(), context.getCurrentInstance().getProcessInstanceId());
 
         } catch (Exception e) {
@@ -36,5 +38,6 @@ public class ProcessActuator extends AbstractProcessActuator {
 
         return context;
     }
+
 
 }

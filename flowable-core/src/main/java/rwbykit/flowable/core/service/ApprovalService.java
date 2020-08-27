@@ -1,6 +1,5 @@
 package rwbykit.flowable.core.service;
 
-import rwbykit.flowable.core.model.runtime.Approval;
 import rwbykit.flowable.core.model.runtime.ApprovalInstance;
 import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.util.Lists;

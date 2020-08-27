@@ -7,7 +7,6 @@ package rwbykit.flowable.core.model.parser;
  */
 public interface ViewPage {
 
-    public String getPath();
-
+    String getPath();
 
 }

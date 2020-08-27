@@ -32,7 +32,7 @@ public class AutoNodeActuator extends AbstractNodeActuator {
     private final static Logger logger = LoggerFactory.getLogger(AutoNodeActuator.class);
 
     @Override
-    public Context nodeExecute(Context context) throws FlowableException {
+    public Context doExecute(Context context) throws FlowableException {
         AbstractTaskActuator actuator = GenericObjectFactory.factory().getTaskActuator(TaskType.DEFAULT.toString());
         AtomicReference<Context> ctx = new AtomicReference<>(context);
         Observable.create((ObservableOnSubscribe<Task>) emitter -> {
@@ -48,7 +48,7 @@ public class AutoNodeActuator extends AbstractNodeActuator {
             logger.info(LoggerHelper.actuator_node_startMessage(ctx.get()));
             try {
                 ctx.get().addParam(Constants.TASK_ID, task.getId());
-                ctx.set(super.schedule(actuator, ctx.get(), "sync"));
+                ctx.set(super.schedule(actuator, ctx.get()));
             } catch (Exception e) {
                 this.handleException(ctx.get(), Phase.TASK, e);
             }

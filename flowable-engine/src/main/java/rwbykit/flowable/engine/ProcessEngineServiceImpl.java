@@ -13,11 +13,14 @@ import rwbykit.flowable.core.model.parser.Process;
 import rwbykit.flowable.core.model.runtime.ApprovalInstance;
 import rwbykit.flowable.core.model.runtime.Approver;
 import rwbykit.flowable.core.model.runtime.NodeInstance;
+import rwbykit.flowable.core.model.runtime.ParameterInstance;
 import rwbykit.flowable.core.model.runtime.ProcessInstance;
 import rwbykit.flowable.core.service.ProcessEngineService;
 import rwbykit.flowable.core.service.ProcessResult;
 import rwbykit.flowable.core.util.Asserts;
 import rwbykit.flowable.core.util.Collections;
+import rwbykit.flowable.core.util.Datetimes;
+import rwbykit.flowable.core.util.Ids;
 import rwbykit.flowable.core.util.Objects;
 import rwbykit.flowable.core.util.Strings;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
@@ -59,12 +62,20 @@ public class ProcessEngineServiceImpl implements ProcessEngineService {
     }
 
     @Override
-    public ProcessResult initializeAndSubmit(String processId, String bizNo, Initiator initiator, Map<String, Object> params) {
+    public ProcessResult initializeAndSubmit(String processId, String bizNo, Initiator initiator, List<Approver> nextApprovers, Map<String, Object> params) throws FlowableException {
         ProcessResult result = this.initialize(processId, bizNo, initiator, params);
         if (!result.isSuccess()) {
             return result;
         }
-        return null;
+        return submit(result.getProcessInstanceId(), null, null, nextApprovers,
+                ApprovalInstance.Approval.builder()
+                        .approvalInstanceId(Ids.getId())
+                        .completed(Constants.COMMMON_YESNO_YES)
+                        .conclusion(Constants.ARRV_RESULT_PASS)
+                        .approver(Approver.of(initiator.getCode(), initiator.getName(), initiator.getDetails()))
+                        .opinion(Constants.ARRV_RESULT_PASS)
+                        .optime(Datetimes.formatByDefault())
+                        .build(), params);
     }
 
     @Override
@@ -76,10 +87,14 @@ public class ProcessEngineServiceImpl implements ProcessEngineService {
         context.setCurrentInstance(CurrentInstance.of(processInstance.getInitiator(), processInstance.getBizNo(), processInstance));
         NodeInstance nodeInstance;
         if (Strings.nonEmpty(nodeInstanceId)) {
-            nodeInstance = this.flowableFactory.getContext().getRuntimeService().getNodeService().getByNodeInstanceId(nodeInstanceId);
-
+            nodeInstance = context.getRuntimeService().getNodeService().getByNodeInstanceId(nodeInstanceId);
         } else {
-            nodeInstance = this.flowableFactory.getContext().getRuntimeService().getNodeService().getByProcessInstanceId(processInstanceId);
+            nodeInstance = context.getRuntimeService().getNodeService().getByProcessInstanceId(processInstanceId);
+        }
+
+        ParameterInstance parameterInstance = context.getRuntimeService().getParameterService().getByProcessInstanceId(processInstanceId);
+        if (Objects.nonNull(parameterInstance)) {
+            // TODO 参数初始化
         }
 
         if (Objects.nonNull(nodeInstance)) {
@@ -99,7 +114,7 @@ public class ProcessEngineServiceImpl implements ProcessEngineService {
 
         AbstractProcessActuator processActuator = GenericObjectFactory.factory().getProcessActuator(Constants.DEFAULT);
         context = processActuator.execute(context);
-        return null;
+        return convertContext(context);
     }
 
     @Override
@@ -134,6 +149,10 @@ public class ProcessEngineServiceImpl implements ProcessEngineService {
 
     @Override
     public ProcessResult returnBack(String processInstanceId, String returnBackNodeInstanceId, Approver returnBackApprover) throws FlowableException {
+        return null;
+    }
+
+    protected ProcessResult convertContext(Context context) {
         return null;
     }
 

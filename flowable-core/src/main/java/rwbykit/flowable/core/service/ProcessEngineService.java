@@ -33,7 +33,7 @@ public interface ProcessEngineService {
      * @return
      * @throws FlowableException
      */
-    ProcessResult initializeAndSubmit(String processId, String bizNo, Initiator initiator, Map<String, Object> params) throws FlowableException;
+    ProcessResult initializeAndSubmit(String processId, String bizNo, Initiator initiator, List<Approver> nextApprovers, Map<String, Object> params) throws FlowableException;
 
 
     /**

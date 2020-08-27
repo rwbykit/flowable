@@ -15,8 +15,3 @@ public interface TaskRepository {
     List<TaskInstanceImpl> getByNodeInstanceId(String nodeInstanceId);
 
 }
-
-
-
-
-

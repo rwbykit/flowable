@@ -3,6 +3,7 @@ package rwbykit.flowable.engine.runtime.actuator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rwbykit.flowable.core.Actuator;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.core.Notification;
@@ -23,15 +24,16 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
     private final static Logger logger = LoggerFactory.getLogger(AbstractActuator.class);
 
     @Override
-    public Context execute(Context context) throws FlowableException {
-        beforeNotify(context);
+    public final Context execute(Context context) throws FlowableException {
+        prepare(context);
         try {
-            context = doExecute(context);
+            context = this.schedule(this::doExecute, context);
         } catch (Exception e) {
-            exceptionNotify(context, e);
-            throw handleException(e);
+            exception(context, e);
+        } finally {
+            terminate(context);
         }
-        afterNotify(context);
+        completed(context);
         return context;
     }
 
@@ -120,9 +122,28 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
      */
     protected abstract Notify assembleNotify(Context context);
 
-    protected Context schedule(Actuator<Context, Context> actuator, Context context, String schedulerType) throws FlowableException {
-        AbstractProcessScheduler scheduler = GenericObjectFactory.factory().getScheduler(schedulerType);
+    protected Context schedule(Actuator<Context, Context> actuator, Context context) throws FlowableException {
+        AbstractProcessScheduler scheduler = GenericObjectFactory.factory().getScheduler(getSchedulerType(context));
         return scheduler.schedule(actuator, context);
+    }
+
+    protected String getSchedulerType(Context context) {
+        return Constants.SCHEDULER_TYPE_SYNC;
+    }
+
+    protected void prepare(Context context) {
+        beforeNotify(context);
+    }
+
+    protected void completed(Context context) {
+        afterNotify(context);
+    }
+
+    protected void exception(Context context, Exception exception) throws FlowableException {
+        exceptionNotify(context, exception);
+    }
+
+    protected void terminate(Context context) {
     }
 
 }

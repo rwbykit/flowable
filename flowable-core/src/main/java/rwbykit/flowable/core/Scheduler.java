@@ -1,7 +1,5 @@
 package rwbykit.flowable.core;
 
-import rwbykit.flowable.core.FlowableException;
-
 /**
  * 调度器
  * @param <In> 入参

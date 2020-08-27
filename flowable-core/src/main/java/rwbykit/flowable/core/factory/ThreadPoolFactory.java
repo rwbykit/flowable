@@ -3,7 +3,7 @@ package rwbykit.flowable.core.factory;
 
 import java.util.concurrent.Executor;
 
-public class ThreadPoolFactory {
+public class  ThreadPoolFactory {
 
     public final static ThreadPoolFactory factory() {
         return null;

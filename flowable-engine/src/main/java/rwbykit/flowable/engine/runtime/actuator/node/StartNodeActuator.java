@@ -19,7 +19,7 @@ public class StartNodeActuator extends AbstractNodeActuator {
     private static final Logger logger = LoggerFactory.getLogger(StartNodeActuator.class);
 
     @Override
-    public Context nodeExecute(Context context) {
+    public Context doExecute(Context context) {
         logger.info("流程实例[{}], 开始节点执行开始!", context.getCurrentInstance().getProcessInstanceId());
         context.getCurrentInstance().setNodeStatus(Constants.STATUS_END);
         logger.info("流程实例[{}], 开始节点执行结束!", context.getCurrentInstance().getProcessInstanceId());

@@ -8,4 +8,6 @@ public interface ParameterService<T extends ParameterInstance> {
 
     T initialize(String processInstanceId, Map<String, Object> params);
 
+    T getByProcessInstanceId(String processInstanceId);
+
 }

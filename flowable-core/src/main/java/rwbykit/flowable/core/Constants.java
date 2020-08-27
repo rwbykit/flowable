@@ -44,6 +44,16 @@ public class Constants {
     public final static String DEFAULT = "Default";
 
 
+
+    public final static String TYPE_SELECTOR_NODE = "NodeSelector";
+
+    public final static String SCHEDULER_TYPE_SYNC = "Sync";
+    public final static String SCHEDULER_TYPE_ASYNC = "Async";
+
+    public final static String TYPE_NODE_AUTO = "Auto";
+
+
+
     // 默认的任务池用户编号
     public static String POOL_USER = "PoolUser";
 

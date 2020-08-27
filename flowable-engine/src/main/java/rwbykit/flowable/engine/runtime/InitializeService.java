@@ -2,10 +2,8 @@ package rwbykit.flowable.engine.runtime;
 
 import rwbykit.flowable.core.Context;
 
-public interface InstanceService {
+public interface InitializeService {
 
     void initialize(Context context);
-
-    void afterSet(Context context);
 
 }

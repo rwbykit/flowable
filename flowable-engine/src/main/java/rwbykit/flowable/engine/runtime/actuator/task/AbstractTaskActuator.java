@@ -13,7 +13,7 @@ import rwbykit.flowable.core.factory.ThreadPoolFactory;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
 import rwbykit.flowable.engine.notice.NotificationHelper;
 import rwbykit.flowable.engine.notice.TaskNotice;
-import rwbykit.flowable.engine.runtime.InstanceService;
+import rwbykit.flowable.engine.runtime.InitializeService;
 import rwbykit.flowable.engine.runtime.actuator.AbstractActuator;
 import rwbykit.flowable.core.current.CurrentInstance;
 import rwbykit.flowable.core.model.runtime.TaskInstance;
@@ -34,7 +34,7 @@ import java.util.concurrent.Callable;
  * @version 1.0
  * @since 2018年12月17日 上午10:37:37
  */
-public abstract class AbstractTaskActuator extends AbstractActuator<TaskNotice> implements InstanceService {
+public abstract class AbstractTaskActuator extends AbstractActuator<TaskNotice> implements InitializeService {
 
     @Override
     public Context doExecute(Context context) throws FlowableException {
@@ -131,7 +131,6 @@ public abstract class AbstractTaskActuator extends AbstractActuator<TaskNotice> 
         context.getCurrentInstance().setCurrentTask(task.getId(), taskInstance.getTaskInstanceId(), taskInstance.getTaskStatus());
     }
 
-    @Override
     public void afterSet(Context context) {
         context.getRuntimeService().getTaskService().modifyInstanceStatus(context.getCurrentInstance().getTaskInstanceId(),
                 context.getCurrentInstance().getTaskStatus(), context.getCurrentInstance().errorCode(), context.getCurrentInstance().errorMessage());

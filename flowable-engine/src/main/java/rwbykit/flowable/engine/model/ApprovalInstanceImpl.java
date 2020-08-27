@@ -1,7 +1,11 @@
-package rwbykit.flowable.core.model.runtime;
+package rwbykit.flowable.engine.model;
 
-public class Approval {
+import rwbykit.flowable.core.model.runtime.ApprovalInstance;
+import rwbykit.flowable.core.model.runtime.Approver;
 
+public class ApprovalInstanceImpl implements ApprovalInstance {
+
+    private String approvalInstanceId;
 
     /**
      * 审批人信息
@@ -39,6 +43,7 @@ public class Approval {
     private String optime;
 
 
+    @Override
     public Approver getApprovers() {
         return approvers;
     }
@@ -55,6 +60,7 @@ public class Approval {
         this.processInstanceId = processInstanceId;
     }
 
+    @Override
     public String getNodeInstanceId() {
         return nodeInstanceId;
     }
@@ -63,6 +69,7 @@ public class Approval {
         this.nodeInstanceId = nodeInstanceId;
     }
 
+    @Override
     public String getOpinion() {
         return opinion;
     }
@@ -71,6 +78,7 @@ public class Approval {
         this.opinion = opinion;
     }
 
+    @Override
     public String getConclusion() {
         return conclusion;
     }
@@ -79,6 +87,7 @@ public class Approval {
         this.conclusion = conclusion;
     }
 
+    @Override
     public String getCompleted() {
         return completed;
     }
@@ -87,6 +96,7 @@ public class Approval {
         this.completed = completed;
     }
 
+    @Override
     public String getOptime() {
         return optime;
     }
@@ -94,4 +104,15 @@ public class Approval {
     public void setOptime(String optime) {
         this.optime = optime;
     }
+
+    @Override
+    public String getApprovalInstanceId() {
+        return this.approvalInstanceId;
+    }
+
+    public void setApprovalInstanceId(String approvalInstanceId) {
+        this.approvalInstanceId = approvalInstanceId;
+    }
+
+
 }
