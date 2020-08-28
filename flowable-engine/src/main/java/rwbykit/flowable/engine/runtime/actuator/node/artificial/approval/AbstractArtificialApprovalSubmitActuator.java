@@ -23,7 +23,7 @@ public abstract class AbstractArtificialApprovalSubmitActuator implements Artifi
 
     protected void afterSubmitSet(Context context, List<ApprovalInstance> listApprovalInstance) {
         List<ApprovalInstance> nonSubmitted = listApprovalInstance.stream()
-                .filter(instance -> Constants.COMMON_YESNO_NO.equals(instance.getSubmitted()))
+                .filter(instance -> Constants.COMMON_YESNO_NO.equals(instance.getCompleted()))
                 .collect(Collectors.toList());
         context.getRuntimeService().getApprovalService().exclude(nonSubmitted);
     }

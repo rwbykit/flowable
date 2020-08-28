@@ -13,7 +13,7 @@ import rwbykit.flowable.core.Context;
  * @version 1.0
  * @since 2018年12月17日 上午8:51:25
  */
-@Type(category = Constants.TYPE_ACTUATOR_NODE, type = "End")
+@Type(category = Constants.CATEGORY_ACTUATOR_NODE, type = Constants.TYPE_NODE_END)
 public class EndNodeActuator extends AbstractNodeActuator {
 
     private final static Logger logger = LoggerFactory.getLogger(EndNodeActuator.class);

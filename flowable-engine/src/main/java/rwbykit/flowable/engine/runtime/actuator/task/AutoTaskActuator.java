@@ -17,7 +17,7 @@ import rwbykit.flowable.core.FlowableException;
 public class AutoTaskActuator extends AbstractTaskActuator {
 
     @Override
-    public Context taskExecute(Context context) throws FlowableException {
+    public Context doExecute(Context context) throws FlowableException {
         return super.taskExecute(context);
     }
 

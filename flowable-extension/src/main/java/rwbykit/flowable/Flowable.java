@@ -21,8 +21,8 @@ import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.Approv
 import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.IntersectionApproverPolymerizationCalculator;
 import rwbykit.flowable.engine.runtime.calculator.approver.polymerization.UnionApproverPolymerizationCalculator;
 import rwbykit.flowable.engine.runtime.runner.InvokeClassRunner;
-import rwbykit.flowable.engine.runtime.scheduler.AsyncProcessScheduler;
-import rwbykit.flowable.engine.runtime.scheduler.SyncProcessScheduler;
+import rwbykit.flowable.engine.runtime.scheduler.AsyncActuatorScheduler;
+import rwbykit.flowable.engine.runtime.scheduler.SyncActuatorScheduler;
 import rwbykit.flowable.engine.runtime.selector.TaskSelector;
 import rwbykit.flowable.extension.calculator.approver.AppointApproverCalculator;
 import rwbykit.flowable.extension.calculator.approver.CompeteApproverCalculator;
@@ -122,8 +122,8 @@ public final class Flowable {
             registerObject(registerObject, Lists.newArrayList(DefaultApproverTaskPoolCalculator.class));
 
             // register scheduler
-            registerObject(registerObject, Lists.newArrayList(AsyncProcessScheduler.class,
-                    SyncProcessScheduler.class));
+            registerObject(registerObject, Lists.newArrayList(AsyncActuatorScheduler.class,
+                    SyncActuatorScheduler.class));
 
             // register selector
             registerObject(registerObject, Lists.newArrayList(TaskSelector.class));

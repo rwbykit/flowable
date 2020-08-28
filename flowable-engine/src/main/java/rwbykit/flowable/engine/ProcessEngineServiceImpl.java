@@ -109,7 +109,7 @@ public class ProcessEngineServiceImpl implements ProcessEngineService {
         }
 
         if (Objects.nonNull(currentApprovalInstance)) {
-            context.addParam(Constants.CURRENT_APPROVAL_INSTANCE, currentApprovalInstance);
+            context.addParam(Constants.INSTANCE_APPROVAL, currentApprovalInstance);
         }
 
         AbstractProcessActuator processActuator = GenericObjectFactory.factory().getProcessActuator(Constants.DEFAULT);

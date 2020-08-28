@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @version 1.0
  * @since 2018年12月27日 下午2:35:43
  */
-@Type(category = Constants.TYPE_ACTUATOR_NODE, type = "Auto")
+@Type(category = Constants.CATEGORY_ACTUATOR_NODE, type = Constants.TYPE_NODE_AUTO)
 public class AutoNodeActuator extends AbstractNodeActuator {
 
     private final static Logger logger = LoggerFactory.getLogger(AutoNodeActuator.class);
@@ -48,7 +48,7 @@ public class AutoNodeActuator extends AbstractNodeActuator {
             logger.info(LoggerHelper.actuator_node_startMessage(ctx.get()));
             try {
                 ctx.get().addParam(Constants.TASK_ID, task.getId());
-                ctx.set(super.schedule(actuator, ctx.get()));
+                ctx.set(super.schedule(actuator, ctx.get(), this.getSupportedType()));
             } catch (Exception e) {
                 this.handleException(ctx.get(), Phase.TASK, e);
             }

@@ -18,6 +18,6 @@ public interface Selector<In, Out> {
      * @return
      * @throws FlowableException
      */
-    Out select(In in);
+    Out select(In in) throws FlowableException;
 
 }

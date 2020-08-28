@@ -7,6 +7,7 @@ import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.core.Notification;
 import rwbykit.flowable.core.Selector;
+import rwbykit.flowable.core.enumeration.Phase;
 import rwbykit.flowable.core.factory.ThreadPoolFactory;
 import rwbykit.flowable.core.model.parser.Node;
 import rwbykit.flowable.core.model.parser.Process;
@@ -72,7 +73,7 @@ public abstract class AbstractProcessActuator extends AbstractActuator<ProcessNo
         if (Objects.nonNull(node) && Strings.ignoreCaseCompare(node.getType(), Constants.TYPE_NODE_AUTO)) {
             ThreadPoolFactory.factory().addRunnable(() -> {
                 try {
-                    super.schedule(this, context.cloneContext());
+                    super.schedule(this, context.cloneContext(), Phase.PROCESS);
                 } catch (FlowableException e) {
                     logger.error(e.getMessage(), e);
                 }
@@ -84,8 +85,12 @@ public abstract class AbstractProcessActuator extends AbstractActuator<ProcessNo
     protected String getSchedulerType(Context context) {
         Node node = context.getProcessConfigService().getNode(context.getParam(Constants.NODE_ID));
         return Objects.nonNull(node) && Strings.ignoreCaseCompare(node.getType(), Constants.TYPE_NODE_AUTO) ?
-                Constants.SCHEDULER_TYPE_ASYNC : Constants.SCHEDULER_TYPE_SYNC;
+                Constants.TYPE_SCHEDULER_ASYNC : Constants.TYPE_SCHEDULER_SYNC;
     }
 
+    @Override
+    public final Phase getSupportedType() {
+        return Phase.PROCESS;
+    }
 
 }

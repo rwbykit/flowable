@@ -2,10 +2,12 @@ package rwbykit.flowable.engine.runtime.actuator.node.artificial.approval;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.FlowableRuntimeException;
 import rwbykit.flowable.core.factory.support.GenericFactoryAware;
 import rwbykit.flowable.core.util.Asserts;
 import rwbykit.flowable.core.util.Collections;
+import rwbykit.flowable.core.util.Lists;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,35 +15,34 @@ import java.util.stream.Collectors;
 
 
 /**
- * 
  * 人工审批提交服务工厂
- * 
- * @author Cytus_
- * @since 2018年6月26日 下午2:14:20
- * @version 1.0
  *
+ * @author Cytus_
+ * @version 1.0
+ * @since 2018年6月26日 下午2:14:20
  */
 public class ArtificialApprovalSubmitServiceFactory extends GenericFactoryAware {
-    
+
     private final static Logger logger = LoggerFactory.getLogger(ArtificialApprovalSubmitServiceFactory.class);
-    
+
     private static ArtificialApprovalSubmitActuator defaultSubmitActuator = null;
-    
+
     private static class ArtificialApprovalSubmitServiceFactoryHolder {
         private static final ArtificialApprovalSubmitServiceFactory FACTORY = new ArtificialApprovalSubmitServiceFactory();
     }
-    
+
     private ArtificialApprovalSubmitServiceFactory() {
-        
-        
-    } 
+
+
+    }
 
     public final static ArtificialApprovalSubmitServiceFactory factory() {
         return ArtificialApprovalSubmitServiceFactoryHolder.FACTORY;
     }
-    
+
     /**
      * 获取审批类型提交处理
+     *
      * @param approverType 审批类型
      * @return
      * @throws
@@ -55,9 +56,9 @@ public class ArtificialApprovalSubmitServiceFactory extends GenericFactoryAware 
             }
             actuator = defaultSubmitActuator;
         }
-       return actuator;
+        return actuator;
     }
-    
+
     /**
      * 初始化defaultServiceBeanName
      */
@@ -76,5 +77,14 @@ public class ArtificialApprovalSubmitServiceFactory extends GenericFactoryAware 
             throw new FlowableRuntimeException();
         }
     }
-    
+
+    public List<ApprovalSubmitPostProcessor> getApprovalSubmitPostProcessors(String nodeId) {
+        List<ApprovalSubmitPostProcessor> postProcessors = this.getObjectFactory().getAllType(Constants.CATEGORY_APPROVAL_SUBMIT_POST_PROCESSOR);
+        return Collections.nonEmpty(postProcessors) ?
+                postProcessors.stream()
+                        .filter(postProcessor -> postProcessor.isSupported(nodeId))
+                        .collect(Collectors.toList()) : Lists.emptyList();
+
+    }
+
 }

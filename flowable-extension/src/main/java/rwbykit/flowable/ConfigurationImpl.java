@@ -12,10 +12,8 @@ import rwbykit.flowable.core.factory.support.RegisteredObjectFactory;
 import rwbykit.flowable.core.service.HistoryService;
 import rwbykit.flowable.core.service.RuntimeService;
 import rwbykit.flowable.core.util.Objects;
-import rwbykit.flowable.engine.ProcessEngineServiceImpl;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
-import rwbykit.flowable.engine.service.HistoryServiceImpl;
-import rwbykit.flowable.engine.service.RuntimeServiceImpl;
+import rwbykit.flowable.engine.runtime.actuator.node.artificial.approval.ArtificialApprovalSubmitServiceFactory;
 import rwbykit.flowable.parser.ParserFactory;
 import rwbykit.flowable.parser.ParserServiceImpl;
 
@@ -56,6 +54,7 @@ class ConfigurationImpl implements Configuration<ConfigurationImpl> {
         this.objectFactory = new RegisteredObjectFactory(registerObject);
         GenericObjectFactory.factory().setObjectFactory(this.objectFactory);
         ParserFactory.factory().setObjectFactory(this.objectFactory);
+        ArtificialApprovalSubmitServiceFactory.factory().setObjectFactory(this.objectFactory);
         this.processPaths = new String[]{"classpath*:process/*.xml"};
         this.processCache = new MemoryProcessCache();
         return this;

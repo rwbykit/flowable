@@ -1,5 +1,7 @@
 package rwbykit.flowable.core;
 
+import rwbykit.flowable.core.enumeration.Phase;
+
 /**
  * 调度器
  * @param <In> 入参
@@ -18,6 +20,6 @@ public interface Scheduler<In, O, Out> {
      * @return
      * @throws FlowableException
      */
-    Out schedule(O object, In in) throws FlowableException;
+    Out schedule(O object, In in, Phase phase) throws FlowableException;
     
 }

@@ -7,9 +7,10 @@ import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.core.Notification;
+import rwbykit.flowable.core.TypesSupported;
 import rwbykit.flowable.core.enumeration.Phase;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
-import rwbykit.flowable.engine.runtime.scheduler.AbstractProcessScheduler;
+import rwbykit.flowable.engine.runtime.scheduler.AbstractActuatorScheduler;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * @version 1.0
  * @since 2018年12月18日 上午8:28:13
  */
-public abstract class AbstractActuator<Notify> implements Actuator<Context, Context> {
+public abstract class AbstractActuator<Notify> implements Actuator<Context, Context>, TypesSupported<Phase> {
 
     private final static Logger logger = LoggerFactory.getLogger(AbstractActuator.class);
 
@@ -27,7 +28,7 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
     public final Context execute(Context context) throws FlowableException {
         prepare(context);
         try {
-            context = this.schedule(this::doExecute, context);
+            context = this.schedule(this::doExecute, context, getSupportedType());
         } catch (Exception e) {
             exception(context, e);
         } finally {
@@ -122,13 +123,13 @@ public abstract class AbstractActuator<Notify> implements Actuator<Context, Cont
      */
     protected abstract Notify assembleNotify(Context context);
 
-    protected Context schedule(Actuator<Context, Context> actuator, Context context) throws FlowableException {
-        AbstractProcessScheduler scheduler = GenericObjectFactory.factory().getScheduler(getSchedulerType(context));
-        return scheduler.schedule(actuator, context);
+    protected Context schedule(Actuator<Context, Context> actuator, Context context, Phase phase) throws FlowableException {
+        AbstractActuatorScheduler scheduler = GenericObjectFactory.factory().getScheduler(getSchedulerType(context));
+        return scheduler.schedule(actuator, context, phase);
     }
 
     protected String getSchedulerType(Context context) {
-        return Constants.SCHEDULER_TYPE_SYNC;
+        return Constants.TYPE_SCHEDULER_SYNC;
     }
 
     protected void prepare(Context context) {

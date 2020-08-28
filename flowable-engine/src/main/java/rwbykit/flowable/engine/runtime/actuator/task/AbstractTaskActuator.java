@@ -7,22 +7,22 @@ import rwbykit.flowable.core.Context;
 import rwbykit.flowable.core.FlowableException;
 import rwbykit.flowable.core.Notification;
 import rwbykit.flowable.core.Result;
+import rwbykit.flowable.core.current.CurrentInstance;
 import rwbykit.flowable.core.enumeration.Phase;
-import rwbykit.flowable.engine.enumeration.TaskScheduleType;
 import rwbykit.flowable.core.factory.ThreadPoolFactory;
+import rwbykit.flowable.core.model.enumeration.ResultStorageType;
+import rwbykit.flowable.core.model.parser.Task;
+import rwbykit.flowable.core.model.runtime.TaskInstance;
+import rwbykit.flowable.core.util.Utils;
+import rwbykit.flowable.engine.enumeration.TaskScheduleType;
 import rwbykit.flowable.engine.factory.GenericObjectFactory;
 import rwbykit.flowable.engine.notice.NotificationHelper;
 import rwbykit.flowable.engine.notice.TaskNotice;
 import rwbykit.flowable.engine.runtime.InitializeService;
 import rwbykit.flowable.engine.runtime.actuator.AbstractActuator;
-import rwbykit.flowable.core.current.CurrentInstance;
-import rwbykit.flowable.core.model.runtime.TaskInstance;
 import rwbykit.flowable.engine.runtime.parameter.ParameterHelper;
 import rwbykit.flowable.engine.runtime.parameter.TaskParameter;
 import rwbykit.flowable.engine.runtime.runner.Runner;
-import rwbykit.flowable.core.util.Utils;
-import rwbykit.flowable.core.model.parser.Task;
-import rwbykit.flowable.core.model.enumeration.ResultStorageType;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -35,20 +35,6 @@ import java.util.concurrent.Callable;
  * @since 2018年12月17日 上午10:37:37
  */
 public abstract class AbstractTaskActuator extends AbstractActuator<TaskNotice> implements InitializeService {
-
-    @Override
-    public Context doExecute(Context context) throws FlowableException {
-        //TODO 可能需要做一些操作
-        this.initialize(context);
-        try {
-            return taskExecute(context);
-        } catch (Exception e) {
-            throw handleException(e);
-        } finally {
-            // 此处存在异步任务， 不需要此处进行afterSet方法
-            // afterSet(context);
-        }
-    }
 
     /**
      * 执行任务
@@ -134,6 +120,11 @@ public abstract class AbstractTaskActuator extends AbstractActuator<TaskNotice> 
     public void afterSet(Context context) {
         context.getRuntimeService().getTaskService().modifyInstanceStatus(context.getCurrentInstance().getTaskInstanceId(),
                 context.getCurrentInstance().getTaskStatus(), context.getCurrentInstance().errorCode(), context.getCurrentInstance().errorMessage());
+    }
+
+    @Override
+    public final Phase getSupportedType() {
+        return Phase.TASK;
     }
 
 }

@@ -25,13 +25,13 @@ public class Constants {
 
     public final static String TYPE_SELECTOR = "Selector";
 
-    public final static String TYPE_SCHEDULER = "Scheduler";
+
 
     public final static String TYPE_CALCULATOR = "Calculator";
 
     public final static String SELECTOR_TASK = "selectorTask";
 
-    public final static String TYPE_ACTUATOR_NODE = "ActuatorNode";
+
     public final static String TYPE_ACTUATOR_PROCESS = "ActuatorProcess";
     public final static String TYPE_ACTUATOR_TASK = "ActuatorTask";
 
@@ -47,10 +47,25 @@ public class Constants {
 
     public final static String TYPE_SELECTOR_NODE = "NodeSelector";
 
-    public final static String SCHEDULER_TYPE_SYNC = "Sync";
-    public final static String SCHEDULER_TYPE_ASYNC = "Async";
 
+    public final static String CATEGORY_ACTUATOR_NODE = "ActuatorNode";
+    public final static String TYPE_NODE_ARTIFICIAL = "Artificial";
     public final static String TYPE_NODE_AUTO = "Auto";
+    public final static String TYPE_NODE_END = "End";
+    public final static String TYPE_NODE_START = "Start";
+    public final static String TYPE_NODE_SUB_PROCESS = "SubProcess";
+
+
+    public final static String CATEGORY_SCHEDULER = "Scheduler";
+    public final static String TYPE_SCHEDULER_SYNC = "SyncScheduler";
+    public final static String TYPE_SCHEDULER_ASYNC = "AsyncScheduler";
+
+    public final static String CATEGORY_APPROVAL_SUBMIT_POST_PROCESSOR = "ApprovalSubmitPostProcessor";
+
+
+    public final static String INSTANCE_APPROVAL = "ApprovalInstance";
+
+
 
 
 
@@ -90,7 +105,5 @@ public class Constants {
     public final static String NEXT_NODE_ID = "NextNodeId";
 
     public final static String NEXT_APPROVERS = "NextApprovers";
-
-    public final static String CURRENT_APPROVAL_INSTANCE = "CurrentApprovalInstance";
 
 }

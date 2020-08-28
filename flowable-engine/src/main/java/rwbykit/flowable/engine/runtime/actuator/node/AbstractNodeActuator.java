@@ -99,4 +99,9 @@ public abstract class AbstractNodeActuator extends AbstractActuator<NodeNotice> 
                 instance.getNodeStatus(), instance.errorCode(), instance.errorMessage());
     }
 
+    @Override
+    public final Phase getSupportedType() {
+        return Phase.NODE;
+    }
+
 }
