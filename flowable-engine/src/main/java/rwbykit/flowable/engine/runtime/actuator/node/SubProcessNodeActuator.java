@@ -1,10 +1,8 @@
 package rwbykit.flowable.engine.runtime.actuator.node;
 
-import rwbykit.flowable.core.annotation.Type;
 import rwbykit.flowable.core.Constants;
 import rwbykit.flowable.core.Context;
-import rwbykit.flowable.core.FlowableException;
-import rwbykit.flowable.engine.exception.UnsupportedOperateException;
+import rwbykit.flowable.core.annotation.Type;
 
 /**
  * 子流程
@@ -17,11 +15,8 @@ import rwbykit.flowable.engine.exception.UnsupportedOperateException;
 public class SubProcessNodeActuator extends AbstractNodeActuator {
 
     @Override
-    public Context doExecute(Context context) throws FlowableException {
-
-
-
-        throw new UnsupportedOperateException("当前不支持节点类型!");
+    public Context doExecute(Context context) {
+        throw new UnsupportedOperationException("当前不支持节点类型!");
     }
 
 }
